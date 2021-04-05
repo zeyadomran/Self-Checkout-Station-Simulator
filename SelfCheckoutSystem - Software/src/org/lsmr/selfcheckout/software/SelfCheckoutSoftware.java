@@ -801,8 +801,11 @@ public class SelfCheckoutSoftware {
 		CardIssuer cardIssuer;
 		if(cd.getType() == "Debit") {
 			cardIssuer = CardIssuersDatabase.DEBIT_CARD_ISSUER;
-		} else {
+		}
+		else if (cd.getType() == "Credit") {
 			cardIssuer = CardIssuersDatabase.CREDIT_CARD_ISSUER;
+		} else {
+			cardIssuer = CardIssuersDatabase.GIFT_CARD_ISSUER;
 		}
 
 		int holdNum = cardIssuer.authorizeHold(cd.getNumber(), this.total);
@@ -835,6 +838,8 @@ public class SelfCheckoutSoftware {
 			return payWithCard(cd); 
 		} else if (cd.getType() == "Credit") {
 			return payWithCard(cd);
+		} else if (cd.getType() == "Gift") {
+			return payWithCard(cd);
 		} else {
 			return false;
 		}
@@ -854,9 +859,11 @@ public class SelfCheckoutSoftware {
 			return payWithCard(cd);
 		} else if (cd.getType() == "Credit") {
 			return payWithCard(cd);
+		}else if (cd.getType() == "Gift") {
+			return payWithCard(cd);
 		} else {
 			return false;
-		}	
+		}
 	}
 	
 	/**
@@ -872,6 +879,8 @@ public class SelfCheckoutSoftware {
 		if (cd.getType() == "Debit") {
 			return payWithCard(cd);
 		} else if (cd.getType() == "Credit") {
+			return payWithCard(cd);
+		} else if (cd.getType() == "Gift") {
 			return payWithCard(cd);
 		} else {
 			return false;
