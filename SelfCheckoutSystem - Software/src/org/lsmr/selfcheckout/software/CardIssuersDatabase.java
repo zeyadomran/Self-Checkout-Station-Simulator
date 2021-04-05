@@ -21,5 +21,10 @@ public class CardIssuersDatabase {
      * Debit Card Issuer.
      */
     public static final CardIssuer DEBIT_CARD_ISSUER = new CardIssuer("Debit");
+    
+    /**
+     * Gift Card Issuer.
+     */
+    public static final CardIssuer GIFT_CARD_ISSUER = new CardIssuer("Gift");
 
 }
