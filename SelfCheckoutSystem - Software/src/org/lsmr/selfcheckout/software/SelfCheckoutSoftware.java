@@ -48,6 +48,7 @@ public class SelfCheckoutSoftware {
 	private String currentMember;
 	private BigDecimal amountPaid;
 	private BigDecimal changeDue = new BigDecimal("0.00");
+	private boolean attendantLoggedIn;
 
 	// Listeners
 	private CardReaderListenerStub cardReaderListener = new CardReaderListenerStub();
@@ -57,6 +58,8 @@ public class SelfCheckoutSoftware {
 	private CoinValidatorListenerStub coinValidatorListener = new CoinValidatorListenerStub();
 	private CoinDispenserListenerStub coinDispenserListener = new CoinDispenserListenerStub();
 	private boolean shutDown = false;
+	private boolean attendentLoggedin;
+	private Attendant currentAttendant;
 	 
 	/**
 	 * Creates an instance of SelfCheckoutSoftware.
@@ -685,6 +688,34 @@ public class SelfCheckoutSoftware {
 	}
 	
 	/**
+	 * Add an attendant to the attendant Database.
+	 * 
+	 * @param attendantID
+	 * 			The code/id of the attendant that will be added.
+	 * 
+	 */
+	public void registerAttendant(String attendantID) {
+		if(attendantID == null) throw new NullPointerException("No argument may be null.");
+		Attendant attendant = new Attendant(attendantID);
+		
+		if(AttendantDatabase.REGISTERED_ATTENDANTS.containsKey(attendantID)) throw new IllegalArgumentException("This Member already exists.");
+		AttendantDatabase.REGISTERED_ATTENDANTS.put(attendantID, attendant);
+	}
+	
+	public void attendantLogin(String attendantID)
+	{
+		if(AttendantDatabase.REGISTERED_ATTENDANTS.containsKey(attendantID))
+		{
+			attendantLoggedIn = true;
+			currentAttendant = AttendantDatabase.REGISTERED_ATTENDANTS.get(attendantID);
+		}
+		else
+		{
+			throw new SimulationException("Invalid attendant Id entered");
+		}
+	}
+	
+	/**
 	 * Adds a Member to the Members Database.
 	 * 
 	 * @param name
@@ -952,50 +983,52 @@ public class SelfCheckoutSoftware {
 		return true;
 	}
 	
-	/*
-	 * Disable all external devices the user can use like the scanners, coin slots, card readers, etc... 
-	 */
-	public void attendantShutDownStation()
+	public boolean shutDownStation()
 	{
-		//if(attendant == logedin)
+		if(this.currentAttendant != null)
 		{
-			this.station.scale.disable();
-			this.station.baggingArea.disable();
-			this.station.handheldScanner.disable();
-			this.station.mainScanner.disable();
-			this.station.cardReader.disable();
-			this.station.screen.disable();
-			this.station.printer.disable();
-			this.station.coinSlot.disable();
-			this.station.banknoteInput.disable();
-			shutDown = true;
+			boolean success = currentAttendant.attendantShutDownStation(this);
+			this.setShutDown(true);
+			return success;
+		}
+			
+		else
+		{
+			return false;
 		}
 	}
 	
-	/*
-	 * enable all external devices the user can use like the scanners, coin slots, card readers, etc... 
-	 */
-	public void startUpStation()
+	public boolean startUpStation()
 	{
-		//if(attendant == logedin)
+		if(this.currentAttendant != null)
 		{
-			this.station.scale.enable();
-			this.station.baggingArea.enable();
-			this.station.handheldScanner.enable();
-			this.station.mainScanner.enable();
-			this.station.cardReader.enable();
-			this.station.screen.enable();
-			this.station.printer.enable();
-			this.station.coinSlot.enable();
-			this.station.banknoteInput.enable();
-			shutDown  = false;
+			boolean success = currentAttendant.attendantShutDownStation(this);
+			this.setShutDown(false);
+			return success;
+		}
+			
+		else
+		{
+			return false;
 		}
 	}
-
 	
 	public boolean isShutDown()
 	{
 		return this.shutDown;
+	}
+
+	public boolean getattendantLoggedIn() {
+		return this.attendantLoggedIn;
+	}
+
+	public SelfCheckoutStation getStation() {
+		// TODO Auto-generated method stub
+		return this.station;
+	}
+
+	public void setShutDown(boolean shutDown) {
+		this.shutDown = shutDown;
 	}
 }
 
