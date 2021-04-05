@@ -16,6 +16,8 @@ import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.Card;
 import org.lsmr.selfcheckout.Coin;
+import org.lsmr.selfcheckout.PLUCodedItem;
+import org.lsmr.selfcheckout.PriceLookupCode;
 import org.lsmr.selfcheckout.Card.CardData;
 import org.lsmr.selfcheckout.devices.DisabledException;
 import org.lsmr.selfcheckout.devices.EmptyException;
@@ -25,6 +27,7 @@ import org.lsmr.selfcheckout.devices.SimulationException;
 import org.lsmr.selfcheckout.external.CardIssuer;
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
+import org.lsmr.selfcheckout.products.PLUCodedProduct;
 import org.lsmr.selfcheckout.products.Product;
 
 
@@ -32,8 +35,12 @@ import org.lsmr.selfcheckout.products.Product;
 public class SelfCheckoutSoftware {
 	private Map<Barcode, BarcodedProduct> productDatabase = ProductDatabases.BARCODED_PRODUCT_DATABASE;
 	private Map<Product, Integer> inventoryDatabase = ProductDatabases.INVENTORY;
+	private Map<PriceLookupCode, PLUCodedProduct> pluProductDatabase = ProductDatabases.PLU_PRODUCT_DATABASE;
+
 	private ArrayList<BarcodedItem> scannedItems = new ArrayList<BarcodedItem>();
+	private ArrayList<PLUCodedItem> pluItems = new ArrayList<PLUCodedItem>();
 	private ArrayList<BarcodedItem> baggingAreaItems = new ArrayList<BarcodedItem>();
+	private ArrayList<PLUCodedItem> baggingAreaPluItems = new ArrayList<PLUCodedItem>();
 	private ArrayList<BarcodedItem> personalBags = new ArrayList<BarcodedItem>();
 	private SelfCheckoutStation station = null;
 	private BigDecimal total = new BigDecimal("0");
@@ -136,6 +143,33 @@ public class SelfCheckoutSoftware {
 	}
 	
 	/**
+	 * Adds a Plu product to the Plu product database.
+	 * 
+	 * @param product
+	 * 			The Plu product that will be added to the database.
+	 * @param amountAvailable
+	 * 			The stock of the product.
+	 */
+	public void addPLUProduct(PLUCodedProduct product, int amountAvailable) {
+		if(product == null) throw new NullPointerException("No argument may be null.");
+		if(amountAvailable <= 0) throw new IllegalArgumentException("The amount availabe should be greater than 0.");
+		this.pluProductDatabase.put(product.getPLUCode(), product);
+		this.inventoryDatabase.put(product, amountAvailable);
+	}
+	
+	public boolean removePluProduct(PriceLookupCode plc) {
+		if(plc == null) throw new NullPointerException("No argument may be null.");
+		if(this.pluProductDatabase.containsKey(plc)) { // Checking if item is in database.
+			PLUCodedProduct product = this.pluProductDatabase.get(plc);
+			this.inventoryDatabase.remove(product);
+			this.pluProductDatabase.remove(plc);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
 	 * Scans an item if there is inventory available.
 	 * 
 	 * @param barcode 
@@ -186,6 +220,50 @@ public class SelfCheckoutSoftware {
 		}
 	}
 	
+	public boolean addPLUItem(PriceLookupCode plu, double weight)
+	{
+		
+		if(plu == null) throw new NullPointerException("No argument may be null.");
+		if(weight <= 0.0) throw new IllegalArgumentException("The weight of the item should be greater than 0.0.");
+		if(this.pluProductDatabase.containsKey(plu)) { // Checking if item is in database.
+			PLUCodedProduct prod = this.pluProductDatabase.get(plu);
+			int inventoryLeft = this.inventoryDatabase.get(prod);
+			if(inventoryLeft == 0) {
+				return false;
+			} else {
+				PLUCodedItem item = new PLUCodedItem(plu, weight);
+				this.station.scale.add(item);
+				
+				weight = weight/1000;
+				
+				BigDecimal priceOfItem = prod.getPrice().multiply(new BigDecimal(weight));
+				
+				this.total = this.total.add(priceOfItem);
+				
+				this.inventoryDatabase.put(prod, inventoryLeft - 1);
+				
+				this.pluItems.add(item);
+				return true;
+			}
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public boolean removePluItem(PLUCodedItem item) {
+		if(item == null) throw new NullPointerException("No argument may be null.");
+		if(this.pluItems.contains(item)) {
+			PLUCodedProduct prod = this.pluProductDatabase.get(item.getPLUCode());
+			this.pluItems.remove(item);
+			this.total.subtract(prod.getPrice());
+			this.inventoryDatabase.put(prod, (this.inventoryDatabase.get(prod) + 1));
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	/**
 	 * Adds an item to the bagging area if it has already been scanned.
 	 * 
@@ -214,6 +292,28 @@ public class SelfCheckoutSoftware {
 		}
 	}
 	
+	public boolean placePluItemInBaggingArea(PriceLookupCode plu) {
+		if(plu == null) throw new NullPointerException("No argument may be null.");
+		if(this.pluProductDatabase.containsKey(plu)) { // Checking if item is in database.
+			PLUCodedItem item = null;
+			for(int i = 0; i < this.pluItems.size(); i++) {
+				if(this.pluItems.get(i).getPLUCode().equals(plu)) {
+					item = this.pluItems.get(i);
+				}
+			}
+			if(item != null) {
+				this.station.baggingArea.add(item);
+				this.baggingAreaPluItems.add(item);
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	
+	
 	/**
 	 * Removes an item that was added to the bagging area.
 	 * 
@@ -233,6 +333,44 @@ public class SelfCheckoutSoftware {
 	}
 	
 	/**
+	 * Removes an item that was added to the bagging area.
+	 * 
+	 * @param item
+	 * 			The item you wish to remove.
+	 * @return If removing the item from the bagging area was a success.
+	 */
+	public boolean removePluItemBaggingArea(PLUCodedItem item) {
+		if(item == null) throw new NullPointerException("No argument may be null.");
+		if(this.baggingAreaPluItems.contains(item)) { // Checking if item is in database.
+			this.station.baggingArea.remove(item);
+			this.baggingAreaPluItems.remove(item);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public PriceLookupCode lookUpProductCode(String productName)
+	{
+		if(productName == null)
+		{
+			throw new SimulationException("Must enter product name to search");
+
+		}
+		for(PriceLookupCode plu : pluProductDatabase.keySet())
+		{
+			PLUCodedProduct prod = pluProductDatabase.get(plu);
+			if(prod.getDescription().equals(productName))
+			{
+				return plu;
+			}
+		}
+		return null;
+		
+	}
+	
+	
+	/**
 	 * Gets the receipt
 	 * 
 	 * @return the receipt.
@@ -248,6 +386,8 @@ public class SelfCheckoutSoftware {
 	 */
 	public ArrayList<BarcodedItem> getScannedItems() { return this.scannedItems; }
 	
+	public ArrayList<PLUCodedItem> getPluItems() { return this.pluItems; }
+	
 	/**
 	 * Gets the items on the bagging area.
 	 * 
@@ -255,12 +395,16 @@ public class SelfCheckoutSoftware {
 	 */
 	public ArrayList<BarcodedItem> getBaggingArea() { return this.baggingAreaItems; }
 	
+	public ArrayList<PLUCodedItem> getBaggingAreaPlu() { return this.baggingAreaPluItems; }
+	
 	/**
 	 * Gets the product database.
 	 * 
 	 * @return The product database.
 	 */
 	public Map<Barcode, BarcodedProduct> getProductDB() { return this.productDatabase; }
+	
+	public Map<PriceLookupCode, PLUCodedProduct> getProductPLUDB() { return this.pluProductDatabase; }
 	
 	/**
 	 * Gets the inventory database.
@@ -501,6 +645,24 @@ public class SelfCheckoutSoftware {
 			for(int i = 0; i < sb.length(); i++) this.station.printer.print(sb.charAt(i));
 			this.station.printer.print('\n');
 		}
+		for(PLUCodedItem item : pluItems) {
+			PriceLookupCode plc = item.getPLUCode();
+			PLUCodedProduct product = this.pluProductDatabase.get(plc);
+			StringBuilder sb = new StringBuilder();
+			String description = product.getDescription();
+			sb.append(description);
+			sb.append("\t");
+			int padnum = 15 - description.length();
+			if(padnum > 0) {
+				char[] pad = new char[padnum];
+				Arrays.fill(pad, ' ');
+				sb.append(pad).append(product.getPrice());
+			}
+			for(int i = 0; i < sb.length(); i++) this.station.printer.print(sb.charAt(i));
+			this.station.printer.print('\n');
+		}
+		
+		
 		StringBuilder sb = new StringBuilder();
 		String total = "Sub Total: ";
 		String AmountPaid = "Amount Paid: ";
@@ -725,6 +887,10 @@ public class SelfCheckoutSoftware {
 		for (int i = 0; i < scannedItems.size(); i++) {
 			totalWeight += scannedItems.get(i).getWeight();
 		}
+		for(int i = 0; i < this.pluItems.size(); i++)
+		{
+			totalWeight += pluItems.get(i).getWeight();
+		}
 		if (totalWeight != getBaggingAreaWeight()) {
 			throw new SimulationException("Please place item in bagging area.");
 		}
@@ -736,6 +902,8 @@ public class SelfCheckoutSoftware {
 	 */
 	public void resetStation() {
 		this.scannedItems.clear();
+		this.pluItems.clear();
+		this.baggingAreaPluItems.clear();
 		this.baggingAreaItems.clear();
 		this.personalBags.clear();
 		this.total = new BigDecimal("0");
