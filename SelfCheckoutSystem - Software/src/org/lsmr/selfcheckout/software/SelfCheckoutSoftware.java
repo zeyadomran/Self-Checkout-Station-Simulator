@@ -838,8 +838,6 @@ public class SelfCheckoutSoftware {
 			return payWithCard(cd); 
 		} else if (cd.getType() == "Credit") {
 			return payWithCard(cd);
-		} else if (cd.getType() == "Gift") {
-			return payWithCard(cd);
 		} else {
 			return false;
 		}

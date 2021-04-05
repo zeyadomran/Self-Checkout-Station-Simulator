@@ -134,7 +134,7 @@ public class PayWithCardTest {
 	}
 	
 	/*Tests tapCard with tapEnabled = false on card */
-	@Test (expected = NullPointerException.class) // Check this !! 
+	@Test (expected = NullPointerException.class) 
 	public void tapDebitCardWithTapDisabledTest() throws IOException{
 		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
 		Barcode b = new Barcode("12");
@@ -423,7 +423,7 @@ public class PayWithCardTest {
 				//ignore
 			}
 		}
-        assertFalse("unsuccessful swipe: " + successful + "%", successful > 80);
+        assertFalse("unsuccessful insert: " + successful + "%", successful > 80);
 	}
 
 	@Test
@@ -450,6 +450,79 @@ public class PayWithCardTest {
 				//ignore
 			}
 		}
-        assertFalse("unsuccessful swipe: " + successful + "%", successful > 80);
+        assertFalse("unsuccessful insert: " + successful + "%", successful > 80);
 	}
+	
+	@Test
+	public void swipeGiftCardTest() throws IOException {
+		int successful = 0;
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		Barcode b = new Barcode("12");
+		BarcodedProduct bp = new BarcodedProduct(b, "TestItem", new BigDecimal("17.36"));
+		control.addProduct(bp, 2);
+		control.scanItem(b, 12);
+		BufferedImage signature = null; 
+		Card card = new Card("Gift", "3062029", "Kylie Sicat", "123", "0000", true, true);
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, 4);
+		CardIssuersDatabase.GIFT_CARD_ISSUER.addCardData("3062029", "Kylie Sicat", cal, "123", new BigDecimal("2000"));
+		for(int i = 0; i < 100; i++) { // Test for  Magnetic Stripe probability
+			try {
+				if(control.swipeCard(card, signature)) {   
+					successful+= 1;
+				} 
+				s.cardReader.remove();
+			} catch (MagneticStripeFailureException e) {
+				//ignore
+			}
+		}
+        assertTrue("unsuccessful swipe: " + successful + "%", successful > 80);
+	}
+	
+	@Test
+	public void payWithGiftCardTest() throws IOException {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		Barcode b = new Barcode("12");
+		BarcodedProduct bp = new BarcodedProduct(b, "TestItem", new BigDecimal("12"));
+		control.addProduct(bp, 2);
+		control.scanItem(b, 12);
+				
+		String insertedPin = "0000";
+		Card card = new Card("Gift", "300629", "Kylie Sicat", "123", "0000", true, true);
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, 4);
+		CardIssuersDatabase.GIFT_CARD_ISSUER.addCardData("300629", "Kylie Sicat", cal, "123", new BigDecimal("200"));
+
+		control.insertCard(card, insertedPin);
+		assertEquals(control.getAmountPaid().toString(), "12");
+	}
+	
+	
+	@Test
+	public void giftCardBrokeTest() {
+		int successful = 0;
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		Barcode b = new Barcode("12");
+		BarcodedProduct bp = new BarcodedProduct(b, "TestItem", new BigDecimal("17.36"));
+		control.addProduct(bp, 2);
+		control.scanItem(b, 12);
+		Card card = new Card("Gift", "302029", "Kylie Sicat", "123", "0000", true, true);
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, 4);
+		CardIssuersDatabase.GIFT_CARD_ISSUER.addCardData("302029", "Kylie Sicat", cal, "123", new BigDecimal("20"));
+		for(int i = 0; i < 100; i++) { // Test for  chip failure probability
+			try {
+				s.cardReader.remove();
+				if(control.insertCard(card, "0000")) {   
+					successful += 1;
+				} 
+			} catch (ChipFailureException e) {
+				//ignore
+			} catch (IOException e) {
+				//ignore
+			}
+		}
+        assertFalse("unsuccessful insert: " + successful + "%", successful > 80);
+	}
+	
 }
