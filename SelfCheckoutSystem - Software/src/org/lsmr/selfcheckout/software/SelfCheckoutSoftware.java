@@ -921,6 +921,27 @@ public class SelfCheckoutSoftware {
 	public boolean finishedScanningItems() {
 		return !failToPlaceItem();
 	}
+	
+	/**
+	 * Attendant adds ink to the receipt printer.
+	 * 
+	 * @return Whether adding ink was successful.
+	 */
+	public boolean addInkToPrinter(int amount) {
+		this.station.printer.addInk(amount);
+		return true;
+	}
+
+	/**
+	 * Attendant adds paper to the receipt printer.
+	 * 
+	 * @return Whether adding paper was successful.
+	 */
+	public boolean addPaperToPrinter(int amount) {
+		this.station.printer.addPaper(amount);
+		return true;
+	}
+
 }
 
 
