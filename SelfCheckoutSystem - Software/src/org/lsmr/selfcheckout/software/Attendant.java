@@ -20,7 +20,7 @@ public class Attendant {
 	/*
 	 * enable all external devices the user can use like the scanners, coin slots, card readers, etc... 
 	 */
-	public boolean attendantstartUpStation(SelfCheckoutSoftware control)
+	public boolean attendantStartUpStation(SelfCheckoutSoftware control)
 	{
 		if(control.getattendantLoggedIn())
 		{

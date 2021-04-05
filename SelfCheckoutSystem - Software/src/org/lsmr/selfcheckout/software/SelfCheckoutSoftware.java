@@ -1000,7 +1000,7 @@ public class SelfCheckoutSoftware {
 	{
 		if(this.currentAttendant != null)
 		{
-			boolean success = currentAttendant.attendantShutDownStation(this);
+			boolean success = currentAttendant.attendantStartUpStation(this);
 			this.setShutDown(false);
 			return success;
 		}
