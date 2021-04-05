@@ -56,7 +56,6 @@ public class SelfCheckoutSoftware {
 	private BanknoteDispenserListenerStub banknoteDispenserListener = new BanknoteDispenserListenerStub();
 	private CoinValidatorListenerStub coinValidatorListener = new CoinValidatorListenerStub();
 	private CoinDispenserListenerStub coinDispenserListener = new CoinDispenserListenerStub();
-	private boolean shutDown = false;
 	 
 	/**
 	 * Creates an instance of SelfCheckoutSoftware.
@@ -959,7 +958,6 @@ public class SelfCheckoutSoftware {
 			this.station.printer.disable();
 			this.station.coinSlot.disable();
 			this.station.banknoteInput.disable();
-			shutDown = true;
 		}
 	}
 	
@@ -979,15 +977,9 @@ public class SelfCheckoutSoftware {
 			this.station.printer.enable();
 			this.station.coinSlot.enable();
 			this.station.banknoteInput.enable();
-			shutDown  = false;
 		}
 	}
 
-	
-	public boolean isShutDown()
-	{
-		return this.shutDown;
-	}
 }
 
 
