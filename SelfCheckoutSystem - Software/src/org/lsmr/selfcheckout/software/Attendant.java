@@ -1,5 +1,7 @@
 package org.lsmr.selfcheckout.software;
 
+import org.lsmr.selfcheckout.BarcodedItem;
+
 public class Attendant {
 	
 	private String attendantID;
@@ -63,6 +65,67 @@ public class Attendant {
 		{
 			return false;
 		}
+	}
+	
+	/**
+	 * Attendant adds ink to the receipt printer.
+	 * 
+	 * @return Whether adding ink was successful.
+	 */
+	public boolean addInkToPrinter(SelfCheckoutSoftware control, int amount) {
+		if (control.getattendantLoggedIn()) {
+			control.addInkToPrinter(amount);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 * Attendant adds paper to the receipt printer.
+	 * 
+	 * @return Whether adding paper was successful.
+	 */
+	public boolean addPaperToPrinter(SelfCheckoutSoftware control, int amount) {
+		if (control.getattendantLoggedIn()) {
+			control.addPaperToPrinter(amount);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Attendant blocks the station
+	 * @return Whether blocking the station was successful
+	 */
+	public boolean blockStation(SelfCheckoutSoftware control) {
+		if (control.getattendantLoggedIn()) {
+			return control.setBlocked(true);
+		}
+		return false;
+	}
+	
+	/**
+	 * Attendant unblocks the station
+	 * @return Whether unblocking the station was successful
+	 */
+	public boolean unBlockStation(SelfCheckoutSoftware control) {
+		if (control.getattendantLoggedIn()) {
+			return control.setBlocked(false);
+		}
+		return false;
+	}
+	
+	/**
+	 * Attendant removes item from purchase
+	 * @param Barcoded item to remove
+	 * @return Whether removing the item was successful.
+	 */
+	public boolean removeItemFromPurchase(SelfCheckoutSoftware control, BarcodedItem item) {
+		return control.removeScannedItem(item);
 	}
 
 }
