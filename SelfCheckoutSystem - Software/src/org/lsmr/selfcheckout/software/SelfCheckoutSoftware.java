@@ -49,6 +49,7 @@ public class SelfCheckoutSoftware {
 	private BigDecimal amountPaid;
 	private BigDecimal changeDue = new BigDecimal("0.00");
 	private boolean attendantLoggedIn;
+	private boolean blocked = false;
 
 	// Listeners
 	private CardReaderListenerStub cardReaderListener = new CardReaderListenerStub();
@@ -978,6 +979,24 @@ public class SelfCheckoutSoftware {
 	 */
 	public boolean addPaperToPrinter(int amount) {
 		this.station.printer.addPaper(amount);
+		return true;
+	}
+	
+	/**
+	 * Gets whether the station is blocked or not
+	 * @return boolean that determines whether the station is blocked or not
+	 */
+	public boolean isBlocked() {
+		return this.blocked;
+	}
+	
+	/**
+	 * Sets the station to be blocked or unblocked
+	 * @param the value to set blocked too
+	 * @return Whether setting the state was successful
+	 */
+	public boolean setBlocked(boolean state) {
+		this.blocked = state;
 		return true;
 	}
 	
