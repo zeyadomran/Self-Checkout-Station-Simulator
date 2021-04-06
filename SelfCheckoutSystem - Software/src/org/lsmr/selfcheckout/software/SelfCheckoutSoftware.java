@@ -968,8 +968,11 @@ public class SelfCheckoutSoftware {
 	 * @return Whether adding ink was successful.
 	 */
 	public boolean addInkToPrinter(int amount) {
-		this.station.printer.addInk(amount);
-		return true;
+		if(this.currentAttendant != null) {
+			this.station.printer.addInk(amount);
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -978,8 +981,11 @@ public class SelfCheckoutSoftware {
 	 * @return Whether adding paper was successful.
 	 */
 	public boolean addPaperToPrinter(int amount) {
-		this.station.printer.addPaper(amount);
-		return true;
+		if(this.currentAttendant != null) {
+			this.station.printer.addPaper(amount);
+			return true;
+		}
+		return false; 
 	}
 	
 	/**
