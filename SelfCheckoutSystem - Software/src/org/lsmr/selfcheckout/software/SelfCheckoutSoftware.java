@@ -1,6 +1,8 @@
 package org.lsmr.selfcheckout.software;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridBagLayout;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -13,15 +15,16 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import org.lsmr.selfcheckout.Banknote;
 import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.Card;
+import org.lsmr.selfcheckout.Card.CardData;
 import org.lsmr.selfcheckout.Coin;
 import org.lsmr.selfcheckout.PLUCodedItem;
 import org.lsmr.selfcheckout.PriceLookupCode;
-import org.lsmr.selfcheckout.Card.CardData;
 import org.lsmr.selfcheckout.devices.DisabledException;
 import org.lsmr.selfcheckout.devices.EmptyException;
 import org.lsmr.selfcheckout.devices.OverloadException;
@@ -1059,12 +1062,18 @@ public class SelfCheckoutSoftware {
 	}
 
 	/**
-	 * Displays the GUI.
+	 * Refreshes the GUI.
 	 */
-	public void displayGUI() {
+	public void refreshGUI() {
 		JFrame frame = this.station.screen.getFrame(); // Gets The JFrame used by the touchscreen listener.
-		frame.getContentPane().setBackground( new Color(9, 11, 16) );
-		frame.getContentPane().add(new MainSCSPanel());
+		frame.setLayout(new BorderLayout());
+		MainSCSPanel mainPanel = new MainSCSPanel(buildTextAreaString(), this.scannedItems);
+		JPanel fixedPanel = new JPanel(new GridBagLayout());
+		fixedPanel.setPreferredSize(frame.getSize());
+		fixedPanel.setBackground(new Color(9, 11, 16));
+		fixedPanel.add(mainPanel);
+		frame.getContentPane().add(fixedPanel);
+		this.station.screen.setVisible(false);
 		this.station.screen.setVisible(true); // Displays the JFrame.
 	}
 
@@ -1073,6 +1082,20 @@ public class SelfCheckoutSoftware {
 	 */
 	public void disableGUI() {
 		this.station.screen.setVisible(false);
+	}
+
+	/**
+	 * Builds a String to be displayed in the textArea of the Main GUI Screen.
+	 * 
+	 * @return The String built.
+	 */
+	private String buildTextAreaString() {
+		return 	"\n  Bagging Scale Weight: " 
+				+ this.getBaggingAreaWeight() 
+				+ "\n  Total Price: $" 
+				+ this.total
+				+ "\n  Member ID: "
+				+ this.currentMember;
 	}
 }
 

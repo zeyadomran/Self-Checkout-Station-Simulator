@@ -1,36 +1,95 @@
 package org.lsmr.selfcheckout.gui;
 
 import javax.swing.JPanel;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JTable;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+
+import org.lsmr.selfcheckout.BarcodedItem;
+import org.lsmr.selfcheckout.external.ProductDatabases;
+import org.lsmr.selfcheckout.products.BarcodedProduct;
+
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+
 import java.awt.Cursor;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.util.ArrayList;
+import javax.swing.ListSelectionModel;
+import javax.swing.JScrollPane;
 
 public class MainSCSPanel extends JPanel {
 	private JTable table;
-
+	private String textAreaText= "";
+	private ArrayList<ArrayList<String>> scannedItems = new ArrayList<ArrayList<String>>();
 	/**
 	 * Create the panel.
 	 */
-	public MainSCSPanel() {
-		setForeground(new Color(9, 11, 16));
-		setBackground(new Color(9, 11, 16));
-		setSize(new Dimension(1280, 720));
-		setLayout(null);
-		
-		table = new JTable();
+	public MainSCSPanel(String textAreaText, ArrayList<BarcodedItem> scannedItems) {
+
+		this.textAreaText = textAreaText;
+		for(int i = 0; i < scannedItems.size(); i++) {
+			BarcodedItem item = scannedItems.get(i);
+			BarcodedProduct product = ProductDatabases.BARCODED_PRODUCT_DATABASE.get(item.getBarcode());
+			this.scannedItems.add(new ArrayList<String>());
+			this.scannedItems.get(i).add(item.getBarcode().toString());
+			this.scannedItems.get(i).add(product.getDescription());
+			this.scannedItems.get(i).add(product.getPrice().toString());
+			this.scannedItems.get(i).add(item.getWeight() + "");
+		}
+
+		this.setForeground(new Color(9, 11, 16));
+		this.setBackground(new Color(9, 11, 16));
+		this.setMinimumSize(new Dimension(1280, 720));
+		this.setMaximumSize(new Dimension(1280, 720));
+		this.setPreferredSize(new Dimension(1280, 720));
+		this.setSize(new Dimension(1280, 720));
+		this.setLayout(null);
+
+		Object tableRows[][] = new Object[this.scannedItems.size() + 1][4];
+		Object tableColumns[] = {"Barcode", 
+								"Description", 
+								"Price $(CAD)", 
+								"Weight g(Grams)"};
+		tableRows[0][0] = "Barcode";
+		tableRows[0][1] = "Description";
+		tableRows[0][2] = "Price $(CAD)";
+		tableRows[0][3] = "Weight g(Grams)";
+		for(int i = 0; i < this.scannedItems.size(); i++) {
+			for(int j = 0; j < 4; j++) {
+				tableRows[i + 1][j] = this.scannedItems.get(i).get(j);
+			}
+		}
+
+		table = new JTable(tableRows, tableColumns);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setForeground(new Color(137, 221, 255));
 		table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		table.setBorder(new LineBorder(new Color(137, 221, 255), 1, true));
-		table.setBounds(20, 20, 480, 510);
+		table.setBounds(0, 0, 480, 510);
 		table.setBackground(new Color(15, 17, 26));
-		add(table);
 		
-		JTextArea textArea = new JTextArea();
+		JPanel tablePanel = new JPanel();
+		tablePanel.setBorder(new LineBorder(new Color(137, 221, 255), 1, true));
+		tablePanel.setBounds(20, 20, 480, 510);
+		tablePanel.setBackground(new Color(15, 17, 26));
+		tablePanel.setForeground(new Color(137, 221, 255));
+		tablePanel.setLayout(null);
+		tablePanel.add(table);
+		add(tablePanel);
+
+		JTextArea textArea = new JTextArea(this.textAreaText);
+		textArea.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		textArea.setForeground(new Color(137, 221, 255));
+		textArea.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		textArea.setEditable(false);
+		textArea.setLineWrap(true);
 		textArea.setBounds(20, 550, 480, 150);
 		textArea.setBorder(new LineBorder(new Color(137, 221, 255), 1, true));
 		textArea.setBackground(new Color(15, 17, 26));
