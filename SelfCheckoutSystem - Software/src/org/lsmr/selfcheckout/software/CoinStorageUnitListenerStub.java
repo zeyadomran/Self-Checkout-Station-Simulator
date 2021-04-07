@@ -51,5 +51,9 @@ public class CoinStorageUnitListenerStub implements CoinStorageUnitListener{
 	public boolean getIsFull() {
 		return coinsFull;
 	}
+	
+	public boolean isLoaded() {
+		return coinsLoaded;
+	}
 }
 
