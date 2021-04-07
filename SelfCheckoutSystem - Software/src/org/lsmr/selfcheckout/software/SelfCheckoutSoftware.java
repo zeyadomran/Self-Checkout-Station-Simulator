@@ -700,6 +700,20 @@ public class SelfCheckoutSoftware {
 		}
 	}
 	
+	public void attendantLogOut()
+	{
+		if(currentAttendant != null)
+		{
+			attendantLoggedIn = false;
+			currentAttendant = null;
+		}
+		else
+		{
+			throw new SimulationException("No attendant logged in to log out");
+		}
+	}
+	
+	
 	/**
 	 * Adds a Member to the Members Database.
 	 * 
@@ -1124,6 +1138,7 @@ public class SelfCheckoutSoftware {
 		// should always return true
 		return !this.banknoteStorageUnitListener.isLoaded();
 	}
+
 }
 
 
