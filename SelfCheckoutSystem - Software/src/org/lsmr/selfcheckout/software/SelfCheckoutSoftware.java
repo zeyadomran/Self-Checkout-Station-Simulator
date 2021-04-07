@@ -1,5 +1,6 @@
 package org.lsmr.selfcheckout.software;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -10,6 +11,8 @@ import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import javax.swing.JFrame;
 
 import org.lsmr.selfcheckout.Banknote;
 import org.lsmr.selfcheckout.Barcode;
@@ -26,6 +29,7 @@ import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.SimulationException;
 import org.lsmr.selfcheckout.external.CardIssuer;
 import org.lsmr.selfcheckout.external.ProductDatabases;
+import org.lsmr.selfcheckout.gui.MainSCSPanel;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
 import org.lsmr.selfcheckout.products.Product;
@@ -1052,6 +1056,23 @@ public class SelfCheckoutSoftware {
 
 	public void setShutDown(boolean shutDown) {
 		this.shutDown = shutDown;
+	}
+
+	/**
+	 * Displays the GUI.
+	 */
+	public void displayGUI() {
+		JFrame frame = this.station.screen.getFrame(); // Gets The JFrame used by the touchscreen listener.
+		frame.getContentPane().setBackground( new Color(9, 11, 16) );
+		frame.getContentPane().add(new MainSCSPanel());
+		this.station.screen.setVisible(true); // Displays the JFrame.
+	}
+
+	/**
+	 * Disables the GUI.
+	 */
+	public void disableGUI() {
+		this.station.screen.setVisible(false);
 	}
 }
 
