@@ -93,5 +93,9 @@ public class CoinDispenserListenerStub implements CoinDispenserListener {
 	public boolean getIsEmpty() {
 		return noCoins;
 	}
+	
+	public boolean isLoaded() {
+		return coinsLoaded;
+	}
 
 }
