@@ -58,6 +58,8 @@ public class SelfCheckoutSoftware {
 	private BanknoteDispenserListenerStub banknoteDispenserListener = new BanknoteDispenserListenerStub();
 	private CoinValidatorListenerStub coinValidatorListener = new CoinValidatorListenerStub();
 	private CoinDispenserListenerStub coinDispenserListener = new CoinDispenserListenerStub();
+	private CoinStorageUnitListenerStub coinStorageUnitListener = new CoinStorageUnitListenerStub();
+	private BanknoteStorageUnitListenerStub banknoteStorageUnitListener = new BanknoteStorageUnitListenerStub();
 	private boolean shutDown = false;
 	private boolean attendentLoggedin;
 	private Attendant currentAttendant;
@@ -76,33 +78,15 @@ public class SelfCheckoutSoftware {
 		this.station.banknoteInput.register(banknoteSlotListener);
 		this.station.banknoteValidator.register(banknoteValidatorListener);
 		this.station.coinValidator.register(coinValidatorListener);
-		
-		// load initial bank notes into dispensers 
+		this.station.coinStorage.register(coinStorageUnitListener);
+		this.station.banknoteStorage.register(banknoteStorageUnitListener);
+		 
 		for(int i : this.station.banknoteDenominations) {
-		    for(int j = 0; j < 100; j++) {
-		    	try {
-					this.station.banknoteDispensers.get(i).load(new Banknote(i, Currency.getInstance(Locale.CANADA)));
-				} catch (SimulationException e) {
-					e.printStackTrace();
-				} catch (OverloadException e) {
-					e.printStackTrace();
-				}
-		    }
 		    //register a listener
 		    this.station.banknoteDispensers.get(i).register(banknoteDispenserListener);
 		}
 
-		// load coins into dispensers
-		for(BigDecimal i : this.station.coinDenominations) {	
-		    for(int j = 0; j < 100; j++) {
-				try {
-					this.station.coinDispensers.get(i).load(new Coin(i, Currency.getInstance(Locale.CANADA)));
-				} catch (SimulationException e) {
-					e.printStackTrace();
-				} catch (OverloadException e) {
-					e.printStackTrace();
-				}
-		    }
+		for(BigDecimal i : this.station.coinDenominations) {
 		    //register a listener
 		    this.station.coinDispensers.get(i).register(coinDispenserListener);
 		}
@@ -1052,6 +1036,93 @@ public class SelfCheckoutSoftware {
 
 	public void setShutDown(boolean shutDown) {
 		this.shutDown = shutDown;
+	}
+	
+	/**
+	 * Attendant loads coins into the coin dispensers.
+	 * @param coins are the coins to be loaded into the dispenser.
+	 * @return true if all coins were successfully loaded.
+	 */
+	public boolean loadCoinDispenser(Coin... coins) {
+		// For each coin, find the respective dispenser, and then loads the coin in there.
+		if (coins == null) {
+			return false;
+		}
+		if (this.currentAttendant != null) {
+			for (Coin c: coins) {
+				if (c == null) {
+					return false;
+				}
+				BigDecimal v = c.getValue();
+				try {
+					this.station.coinDispensers.get(v).load(c);
+				} catch (OverloadException e) {
+					// TODO Auto-generated catch block
+					throw new SimulationException("Coin Dispenser for coins of value " + v.intValue() + " is full.");
+				} catch (NullPointerException e) {
+					throw new SimulationException("This coin type does not exist.");
+				}
+			}
+		}
+		
+		return this.coinDispenserListener.isLoaded();
+	}
+	
+	/**
+	 * Attendant loads banknotes into the banknote dispensers.
+	 * @param banknotes are the baknotes to be loaded into the dispensers.
+	 * @return true of all banknotes were successfully loaded.
+	 */
+	public boolean loadBanknoteDispenser(Banknote ...banknotes) {
+		if (banknotes == null) {
+			return false;
+		}
+		if (this.currentAttendant != null) {
+			for (Banknote b: banknotes) {
+				if (b == null) {
+					return false;
+				}
+				int v = b.getValue();
+				try {
+					this.station.banknoteDispensers.get(v).load(b);
+				} catch (OverloadException e) {
+					// TODO Auto-generated catch block
+					throw new SimulationException("Banknote Dispenser for banknotes of value " + v + " is full.");
+				} catch (NullPointerException e) {
+					throw new SimulationException("This banknote type does not exist.");
+				}
+			}
+		}
+		
+		return this.banknoteDispenserListener.isBanknoteLoaded();
+	}
+	
+	/**
+	 * Attendant empties the coin storage.
+	 * @return true if there are no coins in the storage after unloading, false if there is no attendant.
+	 */
+	public boolean emptyCoinStorage() {
+		if (this.currentAttendant != null) {
+			this.station.coinStorage.unload();
+		} else {
+			return false;
+		}
+		//should always return true
+		return !this.coinStorageUnitListener.isLoaded();
+	}
+	
+	/**
+	 * Attendant empties the banknote storage.
+	 * @return true if there are no banknotes in the storage after unloading, false if there is no attendant.
+	 */
+	public boolean emptyBanknoteStorage() {
+		if (this.currentAttendant != null) {
+			this.station.banknoteStorage.unload();
+		} else {
+			return false;
+		}
+		// should always return true
+		return !this.banknoteStorageUnitListener.isLoaded();
 	}
 }
 
