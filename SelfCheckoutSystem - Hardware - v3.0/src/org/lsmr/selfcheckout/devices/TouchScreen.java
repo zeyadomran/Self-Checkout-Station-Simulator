@@ -31,6 +31,7 @@ public final class TouchScreen extends AbstractDevice<TouchScreenListener> {
 				ready = true;
 			}
 		});
+		
 		while(!ready)
 			;
 	}
@@ -38,18 +39,10 @@ public final class TouchScreen extends AbstractDevice<TouchScreenListener> {
 	private JFrame createGUI() {
 		JFrame frame = new JFrame();
 
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setUndecorated(true);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowOpened(WindowEvent e) {
-				super.windowOpened(e);
-				ready = true;
-				frame.setVisible(false);
-			}
-		});
+		frame.setVisible(false);
 
 		return frame;
 	}
