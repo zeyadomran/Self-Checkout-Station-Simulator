@@ -1,4 +1,4 @@
-package org.lsmr.selfcheckout.devices.test;
+package org.lsmr.selfcheckout.software.test;
 
 import static org.junit.Assert.assertEquals;
 
