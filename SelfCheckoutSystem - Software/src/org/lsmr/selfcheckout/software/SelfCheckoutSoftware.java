@@ -81,15 +81,30 @@ public class SelfCheckoutSoftware {
 		this.station.coinStorage.register(coinStorageUnitListener);
 		this.station.banknoteStorage.register(banknoteStorageUnitListener);
 		 
+		//register super user
+		this.registerAttendant("12345");
+		this.attendantLogin("12345"); 
+		
 		for(int i : this.station.banknoteDenominations) {
-		    //register a listener
+			for(int j = 0; j < 50; j++) {
+				this.loadBanknoteDispenser(new Banknote(i, Currency.getInstance(Locale.CANADA)));
+		    }
+			//register a listener
 		    this.station.banknoteDispensers.get(i).register(banknoteDispenserListener);
 		}
-
+		
+		
 		for(BigDecimal i : this.station.coinDenominations) {
+			for(int j = 0; j < 100; j++) {
+				this.loadCoinDispenser(new Coin(i, Currency.getInstance(Locale.CANADA)));
+		    }
 		    //register a listener
 		    this.station.coinDispensers.get(i).register(coinDispenserListener);
 		}
+		
+		//logout and remove superuser
+		this.attendantLogOut();
+		AttendantDatabase.REGISTERED_ATTENDANTS.remove("12345");
 
 		//load receipt machine with paper and ink
 		this.station.printer.addInk(1000);
