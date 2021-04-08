@@ -2,11 +2,9 @@ package org.lsmr.selfcheckout.gui;
 
 import javax.swing.JPanel;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JTable;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import org.lsmr.selfcheckout.BarcodedItem;
@@ -15,16 +13,15 @@ import org.lsmr.selfcheckout.products.BarcodedProduct;
 
 import javax.swing.JTextArea;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 
 import java.awt.Cursor;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.ListSelectionModel;
-import javax.swing.JScrollPane;
 
 public class MainSCSPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private String textAreaText= "";
 	private ArrayList<ArrayList<String>> scannedItems = new ArrayList<ArrayList<String>>();
