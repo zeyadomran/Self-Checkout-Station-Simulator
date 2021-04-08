@@ -125,7 +125,24 @@ public class Attendant {
 	 * @return Whether removing the item was successful.
 	 */
 	public boolean removeItemFromPurchase(SelfCheckoutSoftware control, BarcodedItem item) {
-		return control.removeScannedItem(item);
+		if (control.getattendantLoggedIn()) {
+			return control.removeScannedItem(item);
+		}
+		else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Attendant approves weight difference by setting a new maximum weight discrepancy
+	 * @param weight difference to set
+	 * @return Whether setting new weight difference was successful.
+	 */
+	public boolean approveWeightDiscrepency(SelfCheckoutSoftware control, double newMaxDiff) {
+		if (control.getattendantLoggedIn()) {
+			return control.setMaxWeightDiff(newMaxDiff);
+		}
+		return false;
 	}
 
 }

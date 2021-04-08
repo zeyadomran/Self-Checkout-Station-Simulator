@@ -50,6 +50,7 @@ public class SelfCheckoutSoftware {
 	private BigDecimal changeDue = new BigDecimal("0.00");
 	private boolean attendantLoggedIn;
 	private boolean blocked = false;
+	private double approvedWeightDifference = 0;
 
 	// Listeners
 	private CardReaderListenerStub cardReaderListener = new CardReaderListenerStub();
@@ -1016,6 +1017,16 @@ public class SelfCheckoutSoftware {
 	 */
 	public boolean setBlocked(boolean state) {
 		this.blocked = state;
+		return true;
+	}
+	
+	/**
+	 * Sets the maximum approved weight difference
+	 * @param the maximum approved weight difference
+	 * @return Whether setting the value was successful
+	 */
+	public boolean setMaxWeightDiff(double diff) {
+		this.approvedWeightDifference = diff;
 		return true;
 	}
 	
