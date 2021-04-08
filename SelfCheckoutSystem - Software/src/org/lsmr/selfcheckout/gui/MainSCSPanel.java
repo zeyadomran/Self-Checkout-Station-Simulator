@@ -1,37 +1,46 @@
 package org.lsmr.selfcheckout.gui;
 
-import javax.swing.JPanel;
-
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 
 import org.lsmr.selfcheckout.BarcodedItem;
+import org.lsmr.selfcheckout.PLUCodedItem;
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
-
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-
-import java.awt.Cursor;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.util.ArrayList;
-import javax.swing.ListSelectionModel;
+import org.lsmr.selfcheckout.products.PLUCodedProduct;
+import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
 
 public class MainSCSPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTable table;
-	private String textAreaText= "";
+	private String textAreaText = "";
 	private ArrayList<ArrayList<String>> scannedItems = new ArrayList<ArrayList<String>>();
+	private SelfCheckoutSoftware control;
+
 	/**
 	 * Create the panel.
 	 */
-	public MainSCSPanel(String textAreaText, ArrayList<BarcodedItem> scannedItems) {
+	public MainSCSPanel( SelfCheckoutSoftware control) {
 
-		this.textAreaText = textAreaText;
-		for(int i = 0; i < scannedItems.size(); i++) {
+		this.textAreaText = control.buildTextAreaString();
+		this.control = control;
+		ArrayList<BarcodedItem> scannedItems = this.control.getScannedItems();
+		ArrayList<PLUCodedItem> pluItems = this.control.getPluItems();
+
+		for (int i = 0; i < scannedItems.size(); i++) {
 			BarcodedItem item = scannedItems.get(i);
 			BarcodedProduct product = ProductDatabases.BARCODED_PRODUCT_DATABASE.get(item.getBarcode());
 			this.scannedItems.add(new ArrayList<String>());
@@ -39,6 +48,18 @@ public class MainSCSPanel extends JPanel {
 			this.scannedItems.get(i).add(product.getDescription());
 			this.scannedItems.get(i).add(product.getPrice().toString());
 			this.scannedItems.get(i).add(item.getWeight() + "");
+		}
+
+		for (int i = 0; i < pluItems.size(); i++) {
+			PLUCodedItem item = pluItems.get(i);
+			PLUCodedProduct product = ProductDatabases.PLU_PRODUCT_DATABASE.get(item.getPLUCode());
+			this.scannedItems.add(new ArrayList<String>());
+			int index = this.scannedItems.size() - 1;
+			this.scannedItems.get(index).add(item.getPLUCode().toString());
+			this.scannedItems.get(index).add(product.getDescription());
+			BigDecimal price = product.getPrice().multiply(new BigDecimal(item.getWeight())).setScale(2, RoundingMode.CEILING);
+			this.scannedItems.get(index).add(price.toString());
+			this.scannedItems.get(index).add(item.getWeight() + "");
 		}
 
 		this.setForeground(new Color(9, 11, 16));
@@ -50,16 +71,13 @@ public class MainSCSPanel extends JPanel {
 		this.setLayout(null);
 
 		Object tableRows[][] = new Object[this.scannedItems.size() + 1][4];
-		Object tableColumns[] = {"Barcode", 
-								"Description", 
-								"Price $(CAD)", 
-								"Weight g(Grams)"};
+		Object tableColumns[] = { "Barcode", "Description", "Price $(CAD)", "Weight g(Grams)" };
 		tableRows[0][0] = "Barcode";
 		tableRows[0][1] = "Description";
 		tableRows[0][2] = "Price $(CAD)";
 		tableRows[0][3] = "Weight g(Grams)";
-		for(int i = 0; i < this.scannedItems.size(); i++) {
-			for(int j = 0; j < 4; j++) {
+		for (int i = 0; i < this.scannedItems.size(); i++) {
+			for (int j = 0; j < 4; j++) {
 				tableRows[i + 1][j] = this.scannedItems.get(i).get(j);
 			}
 		}
@@ -71,7 +89,7 @@ public class MainSCSPanel extends JPanel {
 		table.setBorder(new LineBorder(new Color(137, 221, 255), 1, true));
 		table.setBounds(0, 0, 480, 510);
 		table.setBackground(new Color(15, 17, 26));
-		
+
 		JPanel tablePanel = new JPanel();
 		tablePanel.setBorder(new LineBorder(new Color(137, 221, 255), 1, true));
 		tablePanel.setBounds(20, 20, 480, 510);
@@ -91,7 +109,7 @@ public class MainSCSPanel extends JPanel {
 		textArea.setBorder(new LineBorder(new Color(137, 221, 255), 1, true));
 		textArea.setBackground(new Color(15, 17, 26));
 		add(textArea);
-		
+
 		JButton scanItemButton = new JButton("Scan Item");
 		scanItemButton.setOpaque(true);
 		scanItemButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -171,7 +189,7 @@ public class MainSCSPanel extends JPanel {
 		attendantLogInButton.setBackground(new Color(40, 167, 69));
 		attendantLogInButton.setBounds(980, 645, 280, 55);
 		add(attendantLogInButton);
-		
+
 		JLabel TitleLabel = new JLabel("Self Checkout Station");
 		TitleLabel.setFont(new Font("Lucida Grande", Font.BOLD, 60));
 		TitleLabel.setForeground(new Color(64, 224, 208));
