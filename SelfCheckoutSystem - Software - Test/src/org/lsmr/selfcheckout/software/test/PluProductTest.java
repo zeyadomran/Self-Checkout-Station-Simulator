@@ -169,9 +169,6 @@ public class PluProductTest {
 		
 		control.addPLUProduct(apple, 300);
 		
-		System.out.println(control.getProductPLUDB().get(plc).getDescription());
-		
-		System.out.println(control.getInventoryDB().get(apple));
 		
 		control.addPLUItem(plc, 500);
 		control.placePluItemInBaggingArea(plc);
@@ -303,9 +300,9 @@ public class PluProductTest {
 		control.addPLUProduct(potatoes, 300);
 		control.addPLUProduct(garlic, 300);
 
-		PriceLookupCode testCode = control.lookUpProductCode("Potatoes");
+		PriceLookupCode testCode = control.lookUpProductCode("Garlic");
 		
-		assertEquals(testCode, plc3);
+		assertEquals(testCode, plc4);
 		
 		
 	}

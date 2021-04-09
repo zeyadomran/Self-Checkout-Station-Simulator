@@ -23,6 +23,12 @@ import org.lsmr.selfcheckout.software.Attendant;
 import org.lsmr.selfcheckout.software.AttendantDatabase;
 import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
 
+
+/*
+ * This class tests the functionality that an attendant who is logged in can do
+ * It also tests some of the things that require an attendant to be logged in
+ * 
+ */
 public class AttendantTest {
 	Currency c = Currency.getInstance(Locale.CANADA);
 	int[] noteDenom = {5, 10, 20, 50, 100};
@@ -30,24 +36,167 @@ public class AttendantTest {
 	SelfCheckoutStation s = new SelfCheckoutStation(c, noteDenom, coinDenom, 10000, 1);
 	
     
+	
+	/**
+	 * Tests a normal use for an attendant to log in to the system
+	 */
 	@Test
 	public void login() throws SimulationException, OverloadException, DisabledException, EmptyException {
 		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
-		//Attendant employee = new Attendant("12345");
-		//AttendantDatabase.REGISTERED_ATTENDANTS.put(employee.getAttendantID(), employee);
+		
 		control.registerAttendant("12345");
 		control.attendantLogin("12345");
-		System.out.println(control.getattendantLoggedIn());
-		control.shutDownStation();
-		System.out.println(control.isShutDown());
-		ArrayList<Coin> coins = new ArrayList<Coin>();
-		coins.add(new Coin(new BigDecimal("0.05"), c));
-		control.startUpStation();
-		System.out.println(control.isShutDown());
-		control.payWithCoin(coins);
+		
+		assertTrue(control.getattendantLoggedIn());
 		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
 	}
 	
+	
+	/**
+	 * Tests a normal use when an attendant is logging out
+	 */
+	@Test
+	public void logout() throws SimulationException, OverloadException, DisabledException, EmptyException {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		
+		control.registerAttendant("12345");
+		control.attendantLogin("12345");
+		
+		control.attendantLogOut();
+		assertFalse(control.getattendantLoggedIn());
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+	}
+	
+	
+	/**
+	 * Tests an attendant trying to log out when they haven't logged in
+	 * should never happen
+	 */
+	@Test (expected = SimulationException.class)
+	public void logoutWithNoLoggedIn() throws SimulationException, OverloadException, DisabledException, EmptyException {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		
+		control.attendantLogOut();
+		
+	}
+	
+	
+	/**
+	 * Tests an attendant trying to login when another attendant has not logged out before 
+	 */
+	@Test (expected = SimulationException.class)
+	public void loginTwoAttendants() throws SimulationException, OverloadException, DisabledException, EmptyException {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		
+		control.registerAttendant("12345");
+		control.attendantLogin("12345");
+		
+		control.registerAttendant("12445");
+		control.attendantLogin("12445");
+		
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+
+	}
+	
+	
+	
+	/**
+	 * Tests an attendant logging in who is not registered in the system
+	 */
+	@Test (expected = SimulationException.class)
+	public void loginNotRegistered() throws SimulationException, OverloadException, DisabledException, EmptyException {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		
+		control.attendantLogin("12345");
+	
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+
+	}
+	
+	
+	/**
+	 * Tests an attendant entering the wrong code for their login 
+	 * 
+	 */
+	@Test (expected = SimulationException.class)
+	public void loginWrongCode() throws SimulationException, OverloadException, DisabledException, EmptyException {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		
+		control.registerAttendant("12345");
+		control.attendantLogin("123456");
+	
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+
+	}
+	
+	
+	/**
+	 * Tests shutting down a system with an attendant logged in
+	 */
+	@Test
+	public void shutDownSystemLoggedIn() throws SimulationException, OverloadException, DisabledException, EmptyException {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		
+		control.registerAttendant("12345");
+		control.attendantLogin("12345");
+		
+		control.shutDownStation();
+		
+		assertTrue(control.isShutDown());
+		
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+	}
+	
+	/**
+	 * Tests starting up the system with an attendant logged in
+	 * 
+	 */
+	@Test
+	public void startUpSystemLoggedIn() throws SimulationException, OverloadException, DisabledException, EmptyException {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		
+		control.registerAttendant("12345");
+		control.attendantLogin("12345");
+		
+		control.startUpStation();
+		
+		assertFalse(control.isShutDown());
+		
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+	}
+	
+	/**
+	 * Tests shutting down a system without an attendant logged in
+	 */
+	@Test
+	public void shutDownSystemNotLoggedIn() throws SimulationException, OverloadException, DisabledException, EmptyException {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		
+		control.registerAttendant("12345");
+		
+		control.shutDownStation();
+		
+		assertFalse(control.isShutDown());
+		
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+	}
+	
+	/**
+	 * Tests starting up the system without an attendant logged in
+	 */
+	@Test
+	public void startUpSystemNotLoggedIn() throws SimulationException, OverloadException, DisabledException, EmptyException {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		
+		control.registerAttendant("12345");
+		control.setShutDown(true);
+		
+		control.startUpStation();
+		
+		assertTrue(control.isShutDown());
+		
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+	}
 	/**
 	 * Tests adding ink to printer
 	 */

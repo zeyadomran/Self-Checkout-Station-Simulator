@@ -804,6 +804,10 @@ public class SelfCheckoutSoftware {
 	 */
 	public void attendantLogin(String attendantID)
 	{
+		if(currentAttendant!= null)
+		{
+			throw new SimulationException("An attendant is already logged in");
+		}
 		if(AttendantDatabase.REGISTERED_ATTENDANTS.containsKey(attendantID))
 		{
 			attendantLoggedIn = true;
