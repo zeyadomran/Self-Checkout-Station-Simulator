@@ -980,7 +980,7 @@ public class SelfCheckoutSoftware {
 		{
 			totalWeight += pluItems.get(i).getWeight();
 		}
-		if (totalWeight != getBaggingAreaWeight()) {
+		if (totalWeight != (getBaggingAreaWeight()) + this.approvedWeightDifference) {
 			throw new SimulationException("Please place item in bagging area.");
 		}
 		return false;
