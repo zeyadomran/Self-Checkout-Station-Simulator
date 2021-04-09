@@ -22,6 +22,7 @@ import org.junit.runners.Suite;
 	EmptyStorageTest.class,
 	LoadBanknoteDispensersTest.class,
 	LoadCoinDispensersTest.class,
-	AttendantTest.class
+	AttendantTest.class,
+	ShutDownStartUpTest.class
 })
 public class TestSuiteMain {}
