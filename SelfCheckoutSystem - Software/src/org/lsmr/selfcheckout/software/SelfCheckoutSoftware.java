@@ -1067,6 +1067,14 @@ public class SelfCheckoutSoftware {
 	}
 	
 	/**
+	 * Gets the maximum approved weight difference
+	 * @return Maximum approved weight difference
+	 */
+	public double getMaxWeightDiff() {
+		return this.approvedWeightDifference;
+	}
+	
+	/**
 	 * gets the value of inkLeft
 	 * @return value of inkLeft
 	 */

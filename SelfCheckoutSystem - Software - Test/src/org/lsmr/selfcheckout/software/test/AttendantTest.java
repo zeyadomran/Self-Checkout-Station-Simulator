@@ -1,5 +1,6 @@
 package org.lsmr.selfcheckout.software.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -10,12 +11,14 @@ import java.util.Locale;
 
 import org.junit.Test;
 import org.lsmr.selfcheckout.Barcode;
+import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.Coin;
 import org.lsmr.selfcheckout.devices.DisabledException;
 import org.lsmr.selfcheckout.devices.EmptyException;
 import org.lsmr.selfcheckout.devices.OverloadException;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.SimulationException;
+import org.lsmr.selfcheckout.products.BarcodedProduct;
 import org.lsmr.selfcheckout.software.Attendant;
 import org.lsmr.selfcheckout.software.AttendantDatabase;
 import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
@@ -281,6 +284,146 @@ public class AttendantTest {
 		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
 	}
 	
+	/**
+	 * Tests removing null item from scanned items
+	 */
+	@Test (expected = NullPointerException.class)
+	public void removeNullItem() {
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		control.registerAttendant("1234");
+		control.attendantLogin("1234");
+		Attendant a = new Attendant("1234");
+		a.removeItemFromPurchase(control, null);
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+	}
+	
+	/**
+	 * Tests removing item that is not scanned
+	 */
+	@Test (expected = IndexOutOfBoundsException.class)
+	public void removeItemNotScannedTest() {
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		control.registerAttendant("1234");
+		control.attendantLogin("1234");
+		Attendant a = new Attendant("1234");
+		Barcode b = new Barcode("1234");
+		BarcodedProduct bp = new BarcodedProduct(b, "Test", new BigDecimal("12"));
+		control.addProduct(bp, 1);
+		BarcodedItem bi = control.getScannedItems().get(0);
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+	}
+	
+	/**
+	 * Tests removing item from scanned items
+	 */
+	@Test
+	public void removeItemTest() {
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		control.registerAttendant("1234");
+		control.attendantLogin("1234");
+		Attendant a = new Attendant("1234");
+		Barcode b = new Barcode("1234");
+		BarcodedProduct bp = new BarcodedProduct(b, "Test", new BigDecimal("12"));
+		control.addProduct(bp, 1);
+		control.scanItem(b, 12);
+		BarcodedItem bi = control.getScannedItems().get(0);
+		assertEquals(control.getScannedItems().size(), 1);
+		a.removeItemFromPurchase(control, bi);
+		assertEquals(control.getScannedItems().size(), 0);
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+	}
+	
+	/**
+	 * Tests removing item while not logged in
+	 */
+	@Test
+	public void removeItemNotLoggedInTest() {
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		control.registerAttendant("1234");
+		Attendant a = new Attendant("1234");
+		Barcode b = new Barcode("1234");
+		BarcodedProduct bp = new BarcodedProduct(b, "Test", new BigDecimal("12"));
+		control.addProduct(bp, 1);
+		control.scanItem(b, 12);
+		BarcodedItem bi = control.getScannedItems().get(0);
+		boolean removed = a.removeItemFromPurchase(control, bi);
+		assertFalse(removed);
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+	}
+	
+	/**
+	 * Tests removing item from null software
+	 */
+	@Test (expected = NullPointerException.class)
+	public void removeItemNullSoftware() {
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+		SelfCheckoutSoftware control = null;
+		control.registerAttendant("1234");
+		Attendant a = new Attendant("1234");
+		Barcode b = new Barcode("1234");
+		BarcodedProduct bp = new BarcodedProduct(b, "Test", new BigDecimal("12"));
+		control.addProduct(bp, 1);
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+	}
+	
+	/**
+	 * Tests approving weight discrepancy
+	 */
+	@Test
+	public void approveDiffTest() {
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		control.registerAttendant("1234");
+		control.attendantLogin("1234");
+		Attendant a = new Attendant("1234");
+		a.approveWeightDiscrepency(control, 12);
+		assertEquals(control.getMaxWeightDiff(), 12, 0);
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+	}
+	
+	/**
+	 * Tests approving weight discrepancy while not logged in
+	 */
+	@Test
+	public void approveDiffNotLoggedInTest() {
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		control.registerAttendant("1234");
+		Attendant a = new Attendant("1234");
+		boolean value = a.approveWeightDiscrepency(control, 12);
+		assertFalse(value);
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+	}
+	
+	/**
+	 * Tests approving weight discrepancy on null software
+	 */
+	@Test (expected = NullPointerException.class)
+	public void approveDiffNullSoftwareTest() {
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+		SelfCheckoutSoftware control = null;
+		control.registerAttendant("1234");
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+	}
+	
+	/**
+	 * Tests approving weight discrepancy to a max of zero difference
+	 */
+	@Test
+	public void approveZeroDiffTest() {
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		control.registerAttendant("1234");
+		control.attendantLogin("1234");
+		Attendant a = new Attendant("1234");
+		a.approveWeightDiscrepency(control, 0);
+		assertEquals(control.getMaxWeightDiff(), 0, 0);
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+	}
 	
 
 }
