@@ -1366,6 +1366,54 @@ public class SelfCheckoutSoftware {
 		this.total = this.total.add(bagPrice);
 	}
 
+
+	/**
+	 * Looks up a product name in the system to get the code
+	 * 
+	 * @param productName
+	 * 			The name of the product the customer wants to find the code for
+	 * @return the plu code corresponding to the product the customer has entered
+	 */
+	public PriceLookupCode attendantLookUpProductCode(String productName)
+	{
+		if(this.currentAttendant != null)
+		{
+			if(productName == null)
+			{
+				throw new SimulationException("Must enter product name to search");
+	
+			}
+			
+			return currentAttendant.lookupProdCode(this, productName);
+		}
+		return null;
+		
+	}
+	
+	/**
+	 * Looks up a product name in the system to get the code
+	 * 
+	 * @param productName
+	 * 			The name of the product the customer wants to find the code for
+	 * @return the plu code corresponding to the product the customer has entered
+	 */
+	public String attendantFindProductName(PriceLookupCode code)
+	{
+		if(this.currentAttendant != null)
+		{
+			if(code == null)
+			{
+				throw new SimulationException("Must enter a code to search");
+	
+			}
+			
+			return currentAttendant.lookupProdName(this, code);
+			
+		}
+		return "Not logged in";
+		
+	}
 }
+
 
 

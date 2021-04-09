@@ -1,6 +1,8 @@
 package org.lsmr.selfcheckout.software;
 
 import org.lsmr.selfcheckout.BarcodedItem;
+import org.lsmr.selfcheckout.PriceLookupCode;
+import org.lsmr.selfcheckout.products.PLUCodedProduct;
 
 public class Attendant {
 	
@@ -182,6 +184,39 @@ public class Attendant {
 			return control.setMaxWeightDiff(newMaxDiff);
 		}
 		return false;
+	}
+	
+	public PriceLookupCode lookupProdCode(SelfCheckoutSoftware control, String prodName)
+	{
+		if (control.getattendantLoggedIn()) {
+			
+			for(PriceLookupCode plu : control.getProductPLUDB().keySet())
+			{
+				PLUCodedProduct prod = control.getProductPLUDB().get(plu);
+				if(prod.getDescription().equals(prodName))
+				{
+					return plu;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public String lookupProdName(SelfCheckoutSoftware control, PriceLookupCode code)
+	{
+		if(control.getattendantLoggedIn())
+		{
+			for(PriceLookupCode plu : control.getProductPLUDB().keySet())
+			{
+				PLUCodedProduct prod = control.getProductPLUDB().get(plu);
+				if(plu.equals(code))
+				{
+					return prod.getDescription();
+				}
+			}
+			return "no results";
+		}
+		return "Not logged in";
 	}
 
 }
