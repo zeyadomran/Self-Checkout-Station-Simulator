@@ -186,6 +186,12 @@ public class Attendant {
 		return false;
 	}
 	
+	/**
+	 * Attendant looks up a product code with a product name entered
+	 * @param The control software of the station.
+	 * @param product name to look up
+	 * @return The Plu code for that product or null if not in system
+	 */
 	public PriceLookupCode lookupProdCode(SelfCheckoutSoftware control, String prodName)
 	{
 		if (control.getattendantLoggedIn()) {
@@ -202,6 +208,12 @@ public class Attendant {
 		return null;
 	}
 	
+	/**
+	 * Attendant looks up a product name with a product code entered
+	 * @param The control software of the station.
+	 * @param plu code to find product name
+	 * @return The name of the product or no results if not in system
+	 */
 	public String lookupProdName(SelfCheckoutSoftware control, PriceLookupCode code)
 	{
 		if(control.getattendantLoggedIn())

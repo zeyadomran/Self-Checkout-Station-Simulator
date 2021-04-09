@@ -23,6 +23,7 @@ import org.junit.runners.Suite;
 	LoadBanknoteDispensersTest.class,
 	LoadCoinDispensersTest.class,
 	AttendantTest.class,
-	ShutDownStartUpTest.class
+	ShutDownStartUpTest.class,
+	AttendantLooksUpProductTest.class
 })
 public class TestSuiteMain {}
