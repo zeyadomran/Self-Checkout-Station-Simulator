@@ -6,21 +6,46 @@ public class Attendant {
 	
 	private String attendantID;
 	
+	/**
+	 * constructor for an attendant of the store 
+	 * 
+	 * @param attendantID
+	 * 	The id associated with this attendant 
+	 */
 	public Attendant(String attendantID) 
 	{
 		this.setAttendantID(attendantID);
 	}
 
+	
+	/**
+	 * gets the attendantId of the attendant
+	 * 
+	 * @return the attendant ID of the attendant 
+	 */
 	public String getAttendantID() {
 		return attendantID;
 	}
 
+	/**
+	 * sets the attendantId value to the entered 
+	 * 
+	 * @param attendantId
+	 * 			the software control to modify
+	 * 
+	 * @return Whether the startup was successful 
+	 */
 	public void setAttendantID(String attendantID) {
 		this.attendantID = attendantID;
 	}
 	
-	/*
-	 * enable all external devices the user can use like the scanners, coin slots, card readers, etc... 
+	/**
+	 * enable all external devices the user can use like the scanners, coin slots, card readers, etc...
+	 * 
+	 *  @param control
+	 * 			the software control to modify
+	 * 
+	 * @return Whether the startup was successful 
 	 */
 	public boolean attendantStartUpStation(SelfCheckoutSoftware control)
 	{
@@ -43,8 +68,13 @@ public class Attendant {
 		}
 	}
 	
-	/*
-	 * Disable all external devices the user can use like the scanners, coin slots, card readers, etc... 
+	/**
+	 * Disable all external devices the user can use like the scanners, coin slots, card readers, etc..
+	 * 
+	 * @param control
+	 * 			the software control to modify
+	 * 
+	 * @return Whether the shutdown was successful 
 	 */
 	public boolean attendantShutDownStation(SelfCheckoutSoftware control)
 	{

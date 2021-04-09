@@ -165,6 +165,12 @@ public class SelfCheckoutSoftware {
 		this.inventoryDatabase.put(product, amountAvailable);
 	}
 	
+	/**
+	 * removes a Plu product to the Plu product database.
+	 * 
+	 * @param plc
+	 * 			The code of the product to remove from the database.
+	 */
 	public boolean removePluProduct(PriceLookupCode plc) {
 		if(plc == null) throw new NullPointerException("No argument may be null.");
 		if(this.pluProductDatabase.containsKey(plc)) { // Checking if item is in database.
@@ -228,6 +234,16 @@ public class SelfCheckoutSoftware {
 		}
 	}
 	
+	/**
+	 * Adds a plu item to the checked items with the entered code and weight
+	 * 
+	 * @param plu 
+	 * 			The code of the plu item to add
+	 * @param weight 
+	 * 			The weight of the item being added
+	 * 
+	 * @return If adding the item was a success.
+	 */
 	public boolean addPLUItem(PriceLookupCode plu, double weight)
 	{
 		
@@ -259,6 +275,13 @@ public class SelfCheckoutSoftware {
 		
 	}
 	
+	/**
+	 * Removes a plu item that was scanned.
+	 * 
+	 * @param item
+	 * 			The plu item you wish to remove.
+	 * @return If removing the checked plus item was a success.
+	 */
 	public boolean removePluItem(PLUCodedItem item) {
 		if(item == null) throw new NullPointerException("No argument may be null.");
 		if(this.pluItems.contains(item)) {
@@ -300,6 +323,14 @@ public class SelfCheckoutSoftware {
 		}
 	}
 	
+	
+	/**
+	 * Adds a plu item to the bagging area if it has already been added to the checked items
+	 * 
+	 * @param plu 
+	 * 			The plu code of the item.
+	 * @return If adding the item to the bagging area was a success.
+	 */
 	public boolean placePluItemInBaggingArea(PriceLookupCode plu) {
 		if(plu == null) throw new NullPointerException("No argument may be null.");
 		if(this.pluProductDatabase.containsKey(plu)) { // Checking if item is in database.
@@ -341,11 +372,11 @@ public class SelfCheckoutSoftware {
 	}
 	
 	/**
-	 * Removes an item that was added to the bagging area.
+	 * Removes a plu item that was added to the bagging area.
 	 * 
 	 * @param item
-	 * 			The item you wish to remove.
-	 * @return If removing the item from the bagging area was a success.
+	 * 			The plu item you wish to remove.
+	 * @return If removing the plu item from the bagging area was a success.
 	 */
 	public boolean removePluItemBaggingArea(PLUCodedItem item) {
 		if(item == null) throw new NullPointerException("No argument may be null.");
@@ -358,6 +389,14 @@ public class SelfCheckoutSoftware {
 		}
 	}
 	
+
+	/**
+	 * Looks up a product name in the system to get the code
+	 * 
+	 * @param productName
+	 * 			The name of the product the customer wants to find the code for
+	 * @return the plu code corresponding to the product the customer has entered
+	 */
 	public PriceLookupCode lookUpProductCode(String productName)
 	{
 		if(productName == null)
@@ -394,6 +433,11 @@ public class SelfCheckoutSoftware {
 	 */
 	public ArrayList<BarcodedItem> getScannedItems() { return this.scannedItems; }
 	
+	/**
+	 * Get the plu items checked out
+	 * 
+	 * @return An ArrayList of the plu items checked out.
+	 */
 	public ArrayList<PLUCodedItem> getPluItems() { return this.pluItems; }
 	
 	/**
@@ -403,6 +447,12 @@ public class SelfCheckoutSoftware {
 	 */
 	public ArrayList<BarcodedItem> getBaggingArea() { return this.baggingAreaItems; }
 	
+	
+	/**
+	 * Gets the items in the bagging area.
+	 * 
+	 * @return the items in the Plu bagging area
+	 */
 	public ArrayList<PLUCodedItem> getBaggingAreaPlu() { return this.baggingAreaPluItems; }
 	
 	/**
@@ -412,6 +462,12 @@ public class SelfCheckoutSoftware {
 	 */
 	public Map<Barcode, BarcodedProduct> getProductDB() { return this.productDatabase; }
 	
+	
+	/**
+	 * Gets the Plu product database.
+	 * 
+	 * @return The Plu product database.
+	 */
 	public Map<PriceLookupCode, PLUCodedProduct> getProductPLUDB() { return this.pluProductDatabase; }
 	
 	/**
@@ -738,6 +794,14 @@ public class SelfCheckoutSoftware {
 		AttendantDatabase.REGISTERED_ATTENDANTS.put(attendantID, attendant);
 	}
 	
+	
+	/**
+	 * Log an attendant in to the system
+	 * 
+	 * @param attendantID
+	 * 			The code/id of the attendant that will be used to log in.
+	 * 
+	 */
 	public void attendantLogin(String attendantID)
 	{
 		if(AttendantDatabase.REGISTERED_ATTENDANTS.containsKey(attendantID))
@@ -751,6 +815,10 @@ public class SelfCheckoutSoftware {
 		}
 	}
 	
+	/**
+	 * Log an attendant out of the system
+	 * 
+	 */
 	public void attendantLogOut()
 	{
 		if(currentAttendant != null)
@@ -1090,6 +1158,12 @@ public class SelfCheckoutSoftware {
 		return this.lowInk;
 	}
 	
+	
+	/**
+	 * shuts down the station if the attendant is logged in
+	 * 
+	 * @return if shut down was a success
+	 */
 	public boolean shutDownStation()
 	{
 		if(this.currentAttendant != null)
@@ -1105,6 +1179,11 @@ public class SelfCheckoutSoftware {
 		}
 	}
 	
+	/**
+	 * starts up a station if the attendant is logged in
+	 * 
+	 * @return if shut down was a success
+	 */
 	public boolean startUpStation()
 	{
 		if(this.currentAttendant != null)
@@ -1120,20 +1199,38 @@ public class SelfCheckoutSoftware {
 		}
 	}
 	
+	/**
+	 * gets if the system is shutdown 
+	 * @return if the system is shut down
+	 */
 	public boolean isShutDown()
 	{
 		return this.shutDown;
 	}
 
+	
+	/**
+	 * gets if the attendant is logged in 
+	 * @return if an attendant is logged in
+	 */
 	public boolean getattendantLoggedIn() {
 		return this.attendantLoggedIn;
 	}
 
+	/**
+	 * gets the current station that is being worked on
+	 * @return the checkout station
+	 */
 	public SelfCheckoutStation getStation() {
 		// TODO Auto-generated method stub
 		return this.station;
 	}
 
+	/**
+	 * sets the system to the correct shutdown value
+	 * @param shutDown
+	 * 			value to set the shutdown 
+	 */
 	public void setShutDown(boolean shutDown) {
 		this.shutDown = shutDown;
 	}
