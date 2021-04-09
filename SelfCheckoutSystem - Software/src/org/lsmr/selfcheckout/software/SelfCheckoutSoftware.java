@@ -51,6 +51,8 @@ public class SelfCheckoutSoftware {
 	private boolean attendantLoggedIn;
 	private boolean blocked = false;
 	private double approvedWeightDifference = 0;
+	private boolean lowInk = false;
+	private int inkLeft = 0;
 
 	// Listeners
 	private CardReaderListenerStub cardReaderListener = new CardReaderListenerStub();
@@ -110,6 +112,7 @@ public class SelfCheckoutSoftware {
 		//load receipt machine with paper and ink
 		this.station.printer.addInk(1000);
 		this.station.printer.addPaper(10);
+		this.inkLeft = 1000;
 	}
 	
 	/**
@@ -634,6 +637,14 @@ public class SelfCheckoutSoftware {
 			headersb.append("\nMember Points: " + MemberDatabase.REGISTERED_MEMBERS.get(this.currentMember).getPoints() + "\n\n");
 		}
 		for(int i = 0; i < headersb.length(); i++) this.station.printer.print(headersb.charAt(i));
+		for(int i = 0; i < headersb.length(); i++) {
+			if (!(Character.isWhitespace(headersb.charAt(i)))) {
+				--this.inkLeft;
+				if (this.inkLeft <= 100) {
+					this.lowInk = true;
+				}
+			}
+		}
 		for(BarcodedItem item : scannedItems) {
 			Barcode barcode = item.getBarcode();
 			BarcodedProduct product = this.productDatabase.get(barcode);
@@ -648,6 +659,14 @@ public class SelfCheckoutSoftware {
 				sb.append(pad).append(product.getPrice());
 			}
 			for(int i = 0; i < sb.length(); i++) this.station.printer.print(sb.charAt(i));
+			for(int i = 0; i < sb.length(); i++) {
+				if (!(Character.isWhitespace(sb.charAt(i)))) {
+					--this.inkLeft;
+					if (this.inkLeft <= 100) {
+						this.lowInk = true;
+					}
+				}
+			}
 			this.station.printer.print('\n');
 		}
 		for(PLUCodedItem item : pluItems) {
@@ -664,6 +683,14 @@ public class SelfCheckoutSoftware {
 				sb.append(pad).append(product.getPrice());
 			}
 			for(int i = 0; i < sb.length(); i++) this.station.printer.print(sb.charAt(i));
+			for(int i = 0; i < sb.length(); i++) {
+				if (!(Character.isWhitespace(sb.charAt(i)))) {
+					--this.inkLeft;
+					if (this.inkLeft <= 100) {
+						this.lowInk = true;
+					}
+				}
+			}
 			this.station.printer.print('\n');
 		}
 		
@@ -684,6 +711,14 @@ public class SelfCheckoutSoftware {
 		sb.append("   ");
 		sb.append(this.changeDue);
 		for(int i = 0; i < sb.length(); i++) this.station.printer.print(sb.charAt(i));
+		for(int i = 0; i < sb.length(); i++) {
+			if (!(Character.isWhitespace(sb.charAt(i)))) {
+				--this.inkLeft;
+				if (this.inkLeft <= 100) {
+					this.lowInk = true;
+				}
+			}
+		}
 		this.station.printer.cutPaper();
 		this.receipt = this.station.printer.removeReceipt();
 	}
@@ -945,7 +980,7 @@ public class SelfCheckoutSoftware {
 		{
 			totalWeight += pluItems.get(i).getWeight();
 		}
-		if (totalWeight != (getBaggingAreaWeight() + this.approvedWeightDifference)) {
+		if (totalWeight != getBaggingAreaWeight()) {
 			throw new SimulationException("Please place item in bagging area.");
 		}
 		return false;
@@ -984,6 +1019,7 @@ public class SelfCheckoutSoftware {
 	public boolean addInkToPrinter(int amount) {
 		if(this.currentAttendant != null) {
 			this.station.printer.addInk(amount);
+			this.inkLeft += amount;
 			return true;
 		}
 		return false;
@@ -1026,8 +1062,24 @@ public class SelfCheckoutSoftware {
 	 * @return Whether setting the value was successful
 	 */
 	public boolean setMaxWeightDiff(double diff) {
-		this.approvedWeightDifference = this.approvedWeightDifference + diff;
+		this.approvedWeightDifference = diff;
 		return true;
+	}
+	
+	/**
+	 * gets the value of inkLeft
+	 * @return value of inkLeft
+	 */
+	public int getInkLeft() {
+		return this.inkLeft;
+	}
+	
+	/**
+	 * gets the value of lowInk
+	 * @return value if lowInk
+	 */
+	public boolean getLowInk() {
+		return this.lowInk;
 	}
 	
 	public boolean shutDownStation()
