@@ -67,9 +67,12 @@ public class Attendant {
 		}
 	}
 	
+	
 	/**
 	 * Attendant adds ink to the receipt printer.
 	 * 
+	 * @param the control software of the station
+	 * @param the amount of ink to add
 	 * @return Whether adding ink was successful.
 	 */
 	public boolean addInkToPrinter(SelfCheckoutSoftware control, int amount) {
@@ -85,6 +88,8 @@ public class Attendant {
 	/**
 	 * Attendant adds paper to the receipt printer.
 	 * 
+	 * @param The control software of the station.
+	 * @param The amount of paper to add.
 	 * @return Whether adding paper was successful.
 	 */
 	public boolean addPaperToPrinter(SelfCheckoutSoftware control, int amount) {
@@ -99,6 +104,7 @@ public class Attendant {
 	
 	/**
 	 * Attendant blocks the station
+	 * @param The control software of the station.
 	 * @return Whether blocking the station was successful
 	 */
 	public boolean blockStation(SelfCheckoutSoftware control) {
@@ -110,6 +116,7 @@ public class Attendant {
 	
 	/**
 	 * Attendant unblocks the station
+	 * @param The control software of the station.
 	 * @return Whether unblocking the station was successful
 	 */
 	public boolean unBlockStation(SelfCheckoutSoftware control) {
@@ -121,6 +128,7 @@ public class Attendant {
 	
 	/**
 	 * Attendant removes item from purchase
+	 * @param The control software of the station.
 	 * @param Barcoded item to remove
 	 * @return Whether removing the item was successful.
 	 */
@@ -135,6 +143,7 @@ public class Attendant {
 	
 	/**
 	 * Attendant approves weight difference by setting a new maximum weight discrepancy
+	 * @param The control software of the station.
 	 * @param weight difference to set
 	 * @return Whether setting new weight difference was successful.
 	 */

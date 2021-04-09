@@ -1062,7 +1062,7 @@ public class SelfCheckoutSoftware {
 	 * @return Whether setting the value was successful
 	 */
 	public boolean setMaxWeightDiff(double diff) {
-		this.approvedWeightDifference = diff;
+		this.approvedWeightDifference = this.approvedWeightDifference + diff;
 		return true;
 	}
 	
