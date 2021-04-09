@@ -53,6 +53,7 @@ public class SelfCheckoutSoftware {
 	private double approvedWeightDifference = 0;
 	private boolean lowInk = false;
 	private int inkLeft = 0;
+	private int numberOfBags;
 
 	// Listeners
 	private CardReaderListenerStub cardReaderListener = new CardReaderListenerStub();
@@ -1324,6 +1325,45 @@ public class SelfCheckoutSoftware {
 		}
 		// should always return true
 		return !this.banknoteStorageUnitListener.isLoaded();
+	}
+	
+	
+	/**
+	 * Customer enters their membership card information.
+	 */
+	public boolean enterMembershipInfo(String mNumber) {
+		if(mNumber == null)
+			throw new NullPointerException("No argument may be null.");
+		if(!MemberDatabase.REGISTERED_MEMBERS.containsKey(mNumber))
+			throw new IllegalArgumentException("This Member does not exist.");
+		this.currentMember = mNumber;
+		return true;
+	}
+	
+	
+	/**
+	 * Customer removes purchased items from bagging area.
+	 * @return True if all items were successfully removed from the bagging area.
+	 */
+	public boolean removePurchasedItems() {
+		for (BarcodedItem item : this.baggingAreaItems)
+			removeItemBaggingArea(item);
+		for (PLUCodedItem item : this.baggingAreaPluItems)
+			removePluItemBaggingArea(item);
+		return true;
+	}
+	
+	
+	/**
+	 * Customer enters number of plastic bags used.
+	 */
+	public void enterNumberOfBags(int num) {
+		if (num < 0) throw new IllegalArgumentException("Number of plastic bags used must be 0 or greater.");
+		this.numberOfBags = num;
+		if (num == 0) return;
+		// add bag price to total (5 cents per bag)
+		BigDecimal bagPrice = new BigDecimal(0.05 * num);
+		this.total = this.total.add(bagPrice);
 	}
 
 }
