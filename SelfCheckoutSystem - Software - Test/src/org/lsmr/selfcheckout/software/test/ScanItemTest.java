@@ -136,4 +136,17 @@ public class ScanItemTest {
 		assertEquals(control.getTotal(), price);
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void invalidBagTest() {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		control.enterNumberOfBags(-1); 
+	}
+	
+	@Test
+	public void validBagTest() {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		control.enterNumberOfBags(4); 
+	}
+	
+	
 }

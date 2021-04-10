@@ -128,7 +128,7 @@ public class ReceiptTest
 	{
 		ReceiptPrinterListenerStub rls = new ReceiptPrinterListenerStub();
 		s.printer.register(rls);
-		s.printer.addPaper(100);
+		s.printer.addPaper(100); 
 		assertTrue(rls.isPaperAdded());
 	}
 
