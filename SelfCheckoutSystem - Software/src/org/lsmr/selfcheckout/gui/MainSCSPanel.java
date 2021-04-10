@@ -14,10 +14,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
@@ -32,38 +36,15 @@ public class MainSCSPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private JTextArea textArea;
-	private ArrayList<ArrayList<String>> scannedItems = new ArrayList<ArrayList<String>>();
+	private ArrayList<ArrayList<String>> scannedItems;
 	private SelfCheckoutSoftware control;
 
 	/**
 	 * Create the panel.
 	 */
-	public MainSCSPanel(String textAreaText, SelfCheckoutSoftware control) {
+	public MainSCSPanel(SelfCheckoutSoftware control) {
 		this.control = control;
-		ArrayList<BarcodedItem> scannedItems = this.control.getScannedItems();
-		ArrayList<PLUCodedItem> pluItems = this.control.getPluItems();
-
-		for (int i = 0; i < scannedItems.size(); i++) {
-			BarcodedItem item = scannedItems.get(i);
-			BarcodedProduct product = ProductDatabases.BARCODED_PRODUCT_DATABASE.get(item.getBarcode());
-			this.scannedItems.add(new ArrayList<String>());
-			this.scannedItems.get(i).add(item.getBarcode().toString());
-			this.scannedItems.get(i).add(product.getDescription());
-			this.scannedItems.get(i).add(product.getPrice().toString());
-			this.scannedItems.get(i).add(item.getWeight() + "");
-		}
-
-		for (int i = 0; i < pluItems.size(); i++) {
-			PLUCodedItem item = pluItems.get(i);
-			PLUCodedProduct product = ProductDatabases.PLU_PRODUCT_DATABASE.get(item.getPLUCode());
-			this.scannedItems.add(new ArrayList<String>());
-			int index = this.scannedItems.size() - 1;
-			this.scannedItems.get(index).add(item.getPLUCode().toString());
-			this.scannedItems.get(index).add(product.getDescription());
-			BigDecimal price = product.getPrice().multiply(new BigDecimal(item.getWeight())).setScale(2, RoundingMode.CEILING);
-			this.scannedItems.get(index).add(price.toString());
-			this.scannedItems.get(index).add(item.getWeight() + "");
-		}
+		initScannedItems();
 
 		this.setForeground(new Color(9, 11, 16));
 		this.setBackground(new Color(9, 11, 16));
@@ -73,19 +54,7 @@ public class MainSCSPanel extends JPanel {
 		this.setSize(new Dimension(1280, 720));
 		this.setLayout(null);
 
-		Object tableRows[][] = new Object[this.scannedItems.size() + 1][4];
-		Object tableColumns[] = { "Barcode", "Description", "Price", "Weight" };
-		tableRows[0][0] = "Barcode";
-		tableRows[0][1] = "Description";
-		tableRows[0][2] = "Price";
-		tableRows[0][3] = "Weight";
-		for (int i = 0; i < this.scannedItems.size(); i++) {
-			for (int j = 0; j < 4; j++) {
-				tableRows[i + 1][j] = this.scannedItems.get(i).get(j);
-			}
-		}
-
-		table = new JTable(tableRows, tableColumns);
+		table = new JTable();
 		table.setEnabled(false);
 		table.setFocusTraversalKeysEnabled(false);
 		table.setFocusable(false);
@@ -98,17 +67,16 @@ public class MainSCSPanel extends JPanel {
 		table.setBounds(0, 0, 480, 510);
 		table.setBackground(new Color(15, 17, 26));
 
-		JPanel tablePanel = new JPanel();
-		tablePanel.setBorder(new LineBorder(new Color(137, 221, 255), 1, true));
-		tablePanel.setBounds(20, 20, 480, 510);
-		tablePanel.setBackground(new Color(15, 17, 26));
-		tablePanel.setForeground(new Color(137, 221, 255));
-		tablePanel.setLayout(null);
-		tablePanel.add(table);
-		add(tablePanel);
+		JScrollPane tableScrollPanel = new JScrollPane();
+		tableScrollPanel.setBorder(new LineBorder(new Color(137, 221, 255), 1, true));
+		tableScrollPanel.setBounds(20, 20, 480, 510);
+		tableScrollPanel.setBackground(new Color(15, 17, 26));
+		tableScrollPanel.setForeground(new Color(137, 221, 255));
+		tableScrollPanel.setLayout(null);
+		tableScrollPanel.add(table);
+		add(tableScrollPanel);
 
 		textArea = new JTextArea();
-		textArea.setText(textAreaText);
 		textArea.validate();
 		textArea.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		textArea.setForeground(new Color(137, 221, 255));
@@ -142,7 +110,7 @@ public class MainSCSPanel extends JPanel {
 						"Scan Item Failed!",
 						JOptionPane.ERROR_MESSAGE);
 				}
-				control.refreshGUI();
+				updatePanel(control.buildTextAreaString());
 			}
 		});
 		scanItemButton.setOpaque(true);
@@ -160,7 +128,7 @@ public class MainSCSPanel extends JPanel {
 				if(code.equals("")) return;
 				Barcode barcode = new Barcode(code);
  				BarcodedItem item = null;
-				for(BarcodedItem i : scannedItems) {
+				for(BarcodedItem i : scannedItemss) {
 					if(i.getBarcode().equals(barcode)) item = i;
 				}
 				boolean success;
@@ -180,7 +148,7 @@ public class MainSCSPanel extends JPanel {
 						"Remove Item Failed!",
 						JOptionPane.ERROR_MESSAGE);
 				}
-				control.refreshGUI();
+				updatePanel(control.buildTextAreaString());
 			}
 		});
 		removeItemButton.setOpaque(true);
@@ -212,7 +180,7 @@ public class MainSCSPanel extends JPanel {
 						"PLU Item Add Failed!",
 						JOptionPane.ERROR_MESSAGE);
 				}
-				control.refreshGUI();
+				updatePanel(control.buildTextAreaString());
 			}
 		});
 		enterPLUButton.setOpaque(true);
@@ -250,7 +218,7 @@ public class MainSCSPanel extends JPanel {
 						"Remove PLU Item Failed!",
 						JOptionPane.ERROR_MESSAGE);
 				}
-				control.refreshGUI();
+				updatePanel(control.buildTextAreaString());
 			}
 		});
 		removePLUItemButton.setOpaque(true);
@@ -321,5 +289,55 @@ public class MainSCSPanel extends JPanel {
 		TitleLabel.setForeground(new Color(64, 224, 208));
 		TitleLabel.setBounds(520, 20, 656, 72);
 		add(TitleLabel);
+	}
+
+	private void updatePanel(String textAreaText) {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				textArea.setText(textAreaText);
+				DefaultTableModel model = new DefaultTableModel();
+				model.addColumn("Barcode");
+				model.addColumn("Description");
+				model.addColumn("Price");
+				model.addColumn("Weight");
+				initScannedItems();
+				for (ArrayList<String> i : scannedItems) {
+					String data[] = new String[4];
+					data[0] = i.get(0);
+					data[1] = i.get(1);
+					data[2] = i.get(2);
+					data[3] = i.get(3);
+					model.addRow(data);
+				}
+				table.setModel(model);
+			}
+		});
+	}
+
+	private void initScannedItems() {
+		ArrayList<BarcodedItem> scannedItemss = control.getScannedItems();
+		ArrayList<PLUCodedItem> pluItems = control.getPluItems();
+		scannedItems = new ArrayList<ArrayList<String>>();
+		for (int i = 0; i < scannedItemss.size(); i++) {
+			BarcodedItem item = scannedItemss.get(i);
+			BarcodedProduct product = ProductDatabases.BARCODED_PRODUCT_DATABASE.get(item.getBarcode());
+			scannedItems.add(new ArrayList<String>());
+			scannedItems.get(i).add(item.getBarcode().toString());
+			scannedItems.get(i).add(product.getDescription());
+			scannedItems.get(i).add(product.getPrice().toString());
+			scannedItems.get(i).add(item.getWeight() + "");
+		}
+
+		for (int i = 0; i < pluItems.size(); i++) {
+			PLUCodedItem item = pluItems.get(i);
+			PLUCodedProduct product = ProductDatabases.PLU_PRODUCT_DATABASE.get(item.getPLUCode());
+			scannedItems.add(new ArrayList<String>());
+			int index = scannedItems.size() - 1;
+			scannedItems.get(index).add(item.getPLUCode().toString());
+			scannedItems.get(index).add(product.getDescription());
+			BigDecimal price = product.getPrice().multiply(new BigDecimal((item.getWeight()/1000) + "")).setScale(2, RoundingMode.CEILING);
+			scannedItems.get(index).add(price.toString());
+			scannedItems.get(index).add(item.getWeight() + "");
+		}
 	}
 }

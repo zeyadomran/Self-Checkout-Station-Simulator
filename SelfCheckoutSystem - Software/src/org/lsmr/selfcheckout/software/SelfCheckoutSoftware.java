@@ -1096,7 +1096,7 @@ public class SelfCheckoutSoftware {
 		}
 		this.station.screen.setVisible(false);
 		frame.setLayout(new BorderLayout());
-		MainSCSPanel mainPanel = new MainSCSPanel(buildTextAreaString(), this);
+		MainSCSPanel mainPanel = new MainSCSPanel(this);
 		JPanel fixedPanel = new JPanel(new GridBagLayout());
 		fixedPanel.setPreferredSize(frame.getSize());
 		fixedPanel.setBackground(new Color(9, 11, 16));
@@ -1117,7 +1117,7 @@ public class SelfCheckoutSoftware {
 	 * 
 	 * @return The String built.
 	 */
-	private String buildTextAreaString() {
+	public String buildTextAreaString() {
 		return "\n  Bagging Scale Weight: " + this.getBaggingAreaWeight() + "\n  Total Price: $" + this.total
 				+ "\n  Member ID: " + this.currentMember;
 	}

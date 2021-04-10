@@ -23,8 +23,8 @@ public class Main {
 		PriceLookupCode pluC = new PriceLookupCode("2345");
 		control.addProduct(new BarcodedProduct(code, "testBarcode", new BigDecimal("1.2")), 2);
 		control.addPLUProduct(new PLUCodedProduct(pluC, "testPLU", new BigDecimal("3.3")), 2);
-		control.scanItem(code, 1);
-		//control.addPLUItem(pluC, 2.4);
+		// control.scanItem(code, 1);
+		// control.addPLUItem(pluC, 2400);
 		control.refreshGUI();
 	}
 
