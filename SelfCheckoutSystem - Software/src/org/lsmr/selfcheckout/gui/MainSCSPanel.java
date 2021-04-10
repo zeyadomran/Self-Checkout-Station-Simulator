@@ -4,18 +4,22 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 
+import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.PLUCodedItem;
 import org.lsmr.selfcheckout.external.ProductDatabases;
@@ -111,6 +115,16 @@ public class MainSCSPanel extends JPanel {
 		add(textArea);
 
 		JButton scanItemButton = new JButton("Scan Item");
+		scanItemButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane test = new JOptionPane();
+				String code = JOptionPane.showInputDialog("Enter the Barcode of the item you wish to scan.", "");
+				Barcode barcode = new Barcode(code);
+				control.scanItem(barcode, 1);
+				control.refreshGUI();
+			}
+		});
 		scanItemButton.setOpaque(true);
 		scanItemButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		scanItemButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));

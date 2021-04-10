@@ -140,5 +140,4 @@ public class AttendantSCSPanel extends JPanel {
 		refillBankNoteButton.setBounds(940, 565, 280, 55);
 		add(refillBankNoteButton);
 	}
-
 }
