@@ -351,7 +351,7 @@ public class MainSCSPanel extends JPanel {
 		enterMembNumButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String memberID = JOptionPane.showInputDialog("Please enter your name: ", "");
+				String memberID = JOptionPane.showInputDialog("Please enter your ID: ", "");
 				if(memberID.equals("")) {
 					JOptionPane.showMessageDialog(new JPanel(),
 						"Invalid Inputs!",
