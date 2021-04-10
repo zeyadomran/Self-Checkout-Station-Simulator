@@ -779,6 +779,11 @@ public class SelfCheckoutSoftware {
 		MemberDatabase.REGISTERED_MEMBERS.remove(memberID);
 	}
 
+	/**
+	 * Allows a member to log in manually.
+	 * 
+	 * @param memberID The member's ID.
+	 */
 	public void enterMemberID(String memberID) {
 		if (memberID == null)
 			throw new NullPointerException("No argument may be null.");

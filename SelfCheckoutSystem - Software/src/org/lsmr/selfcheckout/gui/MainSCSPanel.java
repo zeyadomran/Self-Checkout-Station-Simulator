@@ -262,6 +262,33 @@ public class MainSCSPanel extends JPanel {
 		add(lookupProductButton);
 
 		JButton bagItemButton = new JButton("Bag Item");
+		bagItemButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String code = JOptionPane.showInputDialog("Enter the Barcode of the item you wish to bag.", "");
+				if(code.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				Barcode barcode = new Barcode(code);
+				boolean success = control.placeItemInBaggingArea(barcode);
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + barcode + " was added to bagging area!",
+						"Success!",
+						JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + barcode + " was not added to bagging area!",
+						"Failed!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+				updatePanel(control.buildTextAreaString());
+			}
+		});
 		bagItemButton.setOpaque(true);
 		bagItemButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		bagItemButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
@@ -269,12 +296,47 @@ public class MainSCSPanel extends JPanel {
 		bagItemButton.setBounds(520, 250, 280, 55);
 		add(bagItemButton);
 
+		JButton addPLUItemBagButton = new JButton("Add PLU Item to bagging area");
+		addPLUItemBagButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String code = JOptionPane.showInputDialog("Enter the PLU of the item you wish to bag.", "");
+				if(code.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				PriceLookupCode plu = new PriceLookupCode(code);
+				boolean success = control.placePluItemInBaggingArea(plu);
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + plu + " was added to bagging area!",
+						"Success!",
+						JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + plu + " was not added to bagging area!",
+						"Failed!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+				updatePanel(control.buildTextAreaString());
+			}
+		});
+		addPLUItemBagButton.setOpaque(true);
+		addPLUItemBagButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		addPLUItemBagButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
+		addPLUItemBagButton.setBackground(new Color(137, 221, 255));
+		addPLUItemBagButton.setBounds(520, 325, 280, 55);
+		add(addPLUItemBagButton);
+
 		JButton addOwnBagButton = new JButton("Add Own Bag");
 		addOwnBagButton.setOpaque(true);
 		addOwnBagButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		addOwnBagButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
 		addOwnBagButton.setBackground(new Color(137, 221, 255));
-		addOwnBagButton.setBounds(520, 325, 280, 55);
+		addOwnBagButton.setBounds(980, 325, 280, 55);
 		add(addOwnBagButton);
 
 		JButton swipeMembCardButton = new JButton("Swipe Membership Card");
