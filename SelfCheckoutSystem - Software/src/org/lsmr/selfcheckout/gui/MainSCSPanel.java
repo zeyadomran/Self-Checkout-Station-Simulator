@@ -22,6 +22,7 @@ import javax.swing.border.LineBorder;
 import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.PLUCodedItem;
+import org.lsmr.selfcheckout.PriceLookupCode;
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
@@ -30,16 +31,14 @@ import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
 public class MainSCSPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTable table;
-	private String textAreaText = "";
+	private JTextArea textArea;
 	private ArrayList<ArrayList<String>> scannedItems = new ArrayList<ArrayList<String>>();
 	private SelfCheckoutSoftware control;
 
 	/**
 	 * Create the panel.
 	 */
-	public MainSCSPanel( SelfCheckoutSoftware control) {
-
-		this.textAreaText = control.buildTextAreaString();
+	public MainSCSPanel(String textAreaText, SelfCheckoutSoftware control) {
 		this.control = control;
 		ArrayList<BarcodedItem> scannedItems = this.control.getScannedItems();
 		ArrayList<PLUCodedItem> pluItems = this.control.getPluItems();
@@ -75,11 +74,11 @@ public class MainSCSPanel extends JPanel {
 		this.setLayout(null);
 
 		Object tableRows[][] = new Object[this.scannedItems.size() + 1][4];
-		Object tableColumns[] = { "Barcode", "Description", "Price $(CAD)", "Weight g(Grams)" };
+		Object tableColumns[] = { "Barcode", "Description", "Price", "Weight" };
 		tableRows[0][0] = "Barcode";
 		tableRows[0][1] = "Description";
-		tableRows[0][2] = "Price $(CAD)";
-		tableRows[0][3] = "Weight g(Grams)";
+		tableRows[0][2] = "Price";
+		tableRows[0][3] = "Weight";
 		for (int i = 0; i < this.scannedItems.size(); i++) {
 			for (int j = 0; j < 4; j++) {
 				tableRows[i + 1][j] = this.scannedItems.get(i).get(j);
@@ -87,6 +86,11 @@ public class MainSCSPanel extends JPanel {
 		}
 
 		table = new JTable(tableRows, tableColumns);
+		table.setEnabled(false);
+		table.setFocusTraversalKeysEnabled(false);
+		table.setFocusable(false);
+		table.setRequestFocusEnabled(false);
+		table.setRowSelectionAllowed(false);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setForeground(new Color(137, 221, 255));
 		table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -103,7 +107,9 @@ public class MainSCSPanel extends JPanel {
 		tablePanel.add(table);
 		add(tablePanel);
 
-		JTextArea textArea = new JTextArea(this.textAreaText);
+		textArea = new JTextArea();
+		textArea.setText(textAreaText);
+		textArea.validate();
 		textArea.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		textArea.setForeground(new Color(137, 221, 255));
 		textArea.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
@@ -118,10 +124,13 @@ public class MainSCSPanel extends JPanel {
 		scanItemButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane test = new JOptionPane();
 				String code = JOptionPane.showInputDialog("Enter the Barcode of the item you wish to scan.", "");
+				String sWeight = JOptionPane.showInputDialog("Enter the weight of the item you wish to scan.", "");
+				if(code.equals("") || sWeight.equals("")) return;
+				double weight = Double.parseDouble(sWeight);
+				if(weight <= 0) return;
 				Barcode barcode = new Barcode(code);
-				boolean success = control.scanItem(barcode, 1);
+				boolean success = control.scanItem(barcode, weight);
 				if(success) {
 					JOptionPane.showMessageDialog(new JPanel(),
 						"Item: " + barcode + " was Scanned!",
@@ -143,13 +152,14 @@ public class MainSCSPanel extends JPanel {
 		scanItemButton.setBounds(520, 100, 280, 55);
 		add(scanItemButton);
 
-		JButton removeItemButton = new JButton("Remove Item");
+		JButton removeItemButton = new JButton("Remove Barcoded Item");
 		removeItemButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String code = JOptionPane.showInputDialog("Enter the Barcode of the item you wish to remove.", "");
+				if(code.equals("")) return;
 				Barcode barcode = new Barcode(code);
-				BarcodedItem item = null;
+ 				BarcodedItem item = null;
 				for(BarcodedItem i : scannedItems) {
 					if(i.getBarcode().equals(barcode)) item = i;
 				}
@@ -181,6 +191,30 @@ public class MainSCSPanel extends JPanel {
 		add(removeItemButton);
 
 		JButton enterPLUButton = new JButton("Enter Item PLU Code");
+		enterPLUButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String code = JOptionPane.showInputDialog("Enter the PLU of the item you wish to add.", "");
+				String sWeight = JOptionPane.showInputDialog("Enter the weight of the item you wish to add.", "");
+				if(code.equals("") || sWeight.equals("")) return;
+				double weight = Double.parseDouble(sWeight);
+				if(weight <= 0) return;
+				PriceLookupCode plu = new PriceLookupCode(code);
+				boolean success = control.addPLUItem(plu, weight);
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + plu + " was added!",
+						"PLU Item Add Success!",
+						JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + plu + " was not added!",
+						"PLU Item Add Failed!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+				control.refreshGUI();
+			}
+		});
 		enterPLUButton.setOpaque(true);
 		enterPLUButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		enterPLUButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
@@ -188,13 +222,51 @@ public class MainSCSPanel extends JPanel {
 		enterPLUButton.setBounds(520, 170, 280, 55);
 		add(enterPLUButton);
 
-		JButton lookupPLUButton = new JButton("Lookup Product");
-		lookupPLUButton.setOpaque(true);
-		lookupPLUButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lookupPLUButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
-		lookupPLUButton.setBackground(new Color(130, 170, 255));
-		lookupPLUButton.setBounds(980, 175, 280, 55);
-		add(lookupPLUButton);
+		JButton removePLUItemButton = new JButton("Remove PLU Item");
+		removePLUItemButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String code = JOptionPane.showInputDialog("Enter the Barcode of the item you wish to remove.", "");
+				if(code.equals("")) return;
+				PriceLookupCode plu = new PriceLookupCode(code);
+ 				PLUCodedItem item = null;
+				for(PLUCodedItem i : pluItems) {
+					if(i.getPLUCode().equals(plu)) item = i;
+				}
+				boolean success;
+				if(item != null) {
+					success = control.removePluItem(item);
+				} else {
+					success = false;
+				}
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + plu + " was removed!",
+						"Remove PLU Item Success!",
+						JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + plu + " was not removed!",
+						"Remove PLU Item Failed!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+				control.refreshGUI();
+			}
+		});
+		removePLUItemButton.setOpaque(true);
+		removePLUItemButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		removePLUItemButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
+		removePLUItemButton.setBackground(new Color(130, 170, 255));
+		removePLUItemButton.setBounds(980, 175, 280, 55);
+		add(removePLUItemButton);
+
+		JButton lookupProductButton = new JButton("Lookup Products");
+		lookupProductButton.setOpaque(true);
+		lookupProductButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lookupProductButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
+		lookupProductButton.setBackground(new Color(40, 167, 69));
+		lookupProductButton.setBounds(980, 250, 280, 55);
+		add(lookupProductButton);
 
 		JButton bagItemButton = new JButton("Bag Item");
 		bagItemButton.setOpaque(true);

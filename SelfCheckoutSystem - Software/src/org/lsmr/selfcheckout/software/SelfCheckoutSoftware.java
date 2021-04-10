@@ -14,6 +14,7 @@ import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -1087,14 +1088,20 @@ public class SelfCheckoutSoftware {
 	 */
 	public void refreshGUI() {
 		JFrame frame = this.station.screen.getFrame(); // Gets The JFrame used by the touchscreen listener.
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.station.screen.setVisible(false);
 		frame.setLayout(new BorderLayout());
-		MainSCSPanel mainPanel = new MainSCSPanel(this);
+		MainSCSPanel mainPanel = new MainSCSPanel(buildTextAreaString(), this);
 		JPanel fixedPanel = new JPanel(new GridBagLayout());
 		fixedPanel.setPreferredSize(frame.getSize());
 		fixedPanel.setBackground(new Color(9, 11, 16));
 		fixedPanel.add(mainPanel);
 		frame.getContentPane().add(fixedPanel);
-		this.station.screen.setVisible(false);
 		this.station.screen.setVisible(true); // Displays the JFrame.
 	}
 
@@ -1110,7 +1117,7 @@ public class SelfCheckoutSoftware {
 	 * 
 	 * @return The String built.
 	 */
-	public String buildTextAreaString() {
+	private String buildTextAreaString() {
 		return "\n  Bagging Scale Weight: " + this.getBaggingAreaWeight() + "\n  Total Price: $" + this.total
 				+ "\n  Member ID: " + this.currentMember;
 	}
