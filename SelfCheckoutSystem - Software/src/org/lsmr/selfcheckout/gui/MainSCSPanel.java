@@ -30,6 +30,7 @@ import org.lsmr.selfcheckout.PriceLookupCode;
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
+import org.lsmr.selfcheckout.software.MemberDatabase;
 import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
 
 public class MainSCSPanel extends JPanel {
@@ -94,7 +95,13 @@ public class MainSCSPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				String code = JOptionPane.showInputDialog("Enter the Barcode of the item you wish to scan.", "");
 				String sWeight = JOptionPane.showInputDialog("Enter the weight of the item you wish to scan.", "");
-				if(code.equals("") || sWeight.equals("")) return;
+				if(code.equals("") || sWeight.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				double weight = Double.parseDouble(sWeight);
 				if(weight <= 0) return;
 				Barcode barcode = new Barcode(code);
@@ -125,10 +132,16 @@ public class MainSCSPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String code = JOptionPane.showInputDialog("Enter the Barcode of the item you wish to remove.", "");
-				if(code.equals("")) return;
+				if(code.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				Barcode barcode = new Barcode(code);
  				BarcodedItem item = null;
-				for(BarcodedItem i : scannedItemss) {
+				for(BarcodedItem i : control.getScannedItems()) {
 					if(i.getBarcode().equals(barcode)) item = i;
 				}
 				boolean success;
@@ -164,7 +177,13 @@ public class MainSCSPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				String code = JOptionPane.showInputDialog("Enter the PLU of the item you wish to add.", "");
 				String sWeight = JOptionPane.showInputDialog("Enter the weight of the item you wish to add.", "");
-				if(code.equals("") || sWeight.equals("")) return;
+				if(code.equals("") || sWeight.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				double weight = Double.parseDouble(sWeight);
 				if(weight <= 0) return;
 				PriceLookupCode plu = new PriceLookupCode(code);
@@ -195,10 +214,16 @@ public class MainSCSPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String code = JOptionPane.showInputDialog("Enter the Barcode of the item you wish to remove.", "");
-				if(code.equals("")) return;
+				if(code.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				PriceLookupCode plu = new PriceLookupCode(code);
  				PLUCodedItem item = null;
-				for(PLUCodedItem i : pluItems) {
+				for(PLUCodedItem i : control.getPluItems()) {
 					if(i.getPLUCode().equals(plu)) item = i;
 				}
 				boolean success;
@@ -267,6 +292,41 @@ public class MainSCSPanel extends JPanel {
 		enterMembNumButton.setBackground(new Color(193, 142, 227));
 		enterMembNumButton.setBounds(520, 570, 280, 55);
 		add(enterMembNumButton);
+
+		JButton createMembButton = new JButton("Create Membership");
+		createMembButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String name = JOptionPane.showInputDialog("Please enter your name: ", "");
+				if(name.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				String memberID = (MemberDatabase.REGISTERED_MEMBERS.size() + 1) + "";
+				control.addMember(name, memberID);
+				if(MemberDatabase.REGISTERED_MEMBERS.containsKey(memberID)) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Member: " + name + " was created with ID:" + memberID + "!",
+						"Membership Created!",
+						JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Couldn't Create Membership!",
+						"Membership Creation Failed!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+				updatePanel(control.buildTextAreaString());
+			}
+		});
+		createMembButton.setOpaque(true);
+		createMembButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		createMembButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
+		createMembButton.setBackground(new Color(193, 142, 227));
+		createMembButton.setBounds(980, 570, 280, 55);
+		add(createMembButton);
 
 		JButton checkOutButton = new JButton("Check Out");
 		checkOutButton.setOpaque(true);
