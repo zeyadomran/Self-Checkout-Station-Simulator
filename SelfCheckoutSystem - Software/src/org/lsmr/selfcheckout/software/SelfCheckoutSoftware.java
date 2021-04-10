@@ -1413,6 +1413,42 @@ public class SelfCheckoutSoftware {
 		return "Not logged in";
 		
 	}
+	
+	
+	/**
+	 * Compares the actual weight on the scale to the expected weight (comprised of all items added to bagging area)- use case i
+	 * @return Return 'true' if the actual and expected weights are the same, false otherwise
+	 */
+	public boolean checkWeight() {
+		
+		double expected = 0;
+		double actual = 0;
+		
+		actual = this.getBaggingAreaWeight();
+		
+		
+		
+		//Add the weight of all items in bagging area to expected weight
+		for(int i = 0; i < this.baggingAreaItems.size(); i++) {
+			expected += this.baggingAreaItems.get(i).getWeight();
+		}
+		
+		for(int i = 0; i < this.baggingAreaPluItems.size(); i++) {
+			expected += this.baggingAreaPluItems.get(i).getWeight();
+		}
+		
+		for(int i = 0; i < this.personalBags.size(); i++) {
+			expected += this.personalBags.get(i).getWeight();
+		}
+		
+		
+		
+		
+		//Compare actual and expected weights
+		if(actual == expected) return true;
+		
+		return false;
+	}
 }
 
 
