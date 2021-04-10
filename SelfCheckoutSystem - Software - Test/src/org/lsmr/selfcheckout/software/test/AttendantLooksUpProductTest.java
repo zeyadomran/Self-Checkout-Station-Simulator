@@ -294,5 +294,57 @@ public class AttendantLooksUpProductTest {
 		
 	}
 
+	/**
+	 * Test looking up a product with a null code
+	 * Not likely to happen, but done to avoid malicious use 
+	 **/
+	@Test (expected = SimulationException.class)
+	public void attendantLooksUpCodeLoggedInNullName() throws SimulationException, OverloadException
+	{
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+
+		
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+
+		PriceLookupCode plc = new PriceLookupCode("7777");
+
+		PLUCodedProduct apple = new PLUCodedProduct(plc, "Apple", new BigDecimal("1.00"));
+		
+		control.addPLUProduct(apple, 20);
+		
+		control.registerAttendant("12345");
+		control.attendantLogin("12345");
+		
+		control.attendantLookUpProductCode(null);
+		
+		
+	}
+	
+	/*
+	 * Test looking up a product with a null code
+	 * Not likely to happen, but done to avoid malicious use 
+	 */
+	@Test (expected = SimulationException.class)
+	public void attendantLooksUpNameLoggedInNullCode() throws SimulationException, OverloadException
+	{
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+
+		
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+
+		PriceLookupCode plc = new PriceLookupCode("7177");
+
+		PLUCodedProduct apple = new PLUCodedProduct(plc, "Apple", new BigDecimal("1.00"));
+		
+		control.addPLUProduct(apple, 20);
+		
+		control.registerAttendant("12345");
+		control.attendantLogin("12345");
+		
+		control.attendantFindProductName(null);
+		
+		
+	}
+	
 
 }

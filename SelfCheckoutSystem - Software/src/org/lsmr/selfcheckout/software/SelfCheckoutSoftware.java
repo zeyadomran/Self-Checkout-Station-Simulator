@@ -1108,7 +1108,7 @@ public class SelfCheckoutSoftware {
 			this.station.printer.addPaper(amount);
 			return true;
 		}
-		return false; 
+		return false;
 	}
 	
 	/**
