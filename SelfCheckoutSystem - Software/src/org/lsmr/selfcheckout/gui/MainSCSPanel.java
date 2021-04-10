@@ -121,7 +121,18 @@ public class MainSCSPanel extends JPanel {
 				JOptionPane test = new JOptionPane();
 				String code = JOptionPane.showInputDialog("Enter the Barcode of the item you wish to scan.", "");
 				Barcode barcode = new Barcode(code);
-				control.scanItem(barcode, 1);
+				boolean success = control.scanItem(barcode, 1);
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + barcode + " was Scanned!",
+						"Scan Item Success!",
+						JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + barcode + " was not Scanned!",
+						"Scan Item Failed!",
+						JOptionPane.ERROR_MESSAGE);
+				}
 				control.refreshGUI();
 			}
 		});
@@ -133,6 +144,35 @@ public class MainSCSPanel extends JPanel {
 		add(scanItemButton);
 
 		JButton removeItemButton = new JButton("Remove Item");
+		removeItemButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String code = JOptionPane.showInputDialog("Enter the Barcode of the item you wish to remove.", "");
+				Barcode barcode = new Barcode(code);
+				BarcodedItem item = null;
+				for(BarcodedItem i : scannedItems) {
+					if(i.getBarcode().equals(barcode)) item = i;
+				}
+				boolean success;
+				if(item != null) {
+					success = control.removeScannedItem(item);
+				} else {
+					success = false;
+				}
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + barcode + " was removed!",
+						"Remove Item Success!",
+						JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + barcode + " was not removed!",
+						"Remove Item Failed!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+				control.refreshGUI();
+			}
+		});
 		removeItemButton.setOpaque(true);
 		removeItemButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		removeItemButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
