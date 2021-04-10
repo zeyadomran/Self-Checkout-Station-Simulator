@@ -779,6 +779,14 @@ public class SelfCheckoutSoftware {
 		MemberDatabase.REGISTERED_MEMBERS.remove(memberID);
 	}
 
+	public void enterMemberID(String memberID) {
+		if (memberID == null)
+			throw new NullPointerException("No argument may be null.");
+		if (!MemberDatabase.REGISTERED_MEMBERS.containsKey(memberID))
+			throw new IllegalArgumentException("This Member does not exist.");
+		this.currentMember = memberID;
+	}
+
 	/**
 	 * Allows a user to tap their membership card.
 	 * 

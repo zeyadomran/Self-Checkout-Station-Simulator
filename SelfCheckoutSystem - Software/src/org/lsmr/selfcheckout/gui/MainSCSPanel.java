@@ -286,6 +286,32 @@ public class MainSCSPanel extends JPanel {
 		add(swipeMembCardButton);
 
 		JButton enterMembNumButton = new JButton("Enter Membership Number");
+		enterMembNumButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String memberID = JOptionPane.showInputDialog("Please enter your name: ", "");
+				if(memberID.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				control.enterMemberID(memberID);
+				if(MemberDatabase.REGISTERED_MEMBERS.containsKey(memberID)) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Log In Successful!",
+						"Member Logged In!",
+						JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Couldn't Log In!",
+						"Membership Log In Failed!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+				updatePanel(control.buildTextAreaString());
+			}
+		});
 		enterMembNumButton.setOpaque(true);
 		enterMembNumButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		enterMembNumButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
