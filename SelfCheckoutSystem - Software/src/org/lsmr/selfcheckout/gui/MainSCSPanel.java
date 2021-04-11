@@ -252,13 +252,91 @@ public class MainSCSPanel extends JPanel {
 		removePLUItemButton.setBounds(980, 175, 280, 55);
 		add(removePLUItemButton);
 
-		JButton lookupProductButton = new JButton("Lookup Products");
+		JButton lookupProductButton = new JButton("Lookup Barcoded Products");
+		lookupProductButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Object itemsInDB[] = ProductDatabases.BARCODED_PRODUCT_DATABASE.values().toArray();
+				int i = 0;
+				int ctn = JOptionPane.YES_OPTION;
+				while(i < itemsInDB.length && ctn == JOptionPane.YES_OPTION) {
+					String text = "";
+						for(int j = 0; j < 4; j++) {
+							if(itemsInDB.length > i) {
+								text += "\nBarcode: " + ((BarcodedProduct) itemsInDB[i]).getBarcode() + " | Description: " + ((BarcodedProduct) itemsInDB[i]).getDescription();
+								i++;
+							}
+						}
+					Object[] options = { "Next Page", "Go Back" };
+					ctn = JOptionPane.showOptionDialog(
+						new JPanel(), 
+						text, 
+						"Barcoded Items", 
+						JOptionPane.YES_NO_OPTION, 
+						JOptionPane.PLAIN_MESSAGE, 
+						null, 
+						options, 
+						options[0]
+					);
+					System.out.println(ctn);
+				}
+				if(i == itemsInDB.length && ctn == JOptionPane.YES_OPTION) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"No more items to display!",
+						"You viewed all the items!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		lookupProductButton.setOpaque(true);
 		lookupProductButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lookupProductButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
 		lookupProductButton.setBackground(new Color(40, 167, 69));
 		lookupProductButton.setBounds(980, 250, 280, 55);
 		add(lookupProductButton);
+
+		JButton lookupPLUButton = new JButton("Lookup PLU Products");
+		lookupPLUButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Object itemsInDB[] = ProductDatabases.PLU_PRODUCT_DATABASE.values().toArray();
+				int i = 0;
+				int ctn = JOptionPane.YES_OPTION;
+				while(i < itemsInDB.length && ctn == JOptionPane.YES_OPTION) {
+					String text = "";
+						for(int j = 0; j < 4; j++) {
+							if(itemsInDB.length > i) {
+								text += "\nPLU: " + ((PLUCodedProduct) itemsInDB[i]).getPLUCode() + " | Description: " + ((PLUCodedProduct) itemsInDB[i]).getDescription();
+								i++;
+							}
+						}
+					Object[] options = { "Next Page", "Go Back" };
+					ctn = JOptionPane.showOptionDialog(
+						new JPanel(), 
+						text, 
+						"PLU Items", 
+						JOptionPane.YES_NO_OPTION, 
+						JOptionPane.PLAIN_MESSAGE, 
+						null, 
+						options, 
+						options[0]
+					);
+					System.out.println(ctn);
+				}
+				if(i == itemsInDB.length && ctn == JOptionPane.YES_OPTION) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"No more items to display!",
+						"You viewed all the items!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		lookupPLUButton.setOpaque(true);
+		lookupPLUButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lookupPLUButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
+		lookupPLUButton.setBackground(new Color(40, 167, 69));
+		lookupPLUButton.setBounds(980, 325, 280, 55);
+		add(lookupPLUButton);
 
 		JButton bagItemButton = new JButton("Bag Item");
 		bagItemButton.addMouseListener(new MouseAdapter() {
@@ -330,12 +408,28 @@ public class MainSCSPanel extends JPanel {
 		addPLUItemBagButton.setBounds(520, 325, 280, 55);
 		add(addPLUItemBagButton);
 
+		JButton removeItemFromBAButton = new JButton("Remove Item from bagging area");
+		removeItemFromBAButton.setOpaque(true);
+		removeItemFromBAButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		removeItemFromBAButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
+		removeItemFromBAButton.setBackground(new Color(137, 221, 255));
+		removeItemFromBAButton.setBounds(520, 400, 280, 55);
+		add(removeItemFromBAButton);
+
+		JButton removePLUItemFromBAButton = new JButton("Remove PLU Item from bagging area");
+		removePLUItemFromBAButton.setOpaque(true);
+		removePLUItemFromBAButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		removePLUItemFromBAButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
+		removePLUItemFromBAButton.setBackground(new Color(137, 221, 255));
+		removePLUItemFromBAButton.setBounds(980, 400, 280, 55);
+		add(removePLUItemFromBAButton);
+
 		JButton addOwnBagButton = new JButton("Add Own Bag");
 		addOwnBagButton.setOpaque(true);
 		addOwnBagButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		addOwnBagButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
 		addOwnBagButton.setBackground(new Color(137, 221, 255));
-		addOwnBagButton.setBounds(980, 325, 280, 55);
+		addOwnBagButton.setBounds(980, 495, 280, 55);
 		add(addOwnBagButton);
 
 		JButton swipeMembCardButton = new JButton("Swipe Membership Card");
