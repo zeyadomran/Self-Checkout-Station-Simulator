@@ -9,9 +9,13 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import org.lsmr.selfcheckout.external.ProductDatabases;
+import org.lsmr.selfcheckout.products.BarcodedProduct;
+import org.lsmr.selfcheckout.products.PLUCodedProduct;
 import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
 
 public class AttendantSCSPanel extends JPanel {
@@ -62,7 +66,64 @@ public class AttendantSCSPanel extends JPanel {
 		approveWeightButton.setBounds(60, 185, 280, 55);
 		add(approveWeightButton);
 
-		JButton lookUpProduct = new JButton("Lookup Product");
+		JButton lookUpProduct = new JButton("Lookup Products");
+		lookUpProduct.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Object itemsInDB[] = ProductDatabases.PLU_PRODUCT_DATABASE.values().toArray();
+				int i = 0;
+				int ctn = JOptionPane.YES_OPTION;
+				while(i < itemsInDB.length && ctn == JOptionPane.YES_OPTION) {
+					String text = "";
+						for(int j = 0; j < 4; j++) {
+							if(itemsInDB.length > i) {
+								text += "\nPLU: " + ((PLUCodedProduct) itemsInDB[i]).getPLUCode() + " | Description: " + ((PLUCodedProduct) itemsInDB[i]).getDescription();
+								i++;
+							}
+						}
+					Object[] options = { "Next Page", "Go Back" };
+					ctn = JOptionPane.showOptionDialog(
+						new JPanel(), 
+						text, 
+						"PLU Items", 
+						JOptionPane.YES_NO_OPTION, 
+						JOptionPane.PLAIN_MESSAGE, 
+						null, 
+						options, 
+						options[0]
+					);
+				}
+				itemsInDB = ProductDatabases.BARCODED_PRODUCT_DATABASE.values().toArray();
+				i = 0;
+				ctn = JOptionPane.YES_OPTION;
+				while(i < itemsInDB.length && ctn == JOptionPane.YES_OPTION) {
+					String text = "";
+						for(int j = 0; j < 4; j++) {
+							if(itemsInDB.length > i) {
+								text += "\nBarcode: " + ((BarcodedProduct) itemsInDB[i]).getBarcode() + " | Description: " + ((BarcodedProduct) itemsInDB[i]).getDescription();
+								i++;
+							}
+						}
+					Object[] options = { "Next Page", "Go Back" };
+					ctn = JOptionPane.showOptionDialog(
+						new JPanel(), 
+						text, 
+						"Barcoded Items", 
+						JOptionPane.YES_NO_OPTION, 
+						JOptionPane.PLAIN_MESSAGE, 
+						null, 
+						options, 
+						options[0]
+					);
+				}
+				if(i == itemsInDB.length && ctn == JOptionPane.YES_OPTION) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"No more items to display!",
+						"You viewed all the items!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		lookUpProduct.setOpaque(true);
 		lookUpProduct.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lookUpProduct.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
