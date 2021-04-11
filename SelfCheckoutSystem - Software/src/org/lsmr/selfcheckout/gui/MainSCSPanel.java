@@ -495,6 +495,33 @@ public class MainSCSPanel extends JPanel {
 		add(removePLUItemFromBAButton);
 
 		JButton addOwnBagButton = new JButton("Add Own Bag");
+		addOwnBagButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String sWeight = JOptionPane.showInputDialog("Enter the weight of your bag.", "");
+				if(sWeight.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				double weight = Double.parseDouble(sWeight);
+				boolean success = control.addOwnBag(weight);
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Bag was successfully added!",
+						"Success!",
+						JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Bag was not added!",
+						"Failed!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+				updatePanel(control.buildTextAreaString());
+			}
+		});
 		addOwnBagButton.setOpaque(true);
 		addOwnBagButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		addOwnBagButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
