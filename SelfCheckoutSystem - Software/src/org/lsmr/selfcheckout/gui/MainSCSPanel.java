@@ -551,8 +551,11 @@ public class MainSCSPanel extends JPanel {
 						JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				control.enterMemberID(memberID);
+				boolean success = false;
 				if(MemberDatabase.REGISTERED_MEMBERS.containsKey(memberID)) {
+					success = control.enterMembershipInfo(memberID);
+				}
+				if(success) {
 					JOptionPane.showMessageDialog(new JPanel(),
 						"Log In Successful!",
 						"Member Logged In!",
