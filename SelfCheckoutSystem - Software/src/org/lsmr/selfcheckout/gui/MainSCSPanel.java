@@ -29,6 +29,7 @@ import org.lsmr.selfcheckout.PriceLookupCode;
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
+import org.lsmr.selfcheckout.software.AttendantDatabase;
 import org.lsmr.selfcheckout.software.MemberDatabase;
 import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
 
@@ -45,8 +46,6 @@ public class MainSCSPanel extends JPanel {
 		this.control = control;
 		control.returnToAddingItems();
 		
-		initScannedItems();
-
 		this.setForeground(new Color(9, 11, 16));
 		this.setBackground(new Color(9, 11, 16));
 		this.setMinimumSize(new Dimension(1280, 720));
@@ -88,7 +87,8 @@ public class MainSCSPanel extends JPanel {
 		textArea.setBorder(new LineBorder(new Color(137, 221, 255), 1, true));
 		textArea.setBackground(new Color(15, 17, 26));
 		add(textArea);
-
+		updatePanel(control.buildTextAreaString());
+		
 		JButton scanItemButton = new JButton("Scan Item");
 		scanItemButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -648,6 +648,34 @@ public class MainSCSPanel extends JPanel {
 		add(checkOutButton);
 
 		JButton attendantLogInButton = new JButton("Attendant Login");
+		attendantLogInButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String attendantID = JOptionPane.showInputDialog("Please enter your ID: ", "");
+				if(attendantID.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				if(AttendantDatabase.REGISTERED_ATTENDANTS.containsKey(attendantID)) {
+					control.attendantLogin(attendantID);;
+				}
+				if(control.getattendantLoggedIn()) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Log In Successful!",
+						"Attendant Logged In!",
+						JOptionPane.PLAIN_MESSAGE);
+					control.changeToAttendantGUI();
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Couldn't Log In!",
+						"Attendant Log In Failed!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		attendantLogInButton.setOpaque(true);
 		attendantLogInButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		attendantLogInButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
@@ -665,7 +693,7 @@ public class MainSCSPanel extends JPanel {
 	private void updatePanel(String textAreaText) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				textArea.setText(textAreaText);
+				textArea.setText(""+textAreaText);
 				DefaultTableModel model = new DefaultTableModel();
 				model.addColumn("Barcode");
 				model.addColumn("Description");

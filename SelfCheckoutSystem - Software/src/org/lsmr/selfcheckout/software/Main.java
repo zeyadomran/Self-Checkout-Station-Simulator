@@ -27,6 +27,7 @@ public class Main {
 		control.addPLUProduct(new PLUCodedProduct(pluC1, "testPLU1", new BigDecimal("3.3")), 2);
 		control.addProduct(new BarcodedProduct(code2, "testBarcode2", new BigDecimal("1.2")), 2);
 		control.addPLUProduct(new PLUCodedProduct(pluC2, "testPLU2", new BigDecimal("3.3")), 2);
+		control.registerAttendant("1234");
 		// control.scanItem(code, 1);
 		// control.addPLUItem(pluC, 2400);
 		control.loadMainGUI();

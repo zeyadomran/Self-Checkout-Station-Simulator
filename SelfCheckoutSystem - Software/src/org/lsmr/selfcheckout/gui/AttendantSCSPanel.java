@@ -1,15 +1,15 @@
 package org.lsmr.selfcheckout.gui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
@@ -33,13 +33,20 @@ public class AttendantSCSPanel extends JPanel {
 		this.setSize(new Dimension(1280, 720));
 		this.setLayout(null);
 
-		JLabel TitleLabel = new JLabel("Attendant");
+		JLabel TitleLabel = new JLabel("Attendant ID: " + control.currentAttendant.getAttendantID());
 		TitleLabel.setFont(new Font("Lucida Grande", Font.BOLD, 60));
 		TitleLabel.setForeground(new Color(64, 224, 208));
 		TitleLabel.setBounds(20, 20, 720, 72);
 		add(TitleLabel);
 
 		JButton logOutButton = new JButton("Log Out");
+		logOutButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				control.attendantLogOut();
+				control.loadMainGUI();
+			}
+		});
 		logOutButton.setOpaque(true);
 		logOutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		logOutButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));

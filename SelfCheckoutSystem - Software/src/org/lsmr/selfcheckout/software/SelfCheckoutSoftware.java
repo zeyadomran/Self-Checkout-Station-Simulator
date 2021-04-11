@@ -67,6 +67,9 @@ public class SelfCheckoutSoftware {
 	private int linesOfPaperRemaining = 0;
 	private int numberOfBags;
 	private boolean addingItems = false;
+	private boolean shutDown = false;
+	private boolean attendentLoggedin;
+	public Attendant currentAttendant;
 
 	// Listeners
 	private CardReaderListenerStub cardReaderListener = new CardReaderListenerStub();
@@ -77,9 +80,7 @@ public class SelfCheckoutSoftware {
 	private CoinDispenserListenerStub coinDispenserListener = new CoinDispenserListenerStub();
 	private CoinStorageUnitListenerStub coinStorageUnitListener = new CoinStorageUnitListenerStub();
 	private BanknoteStorageUnitListenerStub banknoteStorageUnitListener = new BanknoteStorageUnitListenerStub();
-	private boolean shutDown = false;
-	private boolean attendentLoggedin;
-	private Attendant currentAttendant;
+
 	 
 	/**
 	 * Creates an instance of SelfCheckoutSoftware.
@@ -1509,12 +1510,7 @@ public class SelfCheckoutSoftware {
 	 */
 	public void loadMainGUI() {
 		JFrame frame = this.station.screen.getFrame(); // Gets The JFrame used by the touchscreen listener.
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		frame.getContentPane().removeAll();
 		this.station.screen.setVisible(false);
 		frame.setLayout(new BorderLayout());
 		MainSCSPanel mainPanel = new MainSCSPanel(this);
@@ -1523,6 +1519,8 @@ public class SelfCheckoutSoftware {
 		fixedPanel.setBackground(new Color(9, 11, 16));
 		fixedPanel.add(mainPanel);
 		frame.getContentPane().add(fixedPanel);
+		frame.validate();
+		frame.repaint();
 		this.station.screen.setVisible(true); // Displays the JFrame.
 	}
 
@@ -1531,12 +1529,7 @@ public class SelfCheckoutSoftware {
 	 */
 	public void changeToAttendantGUI() {
 		JFrame frame = this.station.screen.getFrame(); // Gets The JFrame used by the touchscreen listener.
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		frame.getContentPane().removeAll();
 		this.station.screen.setVisible(false);
 		frame.setLayout(new BorderLayout());
 		AttendantSCSPanel attendantPanel = new AttendantSCSPanel(this);
@@ -1545,6 +1538,8 @@ public class SelfCheckoutSoftware {
 		fixedPanel.setBackground(new Color(9, 11, 16));
 		fixedPanel.add(attendantPanel);
 		frame.getContentPane().add(fixedPanel);
+		frame.validate();
+		frame.repaint();
 		this.station.screen.setVisible(true); // Displays the JFrame.
 		this.addingItems = false;
 	}
@@ -1554,12 +1549,7 @@ public class SelfCheckoutSoftware {
 	 */
 	public void changeToCheckOutGUI() {
 		JFrame frame = this.station.screen.getFrame(); // Gets The JFrame used by the touchscreen listener.
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		frame.getContentPane().removeAll();
 		this.station.screen.setVisible(false);
 		frame.setLayout(new BorderLayout());
 		CheckoutSCSPanel checkoutPanel = new CheckoutSCSPanel(this);
@@ -1568,6 +1558,8 @@ public class SelfCheckoutSoftware {
 		fixedPanel.setBackground(new Color(9, 11, 16));
 		fixedPanel.add(checkoutPanel);
 		frame.getContentPane().add(fixedPanel);
+		frame.validate();
+		frame.repaint();
 		this.station.screen.setVisible(true); // Displays the JFrame.
 		this.addingItems = false;
 	}
@@ -1585,8 +1577,7 @@ public class SelfCheckoutSoftware {
 	 * @return The String built.
 	 */
 	public String buildTextAreaString() {
-		return "\n  Bagging Scale Weight: " + this.getBaggingAreaWeight() + "\n  Total Price: $" + this.total
-				+ "\n  Member ID: " + this.currentMember;
+		return "\n  Bagging Scale Weight: " + this.getBaggingAreaWeight() + "\n  Total Price: $" + this.total + "\n  Member ID: " + this.currentMember;
 	}
 	
 }
