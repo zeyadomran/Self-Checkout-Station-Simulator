@@ -52,7 +52,10 @@ public class SelfCheckoutSoftware {
 	private boolean blocked = false;
 	private double approvedWeightDifference = 0;
 	private boolean lowInk = false;
+	private boolean lowPaper = false; 
 	private int inkLeft = 0;
+	private int paperLeft = 0; 
+	private int linesOfPaperRemaining = 0;
 	private int numberOfBags;
 
 	// Listeners
@@ -114,6 +117,7 @@ public class SelfCheckoutSoftware {
 		this.station.printer.addInk(1000);
 		this.station.printer.addPaper(10);
 		this.inkLeft = 1000;
+		this.paperLeft = 10;
 	}
 	
 	/**
@@ -725,6 +729,7 @@ public class SelfCheckoutSoftware {
 				}
 			}
 			this.station.printer.print('\n');
+			linesOfPaperRemaining--;
 		}
 		for(PLUCodedItem item : pluItems) {
 			PriceLookupCode plc = item.getPLUCode();
@@ -749,6 +754,7 @@ public class SelfCheckoutSoftware {
 				}
 			}
 			this.station.printer.print('\n');
+			linesOfPaperRemaining--;
 		}
 		
 		
@@ -1106,6 +1112,7 @@ public class SelfCheckoutSoftware {
 	public boolean addPaperToPrinter(int amount) {
 		if(this.currentAttendant != null) {
 			this.station.printer.addPaper(amount);
+			this.paperLeft += amount; 
 			return true;
 		}
 		return false; 
@@ -1163,6 +1170,22 @@ public class SelfCheckoutSoftware {
 		return this.lowInk;
 	}
 	
+	/**
+	 * gets the value of paperLeft
+	 * @return value of paperLeft
+	 */
+	public int getPaperLeft() {
+		return this.paperLeft;
+	}
+	
+	/**
+	 * gets the value of lowPaper
+	 * @return value of lowPaper
+	 */
+	
+	public boolean getLowPaper() {
+		return this.lowPaper; 
+	}
 	
 	/**
 	 * shuts down the station if the attendant is logged in
