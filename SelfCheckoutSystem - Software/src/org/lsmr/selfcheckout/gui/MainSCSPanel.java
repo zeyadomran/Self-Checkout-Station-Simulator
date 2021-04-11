@@ -20,7 +20,6 @@ import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import org.lsmr.selfcheckout.Barcode;
@@ -340,6 +339,35 @@ public class MainSCSPanel extends JPanel {
 		add(addOwnBagButton);
 
 		JButton swipeMembCardButton = new JButton("Swipe Membership Card");
+		swipeMembCardButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String memberID = JOptionPane.showInputDialog("Please enter your membership card number: ", "");
+				if(memberID.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				boolean success = false;
+				if(MemberDatabase.REGISTERED_MEMBERS.containsKey(memberID)) {
+					success = control.swipeMembershipCard(MemberDatabase.REGISTERED_MEMBERS.get(memberID).getMemberCard());
+				}
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Log In Successful!",
+						"Member Logged In!",
+						JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Couldn't Log In!",
+						"Membership Log In Failed!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+				updatePanel(control.buildTextAreaString());
+			}
+		});
 		swipeMembCardButton.setOpaque(true);
 		swipeMembCardButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		swipeMembCardButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
