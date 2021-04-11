@@ -10,6 +10,7 @@ import java.util.Locale;
 
 import org.junit.Test;
 import org.lsmr.selfcheckout.Barcode;
+import org.lsmr.selfcheckout.PLUCodedItem;
 import org.lsmr.selfcheckout.PriceLookupCode;
 import org.lsmr.selfcheckout.devices.OverloadException;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
@@ -92,6 +93,30 @@ public class PluProductTest {
 		
 	}
 	
+
+	/* tests removing a plu product from the item list and bagging area the software
+	 * not registered in the system
+	 */
+	@Test
+	public void removePlutItemNotInBaggingAreaTest() throws SimulationException, OverloadException
+	{
+		
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+
+		PriceLookupCode plc = new PriceLookupCode("1234");
+		
+		PLUCodedProduct apple = new PLUCodedProduct(plc, "Red Apple", new BigDecimal("1.00"));
+		
+		control.addPLUProduct(apple, 300);
+		PLUCodedItem test = new PLUCodedItem(plc, 30);
+		assertFalse(control.removePluItemBaggingArea(test));
+		assertFalse(control.removePluItem(test));
+		assertTrue(control.getBaggingArea().size() == 0);
+		assertTrue(control.getBaggingAreaWeight() == 0.0);
+		
+		
+	}
+	
 	/* Checks that when plu product is removed from the item list and bagging area the software
 	 * detects the removal
 	 */
@@ -127,6 +152,51 @@ public class PluProductTest {
 		
 	}
 	
+	/* Checks that when plu product is added to the checked items not in database the item is null and returns false
+	 */
+	@Test 
+	public void testPlacePluNotCheckedInBaggingAreaNull() throws SimulationException, OverloadException
+	{
+		
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+
+		PriceLookupCode plc = new PriceLookupCode("1234");
+		PriceLookupCode plc2 = new PriceLookupCode("1111");
+
+		
+		
+		PLUCodedProduct apple = new PLUCodedProduct(plc, "Red Apple", new BigDecimal("1.00"));
+		PLUCodedProduct garlic = new PLUCodedProduct(plc2, "garlic", new BigDecimal("5.00"));
+
+		assertFalse(control.placePluItemInBaggingArea(plc));
+		assertEquals(control.getBaggingAreaPlu().size(), 0);
+		
+		
+		
+	}
+	
+	/* Checks that when a plu product not in the database is checked it is not added to items
+	 * 
+	*/
+	@Test 
+	public void testPlacePluNotCheckedInBaggingArea() throws SimulationException, OverloadException
+	{
+		
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+
+		PriceLookupCode plc = new PriceLookupCode("9871");
+
+		
+		
+		PLUCodedProduct apple = new PLUCodedProduct(plc, "Red Apple", new BigDecimal("1.00"));
+
+		assertFalse(control.placePluItemInBaggingArea(plc));
+		assertEquals(control.getBaggingAreaPlu().size(), 0);
+		
+		
+		
+	}
+	
 	/* Tests removing null plu item */
 	@Test(expected = NullPointerException.class)
 	public void removeNullScannedItem()throws SimulationException, OverloadException {
@@ -134,19 +204,54 @@ public class PluProductTest {
 		control.removePluItem(null);
 	}
 	
-	/* Checks that when an a plu item that is out of stock is scanned the function returns
-	 * false */
+	/* Tests removing plu product not in database
+	 *
+	 */
 	@Test
-	public void scanItemNoStock() throws SimulationException, OverloadException{
+	public void removeProductNotInDatabase()throws SimulationException, OverloadException {
 		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
 		
-		PriceLookupCode plc = new PriceLookupCode("1233");
+		PriceLookupCode plc = new PriceLookupCode("9991");
+		PLUCodedProduct orange = new PLUCodedProduct(plc, "Orange", new BigDecimal("1.00"));
+
+		assertFalse(control.removePluProduct(plc));
+	}
+	
+	/* Checks that when an a plu item that is out of stock is scanned the function returns
+	 * false
+	 */
+	@Test
+	public void checkItemNoStock() throws SimulationException, OverloadException{
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		
+		PriceLookupCode plc = new PriceLookupCode("8888");
 		
 		PLUCodedProduct apple = new PLUCodedProduct(plc, "Red Apple", new BigDecimal("1.00"));
 						
 		boolean retValue = control.addPLUItem(plc, 4000);
 		assertEquals(retValue, false);
 	}
+	
+	/* Checks that when an a plu item that has no stock is scanned the function returns
+	 * false
+	 */
+	@Test
+	public void testItemNoInventory() throws SimulationException, OverloadException{
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		
+		PriceLookupCode plc = new PriceLookupCode("1233");
+		
+		PLUCodedProduct apple = new PLUCodedProduct(plc, "Red Apple", new BigDecimal("1.00"));
+		control.addPLUProduct(apple, 1);
+		
+		
+		control.addPLUItem(plc, 3000);
+		boolean retValue = control.addPLUItem(plc, 3000);
+
+		
+		assertEquals(retValue, false);
+	}
+	
 	
 	/* Checks behavior when a plu item with zero weight is scanned */
 	@Test(expected = IllegalArgumentException.class)

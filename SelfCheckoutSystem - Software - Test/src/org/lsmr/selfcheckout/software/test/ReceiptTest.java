@@ -9,14 +9,17 @@ import java.util.Currency;
 import java.util.Locale;
 
 import org.junit.Test;
+import org.lsmr.selfcheckout.Banknote;
 import org.lsmr.selfcheckout.Barcode;
 import org.lsmr.selfcheckout.Coin;
+import org.lsmr.selfcheckout.PriceLookupCode;
 import org.lsmr.selfcheckout.devices.DisabledException;
 import org.lsmr.selfcheckout.devices.EmptyException;
 import org.lsmr.selfcheckout.devices.OverloadException;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.SimulationException;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
+import org.lsmr.selfcheckout.products.PLUCodedProduct;
 import org.lsmr.selfcheckout.software.ReceiptPrinterListenerStub;
 import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
 
@@ -63,6 +66,66 @@ public class ReceiptTest
 		}
 		
 		control.payWithCoin(coins);
+		
+		control.generateReceipt();
+		
+		String receipt = control.getReceipt();
+		
+		//receipt should not be null
+		assertTrue(receipt != null);
+		
+		s.printer.cutPaper();
+		String empty= "";
+		assertEquals(s.printer.removeReceipt(), empty);
+		
+	}
+	
+	
+	/*
+	 * Testing printing a normal receipt after scanning items and paying
+	 */
+	@Test
+	public void testPrintReceiptTestMixWithPLUAndScannedItems() throws DisabledException, OverloadException, EmptyException
+	{
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		Barcode b1 = new Barcode("12");
+		Barcode b2 = new Barcode("1234");
+		Barcode b3 = new Barcode("12566");
+
+		BarcodedProduct bp1 = new BarcodedProduct(b1, "Cheese", new BigDecimal("12"));
+		BarcodedProduct bp2 = new BarcodedProduct(b2, "Milk", new BigDecimal("10"));
+		BarcodedProduct bp3 = new BarcodedProduct(b3, "Juice", new BigDecimal("5"));
+		
+		PriceLookupCode plc = new PriceLookupCode("1234");
+		PriceLookupCode plc2 = new PriceLookupCode("1111");
+
+		
+		
+		PLUCodedProduct apple = new PLUCodedProduct(plc, "Red Apple", new BigDecimal("1.00"));
+		PLUCodedProduct garlic = new PLUCodedProduct(plc2, "garlic", new BigDecimal("5.00"));
+
+		
+		control.addPLUProduct(apple, 300);
+		control.addPLUProduct(garlic, 300);
+		
+		control.addPLUItem(plc, 4000);
+		control.addPLUItem(plc2, 3000);
+		
+		control.addProduct(bp1, 2);
+		control.scanItem(b1, 10);
+		
+		control.addProduct(bp2, 2);
+		control.scanItem(b2, 15);
+		
+		control.addProduct(bp3, 2);
+		control.scanItem(b3, 20);
+		
+		Banknote fifty = new Banknote(50, c);
+		ArrayList<Banknote> notes = new ArrayList<Banknote>();
+		
+		notes.add(fifty);
+		
+		control.payWithCash(notes);
 		
 		control.generateReceipt();
 		

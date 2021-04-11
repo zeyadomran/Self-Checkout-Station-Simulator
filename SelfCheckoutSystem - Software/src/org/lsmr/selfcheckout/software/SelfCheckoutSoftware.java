@@ -1115,7 +1115,7 @@ public class SelfCheckoutSoftware {
 			this.paperLeft += amount; 
 			return true;
 		}
-		return false; 
+		return false;
 	}
 	
 	/**
