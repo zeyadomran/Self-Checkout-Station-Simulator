@@ -38,12 +38,13 @@ public class MainSCSPanel extends JPanel {
 	private JTextArea textArea;
 	private ArrayList<ArrayList<String>> scannedItems;
 	private SelfCheckoutSoftware control;
-
 	/**
 	 * Create the panel.
 	 */
 	public MainSCSPanel(SelfCheckoutSoftware control) {
 		this.control = control;
+		control.returnToAddingItems();
+		
 		initScannedItems();
 
 		this.setForeground(new Color(9, 11, 16));

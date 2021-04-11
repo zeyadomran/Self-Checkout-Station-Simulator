@@ -12,16 +12,19 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
+
 public class AttendantSCSPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private String attendantID;
+	private SelfCheckoutSoftware control;
+
 
 	/**
 	 * Create the panel.
 	 */
-	public AttendantSCSPanel(String attendantID) {
-		this.attendantID = attendantID;
-
+	public AttendantSCSPanel(SelfCheckoutSoftware control) {
+		this.control = control;
+		
 		this.setForeground(new Color(9, 11, 16));
 		this.setBackground(new Color(9, 11, 16));
 		this.setMinimumSize(new Dimension(1280, 720));
@@ -30,7 +33,7 @@ public class AttendantSCSPanel extends JPanel {
 		this.setSize(new Dimension(1280, 720));
 		this.setLayout(null);
 
-		JLabel TitleLabel = new JLabel("Attendant: " + attendantID);
+		JLabel TitleLabel = new JLabel("Attendant");
 		TitleLabel.setFont(new Font("Lucida Grande", Font.BOLD, 60));
 		TitleLabel.setForeground(new Color(64, 224, 208));
 		TitleLabel.setBounds(20, 20, 720, 72);

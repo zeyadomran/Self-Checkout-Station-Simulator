@@ -29,7 +29,7 @@ public class Main {
 		control.addPLUProduct(new PLUCodedProduct(pluC2, "testPLU2", new BigDecimal("3.3")), 2);
 		// control.scanItem(code, 1);
 		// control.addPLUItem(pluC, 2400);
-		control.refreshGUI();
+		control.loadMainGUI();
 	}
 
 }

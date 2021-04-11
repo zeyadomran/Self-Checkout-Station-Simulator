@@ -32,6 +32,8 @@ import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.SimulationException;
 import org.lsmr.selfcheckout.external.CardIssuer;
 import org.lsmr.selfcheckout.external.ProductDatabases;
+import org.lsmr.selfcheckout.gui.AttendantSCSPanel;
+import org.lsmr.selfcheckout.gui.CheckoutSCSPanel;
 import org.lsmr.selfcheckout.gui.MainSCSPanel;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
@@ -1503,9 +1505,9 @@ public class SelfCheckoutSoftware {
 	}
 
 	/**
-	 * Refreshes the GUI.
+	 * loads the main GUI.
 	 */
-	public void refreshGUI() {
+	public void loadMainGUI() {
 		JFrame frame = this.station.screen.getFrame(); // Gets The JFrame used by the touchscreen listener.
 		try {
 			Thread.sleep(1000);
@@ -1522,6 +1524,52 @@ public class SelfCheckoutSoftware {
 		fixedPanel.add(mainPanel);
 		frame.getContentPane().add(fixedPanel);
 		this.station.screen.setVisible(true); // Displays the JFrame.
+	}
+
+	/**
+	 * Loads up the attendant GUI.
+	 */
+	public void changeToAttendantGUI() {
+		JFrame frame = this.station.screen.getFrame(); // Gets The JFrame used by the touchscreen listener.
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.station.screen.setVisible(false);
+		frame.setLayout(new BorderLayout());
+		AttendantSCSPanel attendantPanel = new AttendantSCSPanel(this);
+		JPanel fixedPanel = new JPanel(new GridBagLayout());
+		fixedPanel.setPreferredSize(frame.getSize());
+		fixedPanel.setBackground(new Color(9, 11, 16));
+		fixedPanel.add(attendantPanel);
+		frame.getContentPane().add(fixedPanel);
+		this.station.screen.setVisible(true); // Displays the JFrame.
+		this.addingItems = false;
+	}
+
+	/**
+	 * Loads up the checkout GUI.
+	 */
+	public void changeToCheckOutGUI() {
+		JFrame frame = this.station.screen.getFrame(); // Gets The JFrame used by the touchscreen listener.
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.station.screen.setVisible(false);
+		frame.setLayout(new BorderLayout());
+		CheckoutSCSPanel checkoutPanel = new CheckoutSCSPanel(this);
+		JPanel fixedPanel = new JPanel(new GridBagLayout());
+		fixedPanel.setPreferredSize(frame.getSize());
+		fixedPanel.setBackground(new Color(9, 11, 16));
+		fixedPanel.add(checkoutPanel);
+		frame.getContentPane().add(fixedPanel);
+		this.station.screen.setVisible(true); // Displays the JFrame.
+		this.addingItems = false;
 	}
 
 	/**
