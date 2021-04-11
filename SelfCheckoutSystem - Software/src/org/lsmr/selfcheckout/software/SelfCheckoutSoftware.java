@@ -689,6 +689,12 @@ public class SelfCheckoutSoftware {
 		return (amountLeft.compareTo(new BigDecimal("0")) == 0);
 	}
 
+	public void checkLowPaper() {
+		linesOfPaperRemaining--;
+		paperLeft--;
+		if(this.paperLeft <= 3)
+			this.lowPaper = true;
+	}
 	
 	/**
 	 * Method to generate a receipt for the transaction with the scanned items and the amount payed, total and the change value
@@ -733,7 +739,7 @@ public class SelfCheckoutSoftware {
 				}
 			}
 			this.station.printer.print('\n');
-			linesOfPaperRemaining--;
+			checkLowPaper();
 		}
 		for(PLUCodedItem item : pluItems) {
 			PriceLookupCode plc = item.getPLUCode();
@@ -758,7 +764,7 @@ public class SelfCheckoutSoftware {
 				}
 			}
 			this.station.printer.print('\n');
-			linesOfPaperRemaining--;
+			checkLowPaper();
 		}
 		
 		
@@ -766,14 +772,17 @@ public class SelfCheckoutSoftware {
 		String total = "Sub Total: ";
 		String AmountPaid = "Amount Paid: ";
 		sb.append('\n');
+		checkLowPaper();
 		sb.append(total);
 		sb.append("    ");
 		sb.append(this.total);
 		sb.append('\n'); 
+		checkLowPaper();
 		sb.append(AmountPaid);
 		sb.append("  ");
 		sb.append(this.amountPaid);
 		sb.append("\n");
+		checkLowPaper();
 		sb.append("Change Due: ");
 		sb.append("   ");
 		sb.append(this.changeDue);
