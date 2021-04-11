@@ -88,7 +88,7 @@ public class MainSCSPanel extends JPanel {
 		textArea.setBackground(new Color(15, 17, 26));
 		add(textArea);
 		updatePanel(control.buildTextAreaString());
-		
+
 		JButton scanItemButton = new JButton("Scan Item");
 		scanItemButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -660,7 +660,7 @@ public class MainSCSPanel extends JPanel {
 					return;
 				}
 				if(AttendantDatabase.REGISTERED_ATTENDANTS.containsKey(attendantID)) {
-					control.attendantLogin(attendantID);;
+					control.attendantLogin(attendantID);
 				}
 				if(control.getattendantLoggedIn()) {
 					JOptionPane.showMessageDialog(new JPanel(),

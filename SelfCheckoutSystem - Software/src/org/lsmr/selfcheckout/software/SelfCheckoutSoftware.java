@@ -1450,7 +1450,6 @@ public class SelfCheckoutSoftware {
 			if(code == null)
 			{
 				throw new SimulationException("Must enter a code to search");
-	
 			}
 			
 			return currentAttendant.lookupProdName(this, code);
@@ -1510,8 +1509,8 @@ public class SelfCheckoutSoftware {
 	 */
 	public void loadMainGUI() {
 		JFrame frame = this.station.screen.getFrame(); // Gets The JFrame used by the touchscreen listener.
-		frame.getContentPane().removeAll();
 		this.station.screen.setVisible(false);
+		frame.getContentPane().removeAll();
 		frame.setLayout(new BorderLayout());
 		MainSCSPanel mainPanel = new MainSCSPanel(this);
 		JPanel fixedPanel = new JPanel(new GridBagLayout());
@@ -1529,8 +1528,8 @@ public class SelfCheckoutSoftware {
 	 */
 	public void changeToAttendantGUI() {
 		JFrame frame = this.station.screen.getFrame(); // Gets The JFrame used by the touchscreen listener.
-		frame.getContentPane().removeAll();
 		this.station.screen.setVisible(false);
+		frame.getContentPane().removeAll();
 		frame.setLayout(new BorderLayout());
 		AttendantSCSPanel attendantPanel = new AttendantSCSPanel(this);
 		JPanel fixedPanel = new JPanel(new GridBagLayout());
@@ -1549,8 +1548,8 @@ public class SelfCheckoutSoftware {
 	 */
 	public void changeToCheckOutGUI() {
 		JFrame frame = this.station.screen.getFrame(); // Gets The JFrame used by the touchscreen listener.
-		frame.getContentPane().removeAll();
 		this.station.screen.setVisible(false);
+		frame.getContentPane().removeAll();
 		frame.setLayout(new BorderLayout());
 		CheckoutSCSPanel checkoutPanel = new CheckoutSCSPanel(this);
 		JPanel fixedPanel = new JPanel(new GridBagLayout());

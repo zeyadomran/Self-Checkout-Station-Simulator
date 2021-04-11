@@ -71,6 +71,7 @@ public class AttendantSCSPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Object itemsInDB[] = ProductDatabases.PLU_PRODUCT_DATABASE.values().toArray();
+				Object[] options = { "Next Page", "Go Back" };
 				int i = 0;
 				int ctn = JOptionPane.YES_OPTION;
 				while(i < itemsInDB.length && ctn == JOptionPane.YES_OPTION) {
@@ -81,7 +82,6 @@ public class AttendantSCSPanel extends JPanel {
 								i++;
 							}
 						}
-					Object[] options = { "Next Page", "Go Back" };
 					ctn = JOptionPane.showOptionDialog(
 						new JPanel(), 
 						text, 
@@ -104,7 +104,6 @@ public class AttendantSCSPanel extends JPanel {
 								i++;
 							}
 						}
-					Object[] options = { "Next Page", "Go Back" };
 					ctn = JOptionPane.showOptionDialog(
 						new JPanel(), 
 						text, 
