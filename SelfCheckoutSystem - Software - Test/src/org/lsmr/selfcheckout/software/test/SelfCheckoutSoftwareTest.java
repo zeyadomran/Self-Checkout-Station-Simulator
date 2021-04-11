@@ -13,6 +13,7 @@ import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.SimulationException;
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
+import org.lsmr.selfcheckout.software.Member;
 import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
 
 public class SelfCheckoutSoftwareTest {
@@ -123,5 +124,23 @@ public class SelfCheckoutSoftwareTest {
 		assertEquals(control.getInventoryDB().size(), 1);
 		assertEquals(control.getInventoryDB().get(bp).intValue(), 2);
 	}
+	@Test(expected = NullPointerException.class)
+	public void enterEmptyMember() {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		control.enterMembershipInfo(null);		
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void enterInvalidMember() {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		control.enterMembershipInfo("TestName");	
+	}
+	
+//	@Test //Have to finish this test
+//	public void enterValidMember() {
+//		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+//		control.addMember("testname", "1234");;
+//		control.enterMembershipInfo("testname");
+//	}
 
 }
