@@ -64,7 +64,6 @@ public class SelfCheckoutSoftware {
 	private boolean lowPaper = false; 
 	private int inkLeft = 0;
 	private int paperLeft = 0; 
-	private int linesOfPaperRemaining = 0;
 	private int numberOfBags;
 	private boolean addingItems = false;
 	private boolean shutDown = false;
@@ -700,7 +699,6 @@ public class SelfCheckoutSoftware {
 	}
 
 	public void checkLowPaper() {
-		linesOfPaperRemaining--;
 		paperLeft--;
 		if(this.paperLeft <= 3)
 			this.lowPaper = true;
