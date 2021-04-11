@@ -278,7 +278,6 @@ public class MainSCSPanel extends JPanel {
 						options, 
 						options[0]
 					);
-					System.out.println(ctn);
 				}
 				if(i == itemsInDB.length && ctn == JOptionPane.YES_OPTION) {
 					JOptionPane.showMessageDialog(new JPanel(),
@@ -321,7 +320,6 @@ public class MainSCSPanel extends JPanel {
 						options, 
 						options[0]
 					);
-					System.out.println(ctn);
 				}
 				if(i == itemsInDB.length && ctn == JOptionPane.YES_OPTION) {
 					JOptionPane.showMessageDialog(new JPanel(),
@@ -409,6 +407,42 @@ public class MainSCSPanel extends JPanel {
 		add(addPLUItemBagButton);
 
 		JButton removeItemFromBAButton = new JButton("Remove Item from bagging area");
+		removeItemFromBAButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String code = JOptionPane.showInputDialog("Enter the Barcode of the item you wish to remove from the bagging area.", "");
+				if(code.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				Barcode barcode = new Barcode(code);
+ 				BarcodedItem item = null;
+				for(BarcodedItem i : control.getScannedItems()) {
+					if(i.getBarcode().equals(barcode)) item = i;
+				}
+				boolean success;
+				if(item != null) {
+					success = control.removeItemBaggingArea(item);
+				} else {
+					success = false;
+				}
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + barcode + " was removed!",
+						"Remove Item Success!",
+						JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + barcode + " was not removed!",
+						"Remove Item Failed!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+				updatePanel(control.buildTextAreaString());
+			}
+		});
 		removeItemFromBAButton.setOpaque(true);
 		removeItemFromBAButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		removeItemFromBAButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
@@ -417,6 +451,42 @@ public class MainSCSPanel extends JPanel {
 		add(removeItemFromBAButton);
 
 		JButton removePLUItemFromBAButton = new JButton("Remove PLU Item from bagging area");
+		removePLUItemFromBAButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String code = JOptionPane.showInputDialog("Enter the PLU of the item you wish to remove from the bagging area.", "");
+				if(code.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				PriceLookupCode plu = new PriceLookupCode(code);
+ 				PLUCodedItem item = null;
+				for(PLUCodedItem i : control.getBaggingAreaPlu()) {
+					if(i.getPLUCode().equals(plu)) item = i;
+				}
+				boolean success;
+				if(item != null) {
+					success = control.removePluItemBaggingArea(item);
+				} else {
+					success = false;
+				}
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + plu + " was removed!",
+						"Remove Item Success!",
+						JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + plu + " was not removed!",
+						"Remove Item Failed!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+				updatePanel(control.buildTextAreaString());
+			}
+		});
 		removePLUItemFromBAButton.setOpaque(true);
 		removePLUItemFromBAButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		removePLUItemFromBAButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
