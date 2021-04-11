@@ -57,6 +57,7 @@ public class SelfCheckoutSoftware {
 	private int paperLeft = 0; 
 	private int linesOfPaperRemaining = 0;
 	private int numberOfBags;
+	private boolean addingItems = false;
 
 	// Listeners
 	private CardReaderListenerStub cardReaderListener = new CardReaderListenerStub();
@@ -404,6 +405,7 @@ public class SelfCheckoutSoftware {
 	 */
 	public PriceLookupCode lookUpProductCode(String productName)
 	{
+		this.addingItems = false;
 		if(productName == null)
 		{
 			throw new SimulationException("Must enter product name to search");
@@ -511,6 +513,7 @@ public class SelfCheckoutSoftware {
 	 * @throws EmptyException 
 	 */
 	public boolean payWithCash(ArrayList<Banknote> banknotes) throws SimulationException, OverloadException, DisabledException, EmptyException {
+		this.addingItems = false;
 		if(banknotes == null) throw new NullPointerException("No argument may be null."); // Checks for null params.
 		double value = 0.0;
 		for(Banknote banknote : banknotes) { // Add value of banknotes.
@@ -575,6 +578,7 @@ public class SelfCheckoutSoftware {
 	 * @throws OverloadException 
 	 */
 	public boolean payWithCoin(ArrayList<Coin> coins) throws DisabledException, OverloadException, EmptyException {
+		this.addingItems = false;
 		if(coins == null) throw new NullPointerException("No argument may be null."); // Checks for null params.
 		BigDecimal value = new BigDecimal("0");
 		for(Coin coin : coins) { // Add value of coins.
@@ -955,7 +959,7 @@ public class SelfCheckoutSoftware {
 	 * 
 	 * @param cd 
 	 * 			card data of card the customer wishes to use.
-	 * @return whether the card used was successfull in paying.
+	 * @return whether the card used was successful in paying.
 	 */
 	 private boolean payWithCard(CardData cd) {
 		CardIssuer cardIssuer;
@@ -1472,6 +1476,16 @@ public class SelfCheckoutSoftware {
 		
 		return false;
 	}
+	
+	
+	/**
+	 * Sets boolean addingItems to 'true'- use case a
+	 * (Functions dealing with payment (payWithBanknote/payWithCoin) and lookUpProductCode set addingItems to false)
+	 */
+	public void returnToAddingItems() {
+		this.addingItems = true;
+	}
+	
 }
 
 
