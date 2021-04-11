@@ -8,6 +8,7 @@ import org.lsmr.selfcheckout.Card;
 public class Member {
     private String name = null;
     private Card card = null;
+    private String memberID = null;
     private int points = 0;
     
     /**
@@ -21,6 +22,7 @@ public class Member {
     public Member(String name, String memberID) {
         if(name == null || memberID == null) throw new NullPointerException("No argument may be null."); 
         this.name = name;
+        this.memberID = memberID;
         this.card = new Card("Membership Card", memberID, name, null, null, false, false);
     }
 
@@ -59,6 +61,13 @@ public class Member {
      * @return The Member's name.
      */
     public String getName() { return this.name; }
+
+    /**
+     * Get the Member's ID.
+     * 
+     * @return The Member's ID.
+     */
+    public String getMemberID() { return this.memberID; }
 
     /**
      * Get the Member's Card.
