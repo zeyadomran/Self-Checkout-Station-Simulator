@@ -149,6 +149,23 @@ public class AttendantSCSPanel extends JPanel {
 		add(shutDownButton);
 
 		JButton emptyCoinButton = new JButton("Empty Coin Storage");
+		emptyCoinButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				boolean success = control.emptyCoinStorage();
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Coin storage successfully emptied!",
+					"Success!",
+					JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Coin storage was not emptied!",
+					"Error!",
+					JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		emptyCoinButton.setOpaque(true);
 		emptyCoinButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		emptyCoinButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
