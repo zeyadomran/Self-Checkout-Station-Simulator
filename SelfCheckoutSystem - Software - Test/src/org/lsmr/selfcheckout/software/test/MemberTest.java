@@ -165,6 +165,28 @@ public class MemberTest {
         member.redeemPoints(1);
     }
 
+    /* Tests entering valid membership info. */
+    @Test
+    public void enterMembershipInfoTestValid() {
+    	control.addMember("Bob", "1234");
+    	assertTrue(control.enterMembershipInfo("1234"));
+    	assertEquals("1234", control.getCurrentMember());
+    }
+    
+    /* Tests entering invalid membership info. */
+    @Test (expected = IllegalArgumentException.class)
+    public void enterMembershipInfoTestInvalid() {
+    	control.enterMembershipInfo("1234");
+    }
+    
+    
+    /* Tests entering membership info. */
+    @Test (expected = NullPointerException.class)
+    public void enterMembershipInfoTestNull() {
+    	control.enterMembershipInfo(null);
+    }
+    
+    
     /* Clear the REGISTERED_MEMBERS and SelfCheckoutSoftware instance */
     @After
     public void Teardown() {
