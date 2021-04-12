@@ -157,6 +157,23 @@ public class AttendantSCSPanel extends JPanel {
 		add(emptyCoinButton);
 
 		JButton emptyBankNoteButton = new JButton("Empty Banknote Storage");
+		emptyBankNoteButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				boolean success = control.emptyBanknoteStorage();
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Banknote storage successfully emptied!",
+					"Success!",
+					JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Banknote storage was not emptied!",
+					"Error!",
+					JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		emptyBankNoteButton.setOpaque(true);
 		emptyBankNoteButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		emptyBankNoteButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
