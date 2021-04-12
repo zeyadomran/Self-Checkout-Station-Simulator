@@ -1575,5 +1575,9 @@ public class SelfCheckoutSoftware {
 	public String buildTextAreaString() {
 		return "\n  Bagging Scale Weight: " + this.getBaggingAreaWeight() + "\n  Total Price: $" + this.total + "\n  Member ID: " + this.currentMember;
 	}
+
+	public String getCurrentMember() {
+		return currentMember;
+	}
 	
 }
