@@ -1301,7 +1301,6 @@ public class SelfCheckoutSoftware {
 				BigDecimal v = c.getValue();
 				try {
 					this.station.coinDispensers.get(v).load(c);
-					return true;
 				} catch (OverloadException e) {
 					// TODO Auto-generated catch block
 					throw new SimulationException("Coin Dispenser for coins of value " + v.doubleValue() + " is full.");
@@ -1331,7 +1330,6 @@ public class SelfCheckoutSoftware {
 				int v = b.getValue();
 				try {
 					this.station.banknoteDispensers.get(v).load(b);
-					return true;
 				} catch (OverloadException e) {
 					// TODO Auto-generated catch block
 					throw new SimulationException("Banknote Dispenser for banknotes of value " + v + " is full.");
