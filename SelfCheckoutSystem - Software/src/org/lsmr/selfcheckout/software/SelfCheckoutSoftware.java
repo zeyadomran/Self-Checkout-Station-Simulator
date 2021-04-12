@@ -39,7 +39,6 @@ import org.lsmr.selfcheckout.products.BarcodedProduct;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
 import org.lsmr.selfcheckout.products.Product;
 
-
 /** This class will store information about the products in the database and the state of the station. */
 public class SelfCheckoutSoftware {
 	private Map<Barcode, BarcodedProduct> productDatabase = ProductDatabases.BARCODED_PRODUCT_DATABASE;
@@ -1302,9 +1301,10 @@ public class SelfCheckoutSoftware {
 				BigDecimal v = c.getValue();
 				try {
 					this.station.coinDispensers.get(v).load(c);
+					return true;
 				} catch (OverloadException e) {
 					// TODO Auto-generated catch block
-					throw new SimulationException("Coin Dispenser for coins of value " + v.intValue() + " is full.");
+					throw new SimulationException("Coin Dispenser for coins of value " + v.doubleValue() + " is full.");
 				} catch (NullPointerException e) {
 					throw new SimulationException("This coin type does not exist.");
 				}
@@ -1331,6 +1331,7 @@ public class SelfCheckoutSoftware {
 				int v = b.getValue();
 				try {
 					this.station.banknoteDispensers.get(v).load(b);
+					return true;
 				} catch (OverloadException e) {
 					// TODO Auto-generated catch block
 					throw new SimulationException("Banknote Dispenser for banknotes of value " + v + " is full.");

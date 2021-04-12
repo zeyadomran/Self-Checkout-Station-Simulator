@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import org.lsmr.selfcheckout.Banknote;
+import org.lsmr.selfcheckout.Coin;
 import org.lsmr.selfcheckout.PriceLookupCode;
 import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
@@ -320,6 +323,40 @@ public class AttendantSCSPanel extends JPanel {
 		add(emptyBankNoteButton);
 
 		JButton refillCoinButton = new JButton("Refill Coin Dispensers");
+		refillCoinButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String sCoin = JOptionPane.showInputDialog("Please enter the coin denomination that you wish to refill: ", "");
+				String sAmount = JOptionPane.showInputDialog("Please enter the amount you wish to add: ", "");
+				if(sCoin.equals("") || sAmount.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				int amount = Integer.parseInt(sAmount);
+				Coin coins[] = new Coin[amount];
+				for(int i = 0; i < amount; i++) coins[i] = new Coin(new BigDecimal(sCoin), control.getStation().coinValidator.currency);
+				boolean success = false;
+				try {
+					success = control.loadCoinDispenser(coins);
+				} catch (Exception ex) {
+					success = false;
+				}
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"" + amount + " x $" + new BigDecimal(sCoin).doubleValue() + " coins were added!",
+					"Success!",
+					JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Coin Dispenser could not be filled!",
+					"Error!",
+					JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		refillCoinButton.setOpaque(true);
 		refillCoinButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		refillCoinButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
@@ -328,6 +365,41 @@ public class AttendantSCSPanel extends JPanel {
 		add(refillCoinButton);
 
 		JButton refillBankNoteButton = new JButton("Refill Banknote Dispensers");
+		refillBankNoteButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String sBankNote = JOptionPane.showInputDialog("Please enter the banknote denomination that you wish to refill: ", "");
+				String sAmount = JOptionPane.showInputDialog("Please enter the amount you wish to add: ", "");
+				if(sBankNote.equals("") || sAmount.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				int amount = Integer.parseInt(sAmount);
+				int bankNoteVal = Integer.parseInt(sBankNote);
+				Banknote banknotes[] = new Banknote[amount];
+				for(int i = 0; i < amount; i++) banknotes[i] = new Banknote(bankNoteVal, control.getStation().coinValidator.currency);
+				boolean success = false;
+				try {
+					success = control.loadBanknoteDispenser(banknotes);
+				} catch (Exception ex) {
+					success = false;
+				}
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"" + amount + " x $" + bankNoteVal + " banknotes were added!",
+					"Success!",
+					JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Banknote Dispenser could not be filled!",
+					"Error!",
+					JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		refillBankNoteButton.setOpaque(true);
 		refillBankNoteButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		refillBankNoteButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
