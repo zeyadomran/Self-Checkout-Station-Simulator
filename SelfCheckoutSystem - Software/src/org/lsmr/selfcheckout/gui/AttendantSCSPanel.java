@@ -47,6 +47,13 @@ public class AttendantSCSPanel extends JPanel {
 		logOutButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(control.isShutDown() || control.isBlocked()) {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Station is shutdown/blocked please startup station before logging out!",
+					"Error!",
+					JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				control.attendantLogOut();
 				control.loadMainGUI();
 			}
@@ -109,6 +116,32 @@ public class AttendantSCSPanel extends JPanel {
 		add(removePurchaseButton);
 
 		JButton startUpButton = new JButton("Start Up Station");
+		startUpButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!control.isShutDown() && !control.isBlocked()) {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Station already running!",
+					"Error!",
+					JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				boolean success = control.startUpStation();
+				control.setBlocked(false);
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Station successfully started!",
+					"Success!",
+					JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Station could not be started!",
+					"Error!",
+					JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		startUpButton.setOpaque(true);
 		startUpButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		startUpButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
@@ -133,6 +166,37 @@ public class AttendantSCSPanel extends JPanel {
 		add(addInkButton);
 
 		JButton blockStationButton = new JButton("Block Station");
+		blockStationButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(control.isBlocked()) {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Station already blocked!",
+					"Error!",
+					JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				int confirm = JOptionPane.showConfirmDialog(new JPanel(), "Are you sure you want to block the station?", "Self Checkout Station Block", JOptionPane.YES_NO_OPTION);
+
+				if(confirm != JOptionPane.YES_OPTION) {
+					return;
+				}
+
+				boolean success = control.setBlocked(true);
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Station successfully blocked!",
+					"Success!",
+					JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Station could not be blocked!",
+					"Error!",
+					JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		blockStationButton.setOpaque(true);
 		blockStationButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		blockStationButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
@@ -141,6 +205,37 @@ public class AttendantSCSPanel extends JPanel {
 		add(blockStationButton);
 
 		JButton shutDownButton = new JButton("Shut Down Station");
+		shutDownButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(control.isShutDown()) {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Station already shutdown!",
+					"Error!",
+					JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				int confirm = JOptionPane.showConfirmDialog(new JPanel(), "Are you sure you want to shutdown?", "Self Checkout Station Shutdown", JOptionPane.YES_NO_OPTION);
+
+				if(confirm != JOptionPane.YES_OPTION) {
+					return;
+				}
+
+				boolean success = control.shutDownStation();
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Station successfully shutdown!",
+					"Success!",
+					JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Station could not be shutdown!",
+					"Error!",
+					JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		shutDownButton.setOpaque(true);
 		shutDownButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		shutDownButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
