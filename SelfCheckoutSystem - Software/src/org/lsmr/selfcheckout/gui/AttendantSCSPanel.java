@@ -213,6 +213,32 @@ public class AttendantSCSPanel extends JPanel {
 		add(startUpButton);
 
 		JButton addPaperButton = new JButton("Add Paper to Printer");
+		addPaperButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String sAmount = JOptionPane.showInputDialog("Please enter the amount of paper to add: ", "");
+				if(sAmount.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				int amount = Integer.parseInt(sAmount);
+				boolean success = control.addPaperToPrinter(amount);
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Successfully added " + amount + " paper to the printer!",
+					"Success!",
+					JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Paper was not added to printer!",
+					"Error!",
+					JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		addPaperButton.setOpaque(true);
 		addPaperButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		addPaperButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
@@ -221,6 +247,32 @@ public class AttendantSCSPanel extends JPanel {
 		add(addPaperButton);
 
 		JButton addInkButton = new JButton("Add Ink to Printer");
+		addInkButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String sAmount = JOptionPane.showInputDialog("Please enter the amount of ink to add: ", "");
+				if(sAmount.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				int amount = Integer.parseInt(sAmount);
+				boolean success = control.addInkToPrinter(amount);
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Successfully added " + amount + " ink to the printer!",
+					"Success!",
+					JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"Ink was not added to printer!",
+					"Error!",
+					JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		addInkButton.setOpaque(true);
 		addInkButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		addInkButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
