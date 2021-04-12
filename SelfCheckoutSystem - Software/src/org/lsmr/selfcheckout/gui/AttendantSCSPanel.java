@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import org.lsmr.selfcheckout.Banknote;
+import org.lsmr.selfcheckout.Barcode;
+import org.lsmr.selfcheckout.BarcodedItem;
 import org.lsmr.selfcheckout.Coin;
 import org.lsmr.selfcheckout.PriceLookupCode;
 import org.lsmr.selfcheckout.external.ProductDatabases;
@@ -24,7 +26,6 @@ import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
 public class AttendantSCSPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private SelfCheckoutSoftware control;
-
 
 	/**
 	 * Create the panel.
@@ -137,6 +138,39 @@ public class AttendantSCSPanel extends JPanel {
 		add(lookUpProduct);
 
 		JButton removePurchaseButton = new JButton("Remove Product from Purchases");
+		removePurchaseButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String code = JOptionPane.showInputDialog("Enter the Barcode of the item you wish to remove.", "");
+				if(code.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				Barcode barcode = new Barcode(code);
+ 				BarcodedItem item = null;
+				for(BarcodedItem i : control.getScannedItems()) {
+					if(i.getBarcode().equals(barcode)) item = i;
+				}
+				boolean success = false;
+				if(item != null) {
+					success = control.currentAttendant.removeItemFromPurchase(control, item);
+				}
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + barcode + " was removed!",
+						"Remove Item Success!",
+						JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Item: " + barcode + " was not removed!",
+						"Remove Item Failed!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		removePurchaseButton.setOpaque(true);
 		removePurchaseButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		removePurchaseButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
