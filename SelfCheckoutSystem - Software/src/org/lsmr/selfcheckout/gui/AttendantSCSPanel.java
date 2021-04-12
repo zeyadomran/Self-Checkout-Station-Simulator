@@ -66,6 +66,32 @@ public class AttendantSCSPanel extends JPanel {
 		add(logOutButton);
 
 		JButton approveWeightButton = new JButton("Approve Weight Discrepancy");
+		approveWeightButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String sWeight = JOptionPane.showInputDialog("Please enter the max weight discrepancy allowed: ", "");
+				if(sWeight.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				double weight = Double.parseDouble(sWeight);
+				boolean success = control.setMaxWeightDiff(weight);
+				if(success) {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"The new approved max weight difference is: " + weight +"!",
+					"Success!",
+					JOptionPane.PLAIN_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+					"The max weight difference could not be approved!",
+					"Error!",
+					JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		approveWeightButton.setOpaque(true);
 		approveWeightButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		approveWeightButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
