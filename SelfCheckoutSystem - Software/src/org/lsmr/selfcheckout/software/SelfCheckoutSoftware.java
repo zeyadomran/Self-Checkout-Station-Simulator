@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Currency;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -70,6 +71,10 @@ public class SelfCheckoutSoftware {
 	private boolean attendentLoggedin;
 	public Attendant currentAttendant;
 	public BigDecimal amountEntered = new BigDecimal("0.00");
+	public Map<String, Card> creditCards = new HashMap<>();
+	public Map<String, Card> debitCards = new HashMap<>();
+	public Map<String, Card> giftCards = new HashMap<>();
+
 
 	// Listeners
 	private CardReaderListenerStub cardReaderListener = new CardReaderListenerStub();

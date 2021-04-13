@@ -18,6 +18,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 
 import org.lsmr.selfcheckout.Banknote;
+import org.lsmr.selfcheckout.Card;
 import org.lsmr.selfcheckout.Coin;
 import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
 
@@ -84,6 +85,73 @@ public class CheckoutSCSPanel extends JPanel {
 		add(returnToAddingItems);
 
 		JButton credit = new JButton("Pay with Credit Card");
+		credit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String cardNum = JOptionPane.showInputDialog("Please enter the number of the credit card!", "");
+				if(cardNum.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				if(control.creditCards.containsKey(cardNum)) {
+					Card card = control.creditCards.get(cardNum);
+					Object[] options = { "Tap", "Insert", "Swipe" };
+					int cardPayType = JOptionPane.showOptionDialog(
+						new JPanel(), 
+						"Please choose how you wish to use your card.", 
+						"Pay With Credit Card!", 
+						JOptionPane.YES_NO_CANCEL_OPTION, 
+						JOptionPane.PLAIN_MESSAGE, 
+						null, 
+						options, 
+						options[0]
+					);
+					boolean success = false;
+					try {
+						if(cardPayType == 0) {
+							success = control.tapCard(card);
+						} else if(cardPayType == 1) {
+							String pin = JOptionPane.showInputDialog("Please enter the card's pin!", "");
+							success = control.insertCard(card, pin);
+						} else if(cardPayType == 2) {
+							success = control.swipeCard(card, null);
+						} else {
+							JOptionPane.showMessageDialog(new JPanel(),
+								"You did not choose a valid method!",
+								"Error!",
+								JOptionPane.ERROR_MESSAGE);
+								return;
+						}
+					} catch (Exception err) {
+						success = false;
+					}
+					if(success) {
+						entered = entered.add(control.getTotal());
+						control.amountEntered = entered;
+						JOptionPane.showMessageDialog(new JPanel(),
+							"Payment Successful!",
+							"Success!",
+							JOptionPane.PLAIN_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(new JPanel(),
+						"Payment Failed!",
+						"Error!",
+						JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Card DNE!",
+						"Error!",
+						JOptionPane.ERROR_MESSAGE);
+						return;
+				}
+				updatePanel();
+			}
+		});
 		credit.setOpaque(true);
 		credit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		credit.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
@@ -92,6 +160,73 @@ public class CheckoutSCSPanel extends JPanel {
 		add(credit);
 		
 		JButton debit = new JButton("Pay with Debit Card");
+		debit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String cardNum = JOptionPane.showInputDialog("Please enter the number of the debit card!", "");
+				if(cardNum.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				if(control.debitCards.containsKey(cardNum)) {
+					Card card = control.debitCards.get(cardNum);
+					Object[] options = { "Tap", "Insert", "Swipe" };
+					int cardPayType = JOptionPane.showOptionDialog(
+						new JPanel(), 
+						"Please choose how you wish to use your card.", 
+						"Pay With Debit Card!", 
+						JOptionPane.YES_NO_CANCEL_OPTION, 
+						JOptionPane.PLAIN_MESSAGE, 
+						null, 
+						options, 
+						options[0]
+					);
+					boolean success = false;
+					try {
+						if(cardPayType == 0) {
+							success = control.tapCard(card);
+						} else if(cardPayType == 1) {
+							String pin = JOptionPane.showInputDialog("Please enter the card's pin!", "");
+							success = control.insertCard(card, pin);
+						} else if(cardPayType == 2) {
+							success = control.swipeCard(card, null);
+						} else {
+							JOptionPane.showMessageDialog(new JPanel(),
+								"You did not choose a valid method!",
+								"Error!",
+								JOptionPane.ERROR_MESSAGE);
+								return;
+						}
+					} catch (Exception err) {
+						success = false;
+					}
+					if(success) {
+						entered = entered.add(control.getTotal());
+						control.amountEntered = entered;
+						JOptionPane.showMessageDialog(new JPanel(),
+							"Payment Successful!",
+							"Success!",
+							JOptionPane.PLAIN_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(new JPanel(),
+						"Payment Failed!",
+						"Error!",
+						JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Card DNE!",
+						"Error!",
+						JOptionPane.ERROR_MESSAGE);
+						return;
+				}
+				updatePanel();
+			}
+		});
 		debit.setOpaque(true);
 		debit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		debit.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
@@ -100,6 +235,73 @@ public class CheckoutSCSPanel extends JPanel {
 		add(debit);
 		
 		JButton giftCard = new JButton("Pay with Giftcard");
+		giftCard.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String cardNum = JOptionPane.showInputDialog("Please enter the number of the gift card!", "");
+				if(cardNum.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				if(control.giftCards.containsKey(cardNum)) {
+					Card card = control.giftCards.get(cardNum);
+					Object[] options = { "Tap", "Insert", "Swipe" };
+					int cardPayType = JOptionPane.showOptionDialog(
+						new JPanel(), 
+						"Please choose how you wish to use your card.", 
+						"Pay With Gift Card!", 
+						JOptionPane.YES_NO_CANCEL_OPTION, 
+						JOptionPane.PLAIN_MESSAGE, 
+						null, 
+						options, 
+						options[0]
+					);
+					boolean success = false;
+					try {
+						if(cardPayType == 0) {
+							success = control.tapCard(card);
+						} else if(cardPayType == 1) {
+							String pin = JOptionPane.showInputDialog("Please enter the card's pin!", "");
+							success = control.insertCard(card, pin);
+						} else if(cardPayType == 2) {
+							success = control.swipeCard(card, null);
+						} else {
+							JOptionPane.showMessageDialog(new JPanel(),
+								"You did not choose a valid method!",
+								"Error!",
+								JOptionPane.ERROR_MESSAGE);
+								return;
+						}
+					} catch (Exception err) {
+						success = false;
+					}
+					if(success) {
+						entered = entered.add(control.getTotal());
+						control.amountEntered = entered;
+						JOptionPane.showMessageDialog(new JPanel(),
+							"Payment Successful!",
+							"Success!",
+							JOptionPane.PLAIN_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(new JPanel(),
+						"Payment Failed!",
+						"Error!",
+						JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+				} else {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Card DNE!",
+						"Error!",
+						JOptionPane.ERROR_MESSAGE);
+						return;
+				}
+				updatePanel();
+			}
+		});
 		giftCard.setOpaque(true);
 		giftCard.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		giftCard.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));

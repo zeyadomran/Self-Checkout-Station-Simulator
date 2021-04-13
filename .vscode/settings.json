@@ -4,6 +4,8 @@
         "Itemss",
         "Loggedin",
         "Lucida",
-        "Memb"
-    ]
+        "Memb",
+        "giftcard"
+    ],
+    "discord.enabled": true
 }
