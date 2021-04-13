@@ -68,6 +68,7 @@ public class SelfCheckoutSoftware {
 	private boolean shutDown = false;
 	private boolean attendentLoggedin;
 	public Attendant currentAttendant;
+	public BigDecimal amountEntered = new BigDecimal("0.00");
 
 	// Listeners
 	private CardReaderListenerStub cardReaderListener = new CardReaderListenerStub();
@@ -78,7 +79,6 @@ public class SelfCheckoutSoftware {
 	private CoinDispenserListenerStub coinDispenserListener = new CoinDispenserListenerStub();
 	private CoinStorageUnitListenerStub coinStorageUnitListener = new CoinStorageUnitListenerStub();
 	private BanknoteStorageUnitListenerStub banknoteStorageUnitListener = new BanknoteStorageUnitListenerStub();
-
 	 
 	/**
 	 * Creates an instance of SelfCheckoutSoftware.
@@ -108,7 +108,6 @@ public class SelfCheckoutSoftware {
 			//register a listener
 		    this.station.banknoteDispensers.get(i).register(banknoteDispenserListener);
 		}
-		
 		
 		for(BigDecimal i : this.station.coinDenominations) {
 			for(int j = 0; j < 100; j++) {
@@ -1469,23 +1468,20 @@ public class SelfCheckoutSoftware {
 		
 		actual = this.getBaggingAreaWeight();
 		
-		
-		
 		//Add the weight of all items in bagging area to expected weight
-		for(int i = 0; i < this.baggingAreaItems.size(); i++) {
-			expected += this.baggingAreaItems.get(i).getWeight();
+		for(int i = 0; i < this.scannedItems.size(); i++) {
+			expected += this.scannedItems.get(i).getWeight();
 		}
 		
-		for(int i = 0; i < this.baggingAreaPluItems.size(); i++) {
-			expected += this.baggingAreaPluItems.get(i).getWeight();
+		for(int i = 0; i < this.pluItems.size(); i++) {
+			expected += this.pluItems.get(i).getWeight();
 		}
 		
 		for(int i = 0; i < this.personalBags.size(); i++) {
 			expected += this.personalBags.get(i).getWeight();
 		}
-		
-		
-		
+
+		expected -= this.approvedWeightDifference;
 		
 		//Compare actual and expected weights
 		if(actual == expected) return true;

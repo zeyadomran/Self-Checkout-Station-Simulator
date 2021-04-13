@@ -643,6 +643,15 @@ public class MainSCSPanel extends JPanel {
 		checkOutButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+
+				if(!control.checkWeight()) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Please add all items to the bagging area, or call an attendant!",
+						"Weight Discrepancy!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
 				control.changeToCheckOutGUI();
 			}
 		});
