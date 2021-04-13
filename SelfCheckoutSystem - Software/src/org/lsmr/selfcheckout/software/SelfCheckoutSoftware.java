@@ -1094,7 +1094,9 @@ public class SelfCheckoutSoftware {
 	public void resetStation() {
 		this.scannedItems.clear();
 		this.pluItems.clear();
+		for(PLUCodedItem i : this.baggingAreaPluItems) this.station.baggingArea.remove(i);
 		this.baggingAreaPluItems.clear();
+		for(BarcodedItem i : this.baggingAreaItems) this.station.baggingArea.remove(i);
 		this.baggingAreaItems.clear();
 		this.personalBags.clear();
 		this.total = new BigDecimal("0");
