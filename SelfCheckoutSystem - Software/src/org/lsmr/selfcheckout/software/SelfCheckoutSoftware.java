@@ -1101,6 +1101,10 @@ public class SelfCheckoutSoftware {
 		this.receipt = null;
 		this.currentMember = null;
 		this.amountPaid = null;
+		this.amountEntered = new BigDecimal("0.00");
+		this.currentAttendant = null;
+		this.approvedWeightDifference = 0.0;
+		this.attendantLoggedIn = false;
 		this.changeDue = new BigDecimal("0.00");
 	}
 

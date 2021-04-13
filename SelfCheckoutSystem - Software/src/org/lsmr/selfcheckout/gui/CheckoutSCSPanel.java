@@ -248,12 +248,12 @@ public class CheckoutSCSPanel extends JPanel {
 				}
 				if(control.giftCards.containsKey(cardNum)) {
 					Card card = control.giftCards.get(cardNum);
-					Object[] options = { "Tap", "Insert", "Swipe" };
+					Object[] options = { "Swipe", "Insert" };
 					int cardPayType = JOptionPane.showOptionDialog(
 						new JPanel(), 
 						"Please choose how you wish to use your card.", 
 						"Pay With Gift Card!", 
-						JOptionPane.YES_NO_CANCEL_OPTION, 
+						JOptionPane.YES_NO_OPTION, 
 						JOptionPane.PLAIN_MESSAGE, 
 						null, 
 						options, 
@@ -262,12 +262,10 @@ public class CheckoutSCSPanel extends JPanel {
 					boolean success = false;
 					try {
 						if(cardPayType == 0) {
-							success = control.tapCard(card);
+							success = control.swipeCard(card, null);
 						} else if(cardPayType == 1) {
 							String pin = JOptionPane.showInputDialog("Please enter the card's pin!", "");
 							success = control.insertCard(card, pin);
-						} else if(cardPayType == 2) {
-							success = control.swipeCard(card, null);
 						} else {
 							JOptionPane.showMessageDialog(new JPanel(),
 								"You did not choose a valid method!",
