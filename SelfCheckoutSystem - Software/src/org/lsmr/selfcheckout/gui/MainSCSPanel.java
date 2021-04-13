@@ -640,6 +640,12 @@ public class MainSCSPanel extends JPanel {
 		add(createMembButton);
 
 		JButton checkOutButton = new JButton("Check Out");
+		checkOutButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				control.changeToCheckOutGUI();
+			}
+		});
 		checkOutButton.setOpaque(true);
 		checkOutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		checkOutButton.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
