@@ -652,6 +652,8 @@ public class MainSCSPanel extends JPanel {
 					return;
 				}
 
+				int bagsUsed = Integer.parseInt(JOptionPane.showInputDialog("How many bags did you use?", ""));
+				control.enterNumberOfBags(bagsUsed);
 				control.changeToCheckOutGUI();
 			}
 		});

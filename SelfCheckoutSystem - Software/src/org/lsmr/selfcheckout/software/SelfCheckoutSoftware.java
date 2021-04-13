@@ -1412,7 +1412,7 @@ public class SelfCheckoutSoftware {
 		this.numberOfBags = num;
 		if (num == 0) return;
 		// add bag price to total (5 cents per bag)
-		BigDecimal bagPrice = new BigDecimal(0.05 * num);
+		BigDecimal bagPrice = new BigDecimal(0.05 * num).setScale(2, RoundingMode.CEILING);
 		this.total = this.total.add(bagPrice);
 	}
 

@@ -431,6 +431,7 @@ public class CheckoutSCSPanel extends JPanel {
 				if(entered.compareTo(control.getTotal()) >= 0) {
 					control.generateReceipt();
 					receipt.setText("" + control.getReceipt());
+					control.resetStation();
 				}
 			}
 		});
