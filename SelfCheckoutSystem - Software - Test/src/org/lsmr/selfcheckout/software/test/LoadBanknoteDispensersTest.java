@@ -18,8 +18,10 @@ public class LoadBanknoteDispensersTest {
 		checkout = new SelfCheckoutSoftware(station);
 		checkout.registerAttendant("12345");
 	}
-	
-	
+
+	/**
+	 * Test for loading one banknote into the banknote dispenser
+	 */
 	@Test
 	public void loadOneBanknoteTest() {
 		checkout.attendantLogin("12345");
@@ -27,7 +29,10 @@ public class LoadBanknoteDispensersTest {
 		Assert.assertTrue(checkout.loadBanknoteDispenser(b));
 		
 	}
-	
+
+	/**
+	 * Test for loading multiple banknotes into the banknote dispenser
+	 */
 	@Test
 	public void loadMultipleBanknotesTest() {
 		checkout.attendantLogin("12345");
@@ -35,25 +40,37 @@ public class LoadBanknoteDispensersTest {
 		Banknote b2 = new Banknote(20, Currency.getInstance("CAD"));
 		Assert.assertTrue(checkout.loadBanknoteDispenser(b1, b2));
 	}
-	
+
+	/**
+	 * Test for loading zero banknotes into the banknote dispenser
+	 */
 	@Test
 	public void loadNoBanknotesTest() {
 		checkout.attendantLogin("12345");
 		Assert.assertFalse(checkout.loadBanknoteDispenser());
 	}
-	
+
+	/**
+	 * Test for loading an invalid banknote in the banknote dispenser
+	 */
 	@Test
 	public void loadInvalidBanknoteTest() {
 		Assert.assertFalse(checkout.loadBanknoteDispenser(null));
 	}
-	
+
+	/**
+	 * Test for loading a banknote with an invalid value
+	 */
 	@Test(expected = SimulationException.class)
 	public void loadInvalidValueBanknoteTest() {
 		checkout.attendantLogin("12345");
 		Banknote b = new Banknote(15, Currency.getInstance("CAD"));
 		checkout.loadBanknoteDispenser(b);
 	}
-	
+
+	/**
+	 * Test for loading multiple banknotes which are valid and invalid
+	 */
 	@Test
 	public void loadValidAndInvalidBanknotesTest() {
 		checkout.attendantLogin("12345");
@@ -62,7 +79,10 @@ public class LoadBanknoteDispensersTest {
 		Banknote[] banknotes = new Banknote[] {b1, null, b2};
 		Assert.assertFalse(checkout.loadBanknoteDispenser(banknotes));
 	}
-	
+
+	/**
+	 * Test for overloading the banknote dispenser
+	 */
 	@Test (expected = SimulationException.class)
 	public void overloadBanknotesTest() {
 		checkout.attendantLogin("12345");
@@ -72,13 +92,19 @@ public class LoadBanknoteDispensersTest {
 			checkout.loadBanknoteDispenser(b);
 		}
 	}
-	
+
+	/**
+	 * Test for loading the banknote dispenser withoutn nthe help of an attendant
+	 */
 	@Test
 	public void loadWithoutAttendantTest() {
 		Banknote b = new Banknote(10, Currency.getInstance("CAD"));
 		Assert.assertFalse(checkout.loadBanknoteDispenser(b));
 	}
-	
+
+	/**
+	 *
+	 */
 	@After
 	public void takedown() {
 		AttendantDatabase.REGISTERED_ATTENDANTS.clear();

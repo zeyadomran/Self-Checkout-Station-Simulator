@@ -18,8 +18,8 @@ import org.lsmr.selfcheckout.software.*;
 
 public class FailToPlaceItemInBaggingAreaTest {
 	
-	/*
-	 * Test to scanning two items and not placing the second item into the bagging area
+	/**
+	 * Test for scanning two items and not placing the second item into the bagging area.
 	 * This means the weight does not equal the expected weight so the the system throws a simulation exception
 	 */
 	@Test (expected = SimulationException.class)
@@ -47,8 +47,8 @@ public class FailToPlaceItemInBaggingAreaTest {
 			control.failToPlaceItem();
 	}
 
-	/*
-	 * Test to scanning two items and placing both in the bagging area
+	/**
+	 * Test for scanning two items and placing both in the bagging area.
 	 * Failure to place item in bagging area should return false since the weights are equal
 	 */
 	@Test 
