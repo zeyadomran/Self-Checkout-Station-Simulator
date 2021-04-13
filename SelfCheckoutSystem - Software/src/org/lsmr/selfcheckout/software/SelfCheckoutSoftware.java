@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -54,7 +55,7 @@ public class SelfCheckoutSoftware {
 	private BigDecimal total = new BigDecimal("0");
 	private String receipt;
 	private String currentMember;
-	private BigDecimal amountPaid;
+	public BigDecimal amountPaid;
 	private BigDecimal changeDue = new BigDecimal("0.00");
 	private boolean attendantLoggedIn;
 	private boolean blocked = false;
@@ -73,9 +74,9 @@ public class SelfCheckoutSoftware {
 	// Listeners
 	private CardReaderListenerStub cardReaderListener = new CardReaderListenerStub();
 	private BanknoteSlotListenerStub banknoteSlotListener = new BanknoteSlotListenerStub();
-	private BanknoteValidatorListenerStub banknoteValidatorListener = new BanknoteValidatorListenerStub();
+	public BanknoteValidatorListenerStub banknoteValidatorListener = new BanknoteValidatorListenerStub();
 	private BanknoteDispenserListenerStub banknoteDispenserListener = new BanknoteDispenserListenerStub();
-	private CoinValidatorListenerStub coinValidatorListener = new CoinValidatorListenerStub();
+	public CoinValidatorListenerStub coinValidatorListener = new CoinValidatorListenerStub();
 	private CoinDispenserListenerStub coinDispenserListener = new CoinDispenserListenerStub();
 	private CoinStorageUnitListenerStub coinStorageUnitListener = new CoinStorageUnitListenerStub();
 	private BanknoteStorageUnitListenerStub banknoteStorageUnitListener = new BanknoteStorageUnitListenerStub();
@@ -217,7 +218,7 @@ public class SelfCheckoutSoftware {
 			} else {
 				BarcodedItem item = new BarcodedItem(barcode, weight);
 				this.station.mainScanner.scan(item);
-				this.total = this.total.add(prod.getPrice());
+				this.total = this.total.add(prod.getPrice()).setScale(2, RoundingMode.CEILING);;
 				this.inventoryDatabase.put(prod, inventoryLeft - 1);
 				this.scannedItems.add(item);
 				return true;
@@ -273,7 +274,7 @@ public class SelfCheckoutSoftware {
 				
 				weight = weight/1000;
 				
-				BigDecimal priceOfItem = prod.getPrice().multiply(new BigDecimal(weight));
+				BigDecimal priceOfItem = prod.getPrice().multiply(new BigDecimal(weight)).setScale(2, RoundingMode.CEILING);
 				
 				this.total = this.total.add(priceOfItem);
 				
@@ -532,7 +533,6 @@ public class SelfCheckoutSoftware {
 		BigDecimal valueAsBigDecimal = new BigDecimal(value);
 		this.changeDue = valueAsBigDecimal.subtract(this.total);
 
-		if (value < this.total.doubleValue()) return false; // return false if banknotes value is not enough.
 		boolean isSuccess = false;
 		for(Banknote banknote : banknotes) { // Accepts banknotes.
 			isSuccess = acceptBanknote(banknote);
@@ -597,7 +597,6 @@ public class SelfCheckoutSoftware {
 		this.changeDue = value.subtract(this.total);
 
 		
-		if (value.compareTo(this.total) < 0) return false; // return false if coins value is not enough.
 		boolean isSuccess = false;
 		for(Coin coin : coins) { // Accepts coin
 			isSuccess = acceptCoin(coin);
@@ -647,7 +646,6 @@ public class SelfCheckoutSoftware {
 	public boolean dispenseChange(BigDecimal changeValue) throws OverloadException, EmptyException, DisabledException {
 		BigDecimal amountDispensed = new BigDecimal("0.0");
 		BigDecimal amountLeft = changeValue;
-		
 		List<BigDecimal> coinDenominations = this.station.coinDenominations;
 		Collections.sort(coinDenominations);
 		Collections.reverse(coinDenominations);
@@ -706,7 +704,7 @@ public class SelfCheckoutSoftware {
 	/**
 	 * Method to generate a receipt for the transaction with the scanned items and the amount payed, total and the change value
 	 */
-	public void generateReceipt() {	
+	public void generateReceipt() {
 		StringBuilder headersb = new StringBuilder();
 		headersb.append("Receipt\n");
 		if(this.currentMember != null) {
@@ -787,12 +785,12 @@ public class SelfCheckoutSoftware {
 		checkLowPaper();
 		sb.append(AmountPaid);
 		sb.append("  ");
-		sb.append(this.amountPaid);
+		sb.append(this.amountEntered);
 		sb.append("\n");
 		checkLowPaper();
 		sb.append("Change Due: ");
 		sb.append("   ");
-		sb.append(this.changeDue);
+		sb.append(this.amountEntered.subtract(this.total));
 		for(int i = 0; i < sb.length(); i++) this.station.printer.print(sb.charAt(i));
 		for(int i = 0; i < sb.length(); i++) {
 			if (!(Character.isWhitespace(sb.charAt(i)))) {

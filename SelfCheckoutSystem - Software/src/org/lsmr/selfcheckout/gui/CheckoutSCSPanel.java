@@ -8,7 +8,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Currency;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -18,6 +17,7 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 
+import org.lsmr.selfcheckout.Banknote;
 import org.lsmr.selfcheckout.Coin;
 import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
 
@@ -25,15 +25,16 @@ public class CheckoutSCSPanel extends JPanel {
 	private SelfCheckoutSoftware control;
 	private JTextArea receipt;
 	private JTextArea infoText;
-	private BigDecimal entered = new BigDecimal("0");
+	private BigDecimal entered;
 	private ArrayList<Coin> coins = new ArrayList<Coin>();
-
+	private ArrayList<Banknote> banknotes = new ArrayList<Banknote>();
 	/**
 	 * Create the panel.
 	 */
 	public CheckoutSCSPanel(SelfCheckoutSoftware control) {
 		this.control = control;
-		
+		entered = control.amountEntered;
+
 		this.setForeground(new Color(9, 11, 16));
 		this.setBackground(new Color(9, 11, 16));
 		this.setMinimumSize(new Dimension(1280, 720));
@@ -69,6 +70,12 @@ public class CheckoutSCSPanel extends JPanel {
 		updatePanel();
 		
 		JButton returnToAddingItems = new JButton("Return To Adding Items");
+		returnToAddingItems.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				control.loadMainGUI();
+			}
+		});
 		returnToAddingItems.setOpaque(true);
 		returnToAddingItems.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		returnToAddingItems.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
@@ -101,6 +108,53 @@ public class CheckoutSCSPanel extends JPanel {
 		add(giftCard);
 		
 		JButton cash = new JButton("Pay with Cash");
+		cash.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String sBanknoteVal = JOptionPane.showInputDialog("Enter the value of the coin you wish to enter.", "");
+				if(sBanknoteVal.equals("")) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Invalid Inputs!",
+						"Please Try Again!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				int value = Integer.parseInt(sBanknoteVal);
+				Banknote banknote = new Banknote(value, control.getStation().coinValidator.currency);
+				banknotes.add(banknote);
+				boolean success = false; 
+				try {
+					success = control.payWithCash(banknotes);
+					if(control.banknoteValidatorListener.isValidBanknote()) {
+						entered = entered.add(new BigDecimal(value));
+						control.amountEntered = entered;
+					} else {
+						JOptionPane.showMessageDialog(new JPanel(),
+							"Invalid Denomination!",
+							"Error!",
+							JOptionPane.ERROR_MESSAGE);
+							return;
+					}
+					if(success) {
+						JOptionPane.showMessageDialog(new JPanel(),
+							"You have payed enough!",
+							"Banknote Entered Success!",
+							JOptionPane.PLAIN_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(new JPanel(),
+							"You still need to pay more!",
+							"Not Enough!",
+							JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (Exception err) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Could not pay with banknote entered!",
+						"Banknote Enter Failed!",
+						JOptionPane.ERROR_MESSAGE);
+				}
+				updatePanel();
+			}
+		});
 		cash.setOpaque(true);
 		cash.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cash.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
@@ -113,7 +167,7 @@ public class CheckoutSCSPanel extends JPanel {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			String coinValue = JOptionPane.showInputDialog("Enter the value of the coin you wish to enter.", "");
-			if(coinValue.equals("") || coinValue.equals("")) {
+			if(coinValue.equals("")) {
 				JOptionPane.showMessageDialog(new JPanel(),
 					"Invalid Inputs!",
 					"Please Try Again!",
@@ -121,32 +175,40 @@ public class CheckoutSCSPanel extends JPanel {
 				return;
 			}
 			BigDecimal value = new BigDecimal(coinValue);
-			Coin coin = new Coin(value, Currency.getInstance(getLocale()));
+			Coin coin = new Coin(value, control.getStation().coinValidator.currency);
 			coins.add(coin);
-			entered = entered.add(value);
 			boolean success = false; 
-			if(entered.compareTo(control.getTotal()) >= 0) {
-				try {
-					success = control.payWithCoin(coins);
-				} catch (Exception err) {
+			try {
+				success = control.payWithCoin(coins);
+				if(control.coinValidatorListener.getIsValid()) {
+					entered = entered.add(value);
+					control.amountEntered = entered;
+				} else {
 					JOptionPane.showMessageDialog(new JPanel(),
-						"Could not pay with coin entered!",
-						"Coin Enter Failed!",
+						"Invalid Denomination!",
+						"Error!",
 						JOptionPane.ERROR_MESSAGE);
+						return;
 				}
-			}
 				if(success) {
 					JOptionPane.showMessageDialog(new JPanel(),
-						"You have payed enough coins!",
+						"You have payed enough!",
 						"Coin Entered Success!",
 						JOptionPane.PLAIN_MESSAGE);
 				} else {
 					JOptionPane.showMessageDialog(new JPanel(),
-						"Coin: " + value + " was not entered!",
-						"Coin Enter Failed!",
+						"You still need to pay more!",
+						"Not Enough!",
 						JOptionPane.ERROR_MESSAGE);
 				}
+			} catch (Exception err) {
+				JOptionPane.showMessageDialog(new JPanel(),
+					"Could not pay with coin entered!",
+					"Coin Enter Failed!",
+					JOptionPane.ERROR_MESSAGE);
 			}
+			updatePanel();
+		}
 		});
 		coin.setOpaque(true);
 		coin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -166,11 +228,15 @@ public class CheckoutSCSPanel extends JPanel {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				infoText.setText(""+getTextAreaText());
+				if(entered.compareTo(control.getTotal()) >= 0) {
+					control.generateReceipt();
+					receipt.setText("" + control.getReceipt());
+				}
 			}
 		});
 	}
 
 	private String getTextAreaText() {
-		return "\n Total: " + control.getTotal().toString() + "\n Entered: " + control.amountEntered + "\n Change Due: "+ entered.subtract(control.getTotal());
+		return "\n Total: " + control.getTotal().toString() + "\n Entered: " + entered.doubleValue() + "\n Change Due: "+ entered.subtract(control.getTotal());
 	}
 }

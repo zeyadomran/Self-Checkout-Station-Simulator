@@ -17,7 +17,7 @@ import org.junit.runners.Suite;
 	PayWithCardTest.class,
 	FailToPlaceItemInBaggingAreaTest.class,
 	SystemTest.class,
-	RecieptPrinterManagementTest.class,
+	ReceiptPrinterManagementTest.class,
 	PluProductTest.class,
 	EmptyStorageTest.class,
 	LoadBanknoteDispensersTest.class,
