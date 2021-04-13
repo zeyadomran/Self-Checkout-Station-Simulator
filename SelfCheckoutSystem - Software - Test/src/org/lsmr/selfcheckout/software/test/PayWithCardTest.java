@@ -211,7 +211,7 @@ public class PayWithCardTest {
         assertFalse("unsuccessful swipe", successful > 90); // false bc it should be an invalid card
 	}
 	
-	
+	/*Tests swipeCard with a debit card */
 	@Test
 	public void swipeDebitCardTest() throws IOException, MagneticStripeFailureException {
 		int successful = 0;
@@ -237,7 +237,8 @@ public class PayWithCardTest {
 		}
         assertTrue("unsuccessful swipe: " + successful + "%", successful > 80);
 	}
-	
+
+	/*Tests swipeCard with a credit card */
 	@Test
 	public void swipeCreditCardTest() throws IOException {
 		int successful = 0;
@@ -356,7 +357,8 @@ public class PayWithCardTest {
 		}
         assertTrue("unsuccessful insert: " + successful + "%", successful > 90);
 	}
-	
+
+	/*Tests a valid debit card correctly pays for all items */
 	@Test
 	public void payWithDebitCardTest() throws IOException {
 		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
@@ -374,7 +376,8 @@ public class PayWithCardTest {
 		control.insertCard(card, insertedPin);
 		assertEquals(control.getAmountPaid().toString(), "12");
 	}
-	
+
+	/*Tests a card that has been blocked by the customer's bank */
 	@Test(expected = BlockedCardException.class)
 	public void blockCardTest() throws IOException {
 		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
@@ -399,6 +402,7 @@ public class PayWithCardTest {
 		}
 	}
 
+	/*Tests a broken debit card */
 	@Test
 	public void debitCardBrokeTest() {
 		int successful = 0;
@@ -426,6 +430,7 @@ public class PayWithCardTest {
         assertFalse("unsuccessful insert: " + successful + "%", successful > 80);
 	}
 
+	/*Tests a broken credit card */
 	@Test
 	public void creditCardBrokeTest() {
 		int successful = 0;
@@ -452,7 +457,8 @@ public class PayWithCardTest {
 		}
         assertFalse("unsuccessful insert: " + successful + "%", successful > 80);
 	}
-	
+
+	/*Tests swipeCard with a valid gift card */
 	@Test
 	public void swipeGiftCardTest() throws IOException {
 		int successful = 0;
@@ -478,7 +484,8 @@ public class PayWithCardTest {
 		}
         assertTrue("unsuccessful swipe: " + successful + "%", successful > 80);
 	}
-	
+
+	/*Tests a valid gift card correctly pays for all items */
 	@Test
 	public void payWithGiftCardTest() throws IOException {
 		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
@@ -497,7 +504,7 @@ public class PayWithCardTest {
 		assertEquals(control.getAmountPaid().toString(), "12");
 	}
 	
-	
+	/*Tests a broken gift card */
 	@Test
 	public void giftCardBrokeTest() {
 		int successful = 0;
