@@ -240,7 +240,7 @@ public class SelfCheckoutSoftware {
 		if(this.scannedItems.contains(item)) {
 			BarcodedProduct prod = this.productDatabase.get(item.getBarcode());
 			this.scannedItems.remove(item);
-			this.total.subtract(prod.getPrice());
+			this.total = this.total.subtract(prod.getPrice());
 			this.inventoryDatabase.put(prod, (this.inventoryDatabase.get(prod) + 1));
 			return true;
 		} else {
@@ -301,7 +301,8 @@ public class SelfCheckoutSoftware {
 		if(this.pluItems.contains(item)) {
 			PLUCodedProduct prod = this.pluProductDatabase.get(item.getPLUCode());
 			this.pluItems.remove(item);
-			this.total.subtract(prod.getPrice());
+			BigDecimal weight = new BigDecimal(item.getWeight()/1000);
+			this.total = this.total.subtract(prod.getPrice().multiply(weight));
 			this.inventoryDatabase.put(prod, (this.inventoryDatabase.get(prod) + 1));
 			return true;
 		} else {
@@ -1573,7 +1574,7 @@ public class SelfCheckoutSoftware {
 	 * @return The String built.
 	 */
 	public String buildTextAreaString() {
-		return "\n  Bagging Scale Weight: " + this.getBaggingAreaWeight() + "\n  Total Price: $" + this.total + "\n  Member ID: " + this.currentMember;
+		return "\n  Bagging Scale Weight: " + this.getBaggingAreaWeight() + "\n  Total Price: $" + this.getTotal() + "\n  Member ID: " + this.currentMember;
 	}
 
 	public String getCurrentMember() {
