@@ -135,13 +135,15 @@ public class ScanItemTest {
 		control.scanItem(b, 12);
 		assertEquals(control.getTotal(), price);
 	}
-	
+
+	/* Tests enterNumberOfBags with a negative number and test that it throws an illegal argument exception */
 	@Test(expected = IllegalArgumentException.class)
 	public void invalidBagTest() {
 		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
 		control.enterNumberOfBags(-1); 
 	}
 	
+	/* Tests enterNumberOfBags with a valid number of bags */
 	@Test
 	public void validBagTest() {
 		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
