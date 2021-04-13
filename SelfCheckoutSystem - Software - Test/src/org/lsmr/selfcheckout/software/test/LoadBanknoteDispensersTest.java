@@ -94,7 +94,7 @@ public class LoadBanknoteDispensersTest {
 	}
 
 	/**
-	 * Test for loading the banknote dispenser withoutn nthe help of an attendant
+	 * Test for loading the banknote dispenser without the help of an attendant
 	 */
 	@Test
 	public void loadWithoutAttendantTest() {
@@ -102,9 +102,6 @@ public class LoadBanknoteDispensersTest {
 		Assert.assertFalse(checkout.loadBanknoteDispenser(b));
 	}
 
-	/**
-	 *
-	 */
 	@After
 	public void takedown() {
 		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
