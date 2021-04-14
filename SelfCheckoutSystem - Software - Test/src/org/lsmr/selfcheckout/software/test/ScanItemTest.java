@@ -59,7 +59,7 @@ public class ScanItemTest {
 		BarcodedProduct bp = new BarcodedProduct(b, "TestItem", new BigDecimal("12"));
 		control.addProduct(bp, 2);
 		control.scanItem(b, 12);
-		BigDecimal expectedTotal = new BigDecimal("12");
+		BigDecimal expectedTotal = new BigDecimal("12.00");
 		BigDecimal returnedTotal = control.getTotal();
 		assertEquals(expectedTotal, returnedTotal);
 		int expectedInventory = 1;
@@ -129,7 +129,7 @@ public class ScanItemTest {
 	public void getTotalTest() throws SimulationException, OverloadException{
 		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
 		Barcode b = new Barcode("12");
-		BigDecimal price = new BigDecimal("12");
+		BigDecimal price = new BigDecimal("12.00");
 		BarcodedProduct bp = new BarcodedProduct(b, "TestItem", price);
 		control.addProduct(bp, 2);
 		control.scanItem(b, 12);

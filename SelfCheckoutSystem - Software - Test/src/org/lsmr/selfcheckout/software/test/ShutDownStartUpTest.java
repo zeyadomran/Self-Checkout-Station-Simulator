@@ -49,7 +49,7 @@ public class ShutDownStartUpTest {
 		BarcodedProduct bp = new BarcodedProduct(b, "TestItem", new BigDecimal("12"));
 		control.addProduct(bp, 2);
 		control.scanItem(b, 12);
-		BigDecimal expectedTotal = new BigDecimal("12");
+		BigDecimal expectedTotal = new BigDecimal("12.00");
 		BigDecimal returnedTotal = control.getTotal();
 		assertEquals(expectedTotal, returnedTotal);
 		int expectedInventory = 1;

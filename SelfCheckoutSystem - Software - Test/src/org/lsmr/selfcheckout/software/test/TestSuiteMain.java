@@ -24,6 +24,7 @@ import org.junit.runners.Suite;
 	LoadCoinDispensersTest.class,
 	AttendantTest.class,
 	ShutDownStartUpTest.class,
-	AttendantLooksUpProductTest.class
+	AttendantLooksUpProductTest.class,
+	CheckWeightTest.class
 })
 public class TestSuiteMain {}

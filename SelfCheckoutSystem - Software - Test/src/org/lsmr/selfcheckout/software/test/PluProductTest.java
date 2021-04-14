@@ -143,7 +143,7 @@ public class PluProductTest {
 		
 		control.addPLUItem(plc2, 250);
 		
-		BigDecimal expectedTotal = new BigDecimal("5.2500");
+		BigDecimal expectedTotal = new BigDecimal("5.25");
 		BigDecimal returnedTotal = control.getTotal();
 		
 		assertEquals(expectedTotal, returnedTotal);

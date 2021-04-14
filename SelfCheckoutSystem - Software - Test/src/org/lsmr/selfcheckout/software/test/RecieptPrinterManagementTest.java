@@ -13,7 +13,7 @@ import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.software.AttendantDatabase;
 import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
 
-public class ReceiptPrinterManagementTest {
+public class RecieptPrinterManagementTest {
 	Currency c = Currency.getInstance(Locale.CANADA);
 	int[] noteDenom = {5, 10, 20, 50, 100};
 	BigDecimal[] coinDenom = {new BigDecimal("0.05"), new BigDecimal("0.1"), new BigDecimal("0.25"), new BigDecimal("0.5"), new BigDecimal("1"), new BigDecimal("2")};
@@ -37,7 +37,6 @@ public class ReceiptPrinterManagementTest {
 	
 	@Test
 	public void inkLeftAdding() {
-		AttendantDatabase.REGISTERED_ATTENDANTS.remove("1234");
 		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
 		control.registerAttendant("1234");
 		control.attendantLogin("1234");
