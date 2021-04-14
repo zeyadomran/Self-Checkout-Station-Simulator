@@ -780,8 +780,14 @@ public class SelfCheckoutSoftware {
 		
 		
 		StringBuilder sb = new StringBuilder();
+		String bagsUsed = "Bags used: ";
 		String total = "Sub Total: ";
 		String AmountPaid = "Amount Paid: ";
+		sb.append('\n');
+		checkLowPaper();
+		sb.append(bagsUsed);
+		sb.append("    ");
+		sb.append(this.numberOfBags);
 		sb.append('\n');
 		checkLowPaper();
 		sb.append(total);
