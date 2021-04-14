@@ -10,6 +10,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
+import org.lsmr.selfcheckout.software.Attendant;
+import org.lsmr.selfcheckout.software.AttendantDatabase;
 import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
 
 public class GUITest {
@@ -23,6 +25,8 @@ public class GUITest {
         BigDecimal[] coinDenom = {new BigDecimal("0.05"), new BigDecimal("0.1"), new BigDecimal("0.25"), new BigDecimal("0.5"), new BigDecimal("1"), new BigDecimal("2")};
         SelfCheckoutStation s = new SelfCheckoutStation(c, noteDenom, coinDenom, 10000, 1);
         control = new SelfCheckoutSoftware(s);
+        Attendant at = new Attendant("1234");
+        AttendantDatabase.REGISTERED_ATTENDANTS.put("1234", at);
     }
 
     @Test
@@ -31,6 +35,7 @@ public class GUITest {
         control.disableGUI();
         control.loadMainGUI();
         control.disableGUI();
+        control.attendantLogin("1234");
         control.changeToAttendantGUI();
         control.disableGUI();
         control.changeToCheckOutGUI();
