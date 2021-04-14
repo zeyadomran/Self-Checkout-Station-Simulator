@@ -1,4 +1,4 @@
-How to use the GUI,
+How to use the GUI:
 Run the Main.java class in <SelfCheckoutSystem - Software/org/lsmr/SelfCheckoutSystem/Software>
 
 Valid Denominations:

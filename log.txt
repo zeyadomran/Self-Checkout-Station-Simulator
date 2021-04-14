@@ -1,0 +1,149 @@
+fef5794 was zeyadomran, 2 minutes ago, message: Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+164019b was zeyadomran, 2 minutes ago, message: Added ReadMe.txt
+1a24c46 was matthewJarrams, 4 minutes ago, message: Diagram explanation and cover page
+599fa24 was sharansarthak, 38 minutes ago, message: Create SENG 300 Iteration 3 Meeting #3.pdf
+1a72a0c was Zeyad Omran, 73 minutes ago, message: Merge pull request #14 from zeyadomran/Bug-Fix
+cd541b2 was zeyadomran, 79 minutes ago, message: Fixed GUI Bugs ✅
+b24b134 was Kylie Sicat, 3 hours ago, message: Updated GUI Structural Diagram.jpg
+9f08f81 was Kylie Sicat, 3 hours ago, message: Update GUI Structural Diagram.drawio
+1a05727 was DanySaaidBonilla, 12 hours ago, message: Update SelfCheckoutSoftware.java
+b40ed56 was DanySaaidBonilla, 12 hours ago, message: Add files via upload
+8a49d98 was DanySaaidBonilla, 12 hours ago, message: Bug fixs
+a9594fb was matthewJarrams, 20 hours ago, message: Text fixes
+61b32f8 was matthewJarrams, 20 hours ago, message: Fixed some errors
+44bfc22 was matthewJarrams, 20 hours ago, message: Added folders
+c2febdb was matthewJarrams, 20 hours ago, message: Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+3e36afa was matthewJarrams, 20 hours ago, message: Possible script for presentation  (design)
+7c34a94 was Mackenzie Dalton, 20 hours ago, message: Add files via upload
+549e358 was matthewJarrams, 21 hours ago, message: Abstracted class diagram
+98e69d4 was sharansarthak, 22 hours ago, message: Added number of bags in receipt
+f6e4071 was zeyadomran, 22 hours ago, message: Added Start Screen for GUI ✅
+fa3ef8b was zeyadomran, 23 hours ago, message: Fixed Bagging Area Bug 🔨
+4b39c33 was zeyadomran, 23 hours ago, message: GUI Completed!!!!!!!!!!!!!! ✅
+4beee10 was zeyadomran, 24 hours ago, message: Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+7e058a4 was zeyadomran, 24 hours ago, message: Organized Main Class 🗃
+166b6d9 was Mackenzie Dalton, 24 hours ago, message: Add files via upload
+5b2d547 was zeyadomran, 24 hours ago, message: Added Paying with various cards 💳
+f862ee8 was zeyadomran, 25 hours ago, message: Added Pay with Coin and Pay with Cash to GUI 💰
+bda073f was Nathan Lum, 26 hours ago, message: Added comments
+7d1dc64 was Nathan Lum, 26 hours ago, message: Added comments
+95e8889 was Nathan Lum, 26 hours ago, message: Added comments
+ad748dd was Nathan Lum, 27 hours ago, message: Added comments, fixed misspelling in file name
+45a882f was zeyadomran, 30 hours ago, message: Added checking weight before checking out ✅
+dd0bec1 was Mackenzie Dalton, 2 days ago, message: Add files via upload
+b80916b was Mackenzie Dalton, 2 days ago, message: Delete PlaceInBaggingArea-SequenceDiagram.pdf
+50b51a6 was Mackenzie Dalton, 2 days ago, message: Add files via upload
+5b45995 was matthewJarrams, 2 days ago, message: Added some Checkout GUI stuff
+520cf53 was matthewJarrams, 2 days ago, message: Fixed bug in GUI/Code
+31dc561 was Kylie Sicat, 2 days ago, message: Added Structural Diagrams
+9fc7d33 was Kylie Sicat, 2 days ago, message: Updated GUI Structural Diagram.drawio
+3d518dd was Kylie Sicat, 2 days ago, message: Added GUI Structural Diagram.drawio
+3314d10 was Kylie Sicat, 2 days ago, message: Updated SelfCheckoutSystem - Software - Structural.drawio
+133c7b4 was joseph-yclam, 2 days ago, message: Upload pay banknote and pay coin sequence diagrams
+ba447f5 was matthewJarrams, 2 days ago, message: Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+79202fd was matthewJarrams, 2 days ago, message: Added currentMember use case
+eedb3c5 was mathew-luong, 2 days ago, message: Upload State and Sequence diagrams
+abf6c61 was zeyadomran, 2 days ago, message: Fixed Bug ⚡️
+4da174b was zeyadomran, 2 days ago, message: Added add ink/paper to printer func to gui ✅
+565a942 was zeyadomran, 2 days ago, message: Added remove product from purchases functionality ⚡️
+c8d99e2 was zeyadomran, 2 days ago, message: Added refill banknote/coin dispenser functionality to GUI ✅
+594807b was zeyadomran, 2 days ago, message: Added attendant approves weight discrepancy function to GUI ✅
+f862674 was zeyadomran, 2 days ago, message: Added shutdown/startup/block functionality to GUI 👨🏽‍🔧
+cf2a67c was zeyadomran, 2 days ago, message: Added attendant empties coin storage to GUI ✅
+5da85ce was zeyadomran, 2 days ago, message: Added attendant empties banknote storage to GUI ✅
+d2ee4c8 was zeyadomran, 2 days ago, message: Added attendant lookup functionality 🔍
+ed87141 was kirkelumir, 3 days ago, message: Merge pull request #13 from zeyadomran/testcasesbranch
+b89e47e was kirkelumir, 3 days ago, message: Added some tests to MemberTest.java
+02071a3 was sharansarthak, 3 days ago, message: Removed unused variable
+3b65a66 was zeyadomran, 3 days ago, message: Small Fixes 🔨
+2b6c553 was zeyadomran, 3 days ago, message: Added Attendant looks up product function 🔍
+e978d35 was zeyadomran, 3 days ago, message: Added Attendantt Login/Logout 👨🏽‍🔧
+dd8b646 was zeyadomran, 3 days ago, message: Added support for attendant panel and checkout panel ⚡️
+650c1ac was zeyadomran, 3 days ago, message: Added addOwnBag functionality 🛍
+0205a60 was zeyadomran, 3 days ago, message: Fixed Compatability between main and GUI branches 🚀
+682020c was Zeyad Omran, 3 days ago, message: Merge pull request #12 from zeyadomran/GUI
+12b6168 was zeyadomran, 3 days ago, message: Merge GUI to Main
+39a3df0 was zeyadomran, 3 days ago, message: .
+7568c88 was zeyadomran, 3 days ago, message: Added remove from bagging area functionality ✅
+1b621f8 was zeyadomran, 3 days ago, message: Added Lookup for BarcodedProducts & PLUCodedProducts 🔍
+815bfcb was zeyadomran, 3 days ago, message: Added Swipe Member Card functionality 💳
+25a091e was sharansarthak, 4 days ago, message: checkLowPaper Function created
+25d92b5 was sharansarthak, 4 days ago, message: Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+47a78fe was sharansarthak, 4 days ago, message: Create SENG 300 Iteration 3 Meeting #2.pdf
+fb58d23 was Mackenzie Dalton, 4 days ago, message: Merge pull request #11 from zeyadomran/ReturnToAddItems
+fb720cd was Mackenzie Dalton, 4 days ago, message: Add files via upload
+9f35612 was sharansarthak, 4 days ago, message: Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+39780a9 was sharansarthak, 4 days ago, message: LowPaper use case
+9a44a39 was matthewJarrams, 4 days ago, message: Ensured 100% coverage for plu item tests
+0675779 was Mackenzie Dalton, 4 days ago, message: Merge pull request #10 from zeyadomran/CheckWeight
+e65f7c0 was Mackenzie Dalton, 4 days ago, message: Add files via upload
+42190d6 was sharansarthak, 4 days ago, message: Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+cb97adf was matthewJarrams, 4 days ago, message: State diagrams
+8914d65 was sharansarthak, 4 days ago, message: Create SENG 300 Iteration 3 Meeting #1.pdf
+832d6ec was zeyadomran, 4 days ago, message: UX Improvement ✍🏽
+e990941 was zeyadomran, 4 days ago, message: Added Bagging Are Functionality 💰
+cf25b64 was zeyadomran, 4 days ago, message: Add Manual Member Log In ✍🏽
+e2042a7 was zeyadomran, 4 days ago, message: Added Create Membership Functionality 🚀
+ea57e55 was matthewJarrams, 4 days ago, message: Added highLevel State Diagram
+48b1853 was zeyadomran, 4 days ago, message: Check Description ⬇️
+978e611 was zeyadomran, 4 days ago, message: Fixing Bugs 🔨
+695e4a1 was sharansarthak, 4 days ago, message: Added a few test cases
+5eb7c49 was zeyadomran, 4 days ago, message: Remove Item Functionality Added! ✅
+108079a was zeyadomran, 4 days ago, message: Added Scan Item Functionality ⚡️
+351dba0 was matthewJarrams, 5 days ago, message: Added comments and tests for attendant looks up product
+334f58b was matthewJarrams, 5 days ago, message: Added Attendant Looks up product use case and tests
+593acbc was kirkelumir, 5 days ago, message: Merge pull request #8 from zeyadomran/branch3
+1d131c0 was kirkelumir, 5 days ago, message: Added use cases 5, 7, and 8
+41bc788 was kirkelumir, 5 days ago, message: Delete SelfCheckoutSoftware.java
+ba604bd was kirkelumir, 5 days ago, message: Rename SelfCheckoutSoftware.java to SelfCheckoutSystem - Software/src/org/lsmr/selfcheckout/SelfCheckoutSoftware.java
+de1c45f was kirkelumir, 5 days ago, message: Added use cases 5, 7, and 8
+68c49bf was matthewJarrams, 5 days ago, message: Added some more tests to use cases I did
+de0c57a was matthewJarrams, 5 days ago, message: Added tests for attendant and updated test suite
+28aabcf was matthewJarrams, 5 days ago, message: Added comments
+10221a0 was DanySaaidBonilla, 6 days ago, message: Added More Tests
+b3ec34f was DanySaaidBonilla, 6 days ago, message: Merge pull request #7 from zeyadomran/Adding-Tests-and-Use-Cases
+eddbedf was DanySaaidBonilla, 6 days ago, message: Fixed a bug
+7786d3d was DanySaaidBonilla, 6 days ago, message: Added some documentation fixes
+f0fc23b was DanySaaidBonilla, 6 days ago, message: Added Tests and Use Case
+d1ba949 was matthewJarrams, 6 days ago, message: added changes to weight discrepancy
+a8bf4fa was DanySaaidBonilla, 6 days ago, message: Merge pull request #5 from zeyadomran/DanySaaidBonilla-ApprovesWeightDiff
+2c3702d was DanySaaidBonilla, 6 days ago, message: Added attendant approves weight discrepancy
+2e55626 was zeyadomran, 6 days ago, message: Added Attendant Panel ✅
+2a83049 was zeyadomran, 7 days ago, message: ..
+b3a067b was zeyadomran, 7 days ago, message: File Management 🗃
+8292d8f was zeyadomran, 7 days ago, message: Updated to Hardware v3.1 ⚡️
+3f9334a was zeyadomran, 7 days ago, message: Updated to Hardware v3.1 ⚡️
+aa34682 was sharansarthak, 7 days ago, message: Added TouchScreenTest.java
+9d24770 was matthewJarrams, 7 days ago, message: All previous tests and the new dispenser stuff passes
+75a3dfe was matthewJarrams, 7 days ago, message: Attendant Logout added
+f379f02 was g-heemeryck, 7 days ago, message: Merge pull request #4 from zeyadomran/storagedispenserbranch
+8e5683a was g-heemeryck, 7 days ago, message: Rename SelfCheckoutSystem - Software - Test/LoadCoinDispensersTest.java to SelfCheckoutSystem - Software - Test/src/org/lsmr/selfcheckout/software/test/LoadCoinDispensersTest.java
+3128877 was g-heemeryck, 7 days ago, message: Rename SelfCheckoutSystem - Software - Test/LoadBanknoteDispensersTest.java to SelfCheckoutSystem - Software - Test/src/org/lsmr/selfcheckout/software/test/LoadBanknoteDispensersTest.java
+0c26857 was g-heemeryck, 7 days ago, message: Rename SelfCheckoutSystem - Software - Test/EmptyStorageTest.java to SelfCheckoutSystem - Software - Test/src/org/lsmr/selfcheckout/software/test/EmptyStorageTest.java
+df3b594 was g-heemeryck, 7 days ago, message: Update CoinDispenserListenerStub.java
+369218d was g-heemeryck, 7 days ago, message: Update CoinStorageUnitListenerStub.java
+421b90a was g-heemeryck, 7 days ago, message: Update SelfCheckoutSoftware.java
+f8e9fc6 was g-heemeryck, 7 days ago, message: Add files via upload
+fea18bc was zeyadomran, 7 days ago, message: Finished Main GUI screen design ✅
+ab09c2b was Kylie Sicat, 7 days ago, message: Updated SelfCheckoutSystem - Software - Structural.drawio
+8d6e008 was zeyadomran, 7 days ago, message: Added First GUI Screen
+1be4e30 was Kylie Sicat, 8 days ago, message: Updated SelfCheckoutSystem - Software - Structural.drawio
+56f0235 was Kylie Sicat, 8 days ago, message: Updated SelfCheckoutSystem - Software - Structural.drawio
+5607042 was sharansarthak, 8 days ago, message: Paper or Ink can only be added to the printer if attendant is logged in
+c5ee8eb was DanySaaidBonilla, 9 days ago, message: Merge pull request #3 from zeyadomran/DanySaaidBonilla-patch-1
+07215df was DanySaaidBonilla, 9 days ago, message: Added some use cases
+38f43dc was matthewJarrams, 9 days ago, message: Added some tests for attendant
+4d15044 was matthewJarrams, 9 days ago, message: Merge pull request #2 from zeyadomran/Attendant
+1b8d856 was Kylie Sicat, 9 days ago, message: added gift card tests &minor change with tapCard()
+d89dd6b was matthewJarrams, 9 days ago, message: Separated Attendant class from Software
+a7ebdcd was matthewJarrams, 9 days ago, message: manual fix of previous commit
+9e656f2 was matthewJarrams, 9 days ago, message: Fixed an issue with the last commit
+c35fbeb was Kylie Sicat, 9 days ago, message: Creating SelfCheckoutSystem - Software - Structural.drawio
+377e25d was Kylie Sicat, 9 days ago, message: Added gift card issuer in database and modified the card methods in main class
+33b22d9 was matthewJarrams, 10 days ago, message: Merge pull request #1 from zeyadomran/ShutDownStation
+603d7ae was matthewJarrams, 10 days ago, message: Some initial shutdown and start up station implementaion
+86c12d2 was matthewJarrams, 10 days ago, message: Manual Merge add of Dany's branch
+9919520 was matthewJarrams, 10 days ago, message: Plu code for Product use case and look up product use case
+6be701e was matthewJarrams, 11 days ago, message: No changes
+0e2f1ca was zeyadomran, 11 days ago, message: Initial Commit 🚀
+62b7faa was zeyadomran, 11 days ago, message: Initial Commit 🚀
