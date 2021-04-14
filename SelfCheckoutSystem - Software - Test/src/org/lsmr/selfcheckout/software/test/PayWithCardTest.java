@@ -374,7 +374,7 @@ public class PayWithCardTest {
 		CardIssuersDatabase.CREDIT_CARD_ISSUER.addCardData("300629", "Kylie Sicat", cal, "123", new BigDecimal("20000"));
 
 		control.insertCard(card, insertedPin);
-		assertEquals(control.getAmountPaid().toString(), "12");
+		assertEquals(control.getAmountPaid().toString(), "12.00");
 	}
 
 	/*Tests a card that has been blocked by the customer's bank */
@@ -501,7 +501,7 @@ public class PayWithCardTest {
 		CardIssuersDatabase.GIFT_CARD_ISSUER.addCardData("300629", "Kylie Sicat", cal, "123", new BigDecimal("200"));
 
 		control.insertCard(card, insertedPin);
-		assertEquals(control.getAmountPaid().toString(), "12");
+		assertEquals(control.getAmountPaid().toString(), "12.00");
 	}
 	
 	/*Tests a broken gift card */

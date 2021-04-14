@@ -278,7 +278,7 @@ public class PluProductTest {
 		control.addPLUItem(plc, 500);
 		control.placePluItemInBaggingArea(plc);
 		
-		BigDecimal expectedTotal = new BigDecimal("0.500");
+		BigDecimal expectedTotal = new BigDecimal("0.50");
 		BigDecimal returnedTotal = control.getTotal();
 	
 	
@@ -319,7 +319,7 @@ public class PluProductTest {
 		control.addPLUItem(plc, 5000);
 		control.placePluItemInBaggingArea(plc);
 		
-		BigDecimal expectedTotal = new BigDecimal("15.500");
+		BigDecimal expectedTotal = new BigDecimal("15.50");
 		BigDecimal returnedTotal = control.getTotal();
 	
 	
@@ -368,7 +368,7 @@ public class PluProductTest {
 		control.placePluItemInBaggingArea(plc2);
 
 		
-		BigDecimal expectedTotal = new BigDecimal("10.2500");
+		BigDecimal expectedTotal = new BigDecimal("10.25");
 		BigDecimal returnedTotal = control.getTotal();
 		
 		assertEquals(expectedTotal, returnedTotal);
