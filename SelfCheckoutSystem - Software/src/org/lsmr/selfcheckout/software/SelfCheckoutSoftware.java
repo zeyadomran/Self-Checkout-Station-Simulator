@@ -1516,8 +1516,9 @@ public class SelfCheckoutSoftware {
 	 * Sets boolean addingItems to 'true'- use case a
 	 * (Functions dealing with payment (payWithBanknote/payWithCoin) and lookUpProductCode set addingItems to false)
 	 */
-	public void returnToAddingItems() {
+	public boolean returnToAddingItems() {
 		this.addingItems = true;
+		return this.addingItems;
 	}
 
 	/**

@@ -74,6 +74,13 @@ public class FailToPlaceItemInBaggingAreaTest {
 		assertFalse(control.failToPlaceItem());
 		assertTrue(totalWeight == scs.baggingArea.getCurrentWeight());
 	}
+
+	@Test
+	public void returnToAddingItemsTest() {
+		SelfCheckoutStation scs = createStation();
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(scs);
+		assertTrue(control.returnToAddingItems());
+	}
 	
 	private SelfCheckoutStation createStation() {
 		Currency c = Currency.getInstance(Locale.CANADA);
