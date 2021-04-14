@@ -25,6 +25,7 @@ import org.junit.runners.Suite;
 	AttendantTest.class,
 	ShutDownStartUpTest.class,
 	AttendantLooksUpProductTest.class,
-	CheckWeightTest.class
+	CheckWeightTest.class,
+	GUITest.class
 })
 public class TestSuiteMain {}

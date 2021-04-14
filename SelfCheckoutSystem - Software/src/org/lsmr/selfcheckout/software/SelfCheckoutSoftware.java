@@ -1602,8 +1602,9 @@ public class SelfCheckoutSoftware {
 	/**
 	 * Disables the GUI.
 	 */
-	public void disableGUI() {
+	public boolean disableGUI() {
 		this.station.screen.setVisible(false);
+		return false;
 	}
 
 	/**
