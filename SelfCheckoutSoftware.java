@@ -330,7 +330,6 @@ public class SelfCheckoutSoftware {
 			for(int i = 0; i < this.scannedItems.size(); i++) {
 				if(this.scannedItems.get(i).getBarcode().equals(barcode)) {
 					item = this.scannedItems.get(i);
-					for(BarcodedItem j : this.baggingAreaItems) if(j == item) item = null;
 				}
 			}
 			if(item != null) {
@@ -360,7 +359,6 @@ public class SelfCheckoutSoftware {
 			for(int i = 0; i < this.pluItems.size(); i++) {
 				if(this.pluItems.get(i).getPLUCode().equals(plu)) {
 					item = this.pluItems.get(i);
-					for(PLUCodedItem j : this.baggingAreaPluItems) if(j == item) item = null;
 				}
 			}
 			if(item != null) {
@@ -1137,9 +1135,6 @@ public class SelfCheckoutSoftware {
 		if(this.currentAttendant != null) {
 			this.station.printer.addInk(amount);
 			this.inkLeft += amount;
-			if (this.inkLeft >= 100) {
-				this.lowInk = false;
-			}
 			return true;
 		}
 		return false;
@@ -1154,7 +1149,6 @@ public class SelfCheckoutSoftware {
 		if(this.currentAttendant != null) {
 			this.station.printer.addPaper(amount);
 			this.paperLeft += amount; 
-			checkLowPaper();
 			return true;
 		}
 		return false;

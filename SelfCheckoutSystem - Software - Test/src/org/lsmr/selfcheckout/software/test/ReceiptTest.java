@@ -20,6 +20,7 @@ import org.lsmr.selfcheckout.devices.SelfCheckoutStation;
 import org.lsmr.selfcheckout.devices.SimulationException;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
+import org.lsmr.selfcheckout.software.AttendantDatabase;
 import org.lsmr.selfcheckout.software.ReceiptPrinterListenerStub;
 import org.lsmr.selfcheckout.software.SelfCheckoutSoftware;
 
@@ -88,9 +89,13 @@ public class ReceiptTest
 	public void testPrintReceiptTestMixWithPLUAndScannedItems() throws DisabledException, OverloadException, EmptyException
 	{
 		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
+		control.registerAttendant("10000");
+		control.attendantLogin("10000");
 		Barcode b1 = new Barcode("12");
 		Barcode b2 = new Barcode("1234");
 		Barcode b3 = new Barcode("12566");
+		control.addPaperToPrinter(20);
 
 		BarcodedProduct bp1 = new BarcodedProduct(b1, "Cheese", new BigDecimal("12"));
 		BarcodedProduct bp2 = new BarcodedProduct(b2, "Milk", new BigDecimal("10"));
@@ -137,6 +142,7 @@ public class ReceiptTest
 		s.printer.cutPaper();
 		String empty= "";
 		assertEquals(s.printer.removeReceipt(), empty);
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
 		
 	}
 	

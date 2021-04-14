@@ -28,7 +28,7 @@ public class ReceiptPrinterManagementTest {
 		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
 		control.generateReceipt();
 		int inkLeft = control.getInkLeft();
-		assertEquals(inkLeft, 954);
+		assertEquals(inkLeft, 944);
 	}
 	
 	/**
@@ -50,15 +50,16 @@ public class ReceiptPrinterManagementTest {
 	 */
 	@Test
 	public void lowInkUpdate() {
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
 		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
 		control.registerAttendant("1234");
 		control.attendantLogin("1234");
 		assertFalse(control.getLowInk());
-		for(int i = 0; i < 20; i++) {
+		for(int i = 0; i < 17; i++) {
 			control.generateReceipt();
 			control.addPaperToPrinter(10);
 		}
 		assertTrue(control.getLowInk());
-		AttendantDatabase.REGISTERED_ATTENDANTS.remove("1234");
+		AttendantDatabase.REGISTERED_ATTENDANTS.clear();
 	}
 }
