@@ -176,6 +176,7 @@ public class SystemTest {
         control.generateReceipt();
         String receipt = control.getReceipt();
         assertTrue("Receipt was not generated!", receipt != null);
+        assertTrue(control.removePurchasedItems());
     }
 
     

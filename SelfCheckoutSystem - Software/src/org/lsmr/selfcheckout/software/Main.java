@@ -24,7 +24,7 @@ public class Main {
 		// Control
 		Currency c = Currency.getInstance(Locale.CANADA);
 		int[] noteDenom = { 5, 10, 20, 50, 100 };
-		BigDecimal[] coinDenom = { new BigDecimal("0.05"), new BigDecimal("0.1"), new BigDecimal("0.25"), new BigDecimal("0.5"), new BigDecimal("1"), new BigDecimal("2") };
+		BigDecimal[] coinDenom = { new BigDecimal("0.05"), new BigDecimal("0.1"), new BigDecimal("0.25"), new BigDecimal("1"), new BigDecimal("2") };
 		SelfCheckoutStation s = new SelfCheckoutStation(c, noteDenom, coinDenom, 10000, 1);
 		control = new SelfCheckoutSoftware(s);
 

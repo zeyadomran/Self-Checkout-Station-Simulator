@@ -1411,10 +1411,8 @@ public class SelfCheckoutSoftware {
 	 * @return True if all items were successfully removed from the bagging area.
 	 */
 	public boolean removePurchasedItems() {
-		for (BarcodedItem item : this.baggingAreaItems)
-			removeItemBaggingArea(item);
-		for (PLUCodedItem item : this.baggingAreaPluItems)
-			removePluItemBaggingArea(item);
+		this.baggingAreaItems.clear();
+		this.baggingAreaPluItems.clear();
 		return true;
 	}
 	
@@ -1516,8 +1514,9 @@ public class SelfCheckoutSoftware {
 	 * Sets boolean addingItems to 'true'- use case a
 	 * (Functions dealing with payment (payWithBanknote/payWithCoin) and lookUpProductCode set addingItems to false)
 	 */
-	public void returnToAddingItems() {
+	public boolean returnToAddingItems() {
 		this.addingItems = true;
+		return this.addingItems;
 	}
 
 	/**
