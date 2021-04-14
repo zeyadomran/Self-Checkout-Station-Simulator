@@ -130,9 +130,9 @@ public class SelfCheckoutSoftware {
 
 		//load receipt machine with paper and ink
 		this.station.printer.addInk(1000);
-		this.station.printer.addPaper(10);
+		this.station.printer.addPaper(20);
 		this.inkLeft = 1000;
-		this.paperLeft = 10;
+		this.paperLeft = 20;
 	}
 	
 	/**
