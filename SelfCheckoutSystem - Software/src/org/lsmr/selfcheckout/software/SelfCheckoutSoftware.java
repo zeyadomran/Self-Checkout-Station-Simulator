@@ -1411,10 +1411,8 @@ public class SelfCheckoutSoftware {
 	 * @return True if all items were successfully removed from the bagging area.
 	 */
 	public boolean removePurchasedItems() {
-		for (BarcodedItem item : this.baggingAreaItems)
-			removeItemBaggingArea(item);
-		for (PLUCodedItem item : this.baggingAreaPluItems)
-			removePluItemBaggingArea(item);
+		this.baggingAreaItems.clear();
+		this.baggingAreaPluItems.clear();
 		return true;
 	}
 	
