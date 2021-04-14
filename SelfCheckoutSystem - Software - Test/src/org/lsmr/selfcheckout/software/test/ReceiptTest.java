@@ -1,6 +1,7 @@
 package org.lsmr.selfcheckout.software.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
@@ -302,5 +303,44 @@ public class ReceiptTest
 		assertTrue(receipt != null);
 		assertTrue(nullReciept == null);
 		
+	}
+	/**
+	 * Tests getting paper left
+	 */
+	@Test
+	public void getPaperTest() {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		int paper = control.getPaperLeft();
+		assertEquals(paper, 20);
+	}
+	
+	/**
+	 * Tests getting low paper check
+	 */
+	@Test
+	public void getLowPaperTest() {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		boolean low = control.getLowPaper();
+		assertFalse(low);
+	}
+	
+	/**
+	 * Tests adding ink while attendant is null
+	 */
+	@Test
+	public void addInkAttendantNull() {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		boolean test = control.addInkToPrinter(20);
+		assertFalse(test);
+	}
+	
+	/**
+	 * Tests adding paper while attendant is null
+	 */
+	@Test
+	public void addPaperAttendantNull() {
+		SelfCheckoutSoftware control = new SelfCheckoutSoftware(s);
+		boolean test = control.addPaperToPrinter(20);
+		assertFalse(test);
 	}
 }
