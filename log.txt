@@ -1,149 +1,1106 @@
-fef5794 was zeyadomran, 2 minutes ago, message: Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
-164019b was zeyadomran, 2 minutes ago, message: Added ReadMe.txt
-1a24c46 was matthewJarrams, 4 minutes ago, message: Diagram explanation and cover page
-599fa24 was sharansarthak, 38 minutes ago, message: Create SENG 300 Iteration 3 Meeting #3.pdf
-1a72a0c was Zeyad Omran, 73 minutes ago, message: Merge pull request #14 from zeyadomran/Bug-Fix
-cd541b2 was zeyadomran, 79 minutes ago, message: Fixed GUI Bugs ✅
-b24b134 was Kylie Sicat, 3 hours ago, message: Updated GUI Structural Diagram.jpg
-9f08f81 was Kylie Sicat, 3 hours ago, message: Update GUI Structural Diagram.drawio
-1a05727 was DanySaaidBonilla, 12 hours ago, message: Update SelfCheckoutSoftware.java
-b40ed56 was DanySaaidBonilla, 12 hours ago, message: Add files via upload
-8a49d98 was DanySaaidBonilla, 12 hours ago, message: Bug fixs
-a9594fb was matthewJarrams, 20 hours ago, message: Text fixes
-61b32f8 was matthewJarrams, 20 hours ago, message: Fixed some errors
-44bfc22 was matthewJarrams, 20 hours ago, message: Added folders
-c2febdb was matthewJarrams, 20 hours ago, message: Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
-3e36afa was matthewJarrams, 20 hours ago, message: Possible script for presentation  (design)
-7c34a94 was Mackenzie Dalton, 20 hours ago, message: Add files via upload
-549e358 was matthewJarrams, 21 hours ago, message: Abstracted class diagram
-98e69d4 was sharansarthak, 22 hours ago, message: Added number of bags in receipt
-f6e4071 was zeyadomran, 22 hours ago, message: Added Start Screen for GUI ✅
-fa3ef8b was zeyadomran, 23 hours ago, message: Fixed Bagging Area Bug 🔨
-4b39c33 was zeyadomran, 23 hours ago, message: GUI Completed!!!!!!!!!!!!!! ✅
-4beee10 was zeyadomran, 24 hours ago, message: Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
-7e058a4 was zeyadomran, 24 hours ago, message: Organized Main Class 🗃
-166b6d9 was Mackenzie Dalton, 24 hours ago, message: Add files via upload
-5b2d547 was zeyadomran, 24 hours ago, message: Added Paying with various cards 💳
-f862ee8 was zeyadomran, 25 hours ago, message: Added Pay with Coin and Pay with Cash to GUI 💰
-bda073f was Nathan Lum, 26 hours ago, message: Added comments
-7d1dc64 was Nathan Lum, 26 hours ago, message: Added comments
-95e8889 was Nathan Lum, 26 hours ago, message: Added comments
-ad748dd was Nathan Lum, 27 hours ago, message: Added comments, fixed misspelling in file name
-45a882f was zeyadomran, 30 hours ago, message: Added checking weight before checking out ✅
-dd0bec1 was Mackenzie Dalton, 2 days ago, message: Add files via upload
-b80916b was Mackenzie Dalton, 2 days ago, message: Delete PlaceInBaggingArea-SequenceDiagram.pdf
-50b51a6 was Mackenzie Dalton, 2 days ago, message: Add files via upload
-5b45995 was matthewJarrams, 2 days ago, message: Added some Checkout GUI stuff
-520cf53 was matthewJarrams, 2 days ago, message: Fixed bug in GUI/Code
-31dc561 was Kylie Sicat, 2 days ago, message: Added Structural Diagrams
-9fc7d33 was Kylie Sicat, 2 days ago, message: Updated GUI Structural Diagram.drawio
-3d518dd was Kylie Sicat, 2 days ago, message: Added GUI Structural Diagram.drawio
-3314d10 was Kylie Sicat, 2 days ago, message: Updated SelfCheckoutSystem - Software - Structural.drawio
-133c7b4 was joseph-yclam, 2 days ago, message: Upload pay banknote and pay coin sequence diagrams
-ba447f5 was matthewJarrams, 2 days ago, message: Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
-79202fd was matthewJarrams, 2 days ago, message: Added currentMember use case
-eedb3c5 was mathew-luong, 2 days ago, message: Upload State and Sequence diagrams
-abf6c61 was zeyadomran, 2 days ago, message: Fixed Bug ⚡️
-4da174b was zeyadomran, 2 days ago, message: Added add ink/paper to printer func to gui ✅
-565a942 was zeyadomran, 2 days ago, message: Added remove product from purchases functionality ⚡️
-c8d99e2 was zeyadomran, 2 days ago, message: Added refill banknote/coin dispenser functionality to GUI ✅
-594807b was zeyadomran, 2 days ago, message: Added attendant approves weight discrepancy function to GUI ✅
-f862674 was zeyadomran, 2 days ago, message: Added shutdown/startup/block functionality to GUI 👨🏽‍🔧
-cf2a67c was zeyadomran, 2 days ago, message: Added attendant empties coin storage to GUI ✅
-5da85ce was zeyadomran, 2 days ago, message: Added attendant empties banknote storage to GUI ✅
-d2ee4c8 was zeyadomran, 2 days ago, message: Added attendant lookup functionality 🔍
-ed87141 was kirkelumir, 3 days ago, message: Merge pull request #13 from zeyadomran/testcasesbranch
-b89e47e was kirkelumir, 3 days ago, message: Added some tests to MemberTest.java
-02071a3 was sharansarthak, 3 days ago, message: Removed unused variable
-3b65a66 was zeyadomran, 3 days ago, message: Small Fixes 🔨
-2b6c553 was zeyadomran, 3 days ago, message: Added Attendant looks up product function 🔍
-e978d35 was zeyadomran, 3 days ago, message: Added Attendantt Login/Logout 👨🏽‍🔧
-dd8b646 was zeyadomran, 3 days ago, message: Added support for attendant panel and checkout panel ⚡️
-650c1ac was zeyadomran, 3 days ago, message: Added addOwnBag functionality 🛍
-0205a60 was zeyadomran, 3 days ago, message: Fixed Compatability between main and GUI branches 🚀
-682020c was Zeyad Omran, 3 days ago, message: Merge pull request #12 from zeyadomran/GUI
-12b6168 was zeyadomran, 3 days ago, message: Merge GUI to Main
-39a3df0 was zeyadomran, 3 days ago, message: .
-7568c88 was zeyadomran, 3 days ago, message: Added remove from bagging area functionality ✅
-1b621f8 was zeyadomran, 3 days ago, message: Added Lookup for BarcodedProducts & PLUCodedProducts 🔍
-815bfcb was zeyadomran, 3 days ago, message: Added Swipe Member Card functionality 💳
-25a091e was sharansarthak, 4 days ago, message: checkLowPaper Function created
-25d92b5 was sharansarthak, 4 days ago, message: Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
-47a78fe was sharansarthak, 4 days ago, message: Create SENG 300 Iteration 3 Meeting #2.pdf
-fb58d23 was Mackenzie Dalton, 4 days ago, message: Merge pull request #11 from zeyadomran/ReturnToAddItems
-fb720cd was Mackenzie Dalton, 4 days ago, message: Add files via upload
-9f35612 was sharansarthak, 4 days ago, message: Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
-39780a9 was sharansarthak, 4 days ago, message: LowPaper use case
-9a44a39 was matthewJarrams, 4 days ago, message: Ensured 100% coverage for plu item tests
-0675779 was Mackenzie Dalton, 4 days ago, message: Merge pull request #10 from zeyadomran/CheckWeight
-e65f7c0 was Mackenzie Dalton, 4 days ago, message: Add files via upload
-42190d6 was sharansarthak, 4 days ago, message: Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
-cb97adf was matthewJarrams, 4 days ago, message: State diagrams
-8914d65 was sharansarthak, 4 days ago, message: Create SENG 300 Iteration 3 Meeting #1.pdf
-832d6ec was zeyadomran, 4 days ago, message: UX Improvement ✍🏽
-e990941 was zeyadomran, 4 days ago, message: Added Bagging Are Functionality 💰
-cf25b64 was zeyadomran, 4 days ago, message: Add Manual Member Log In ✍🏽
-e2042a7 was zeyadomran, 4 days ago, message: Added Create Membership Functionality 🚀
-ea57e55 was matthewJarrams, 4 days ago, message: Added highLevel State Diagram
-48b1853 was zeyadomran, 4 days ago, message: Check Description ⬇️
-978e611 was zeyadomran, 4 days ago, message: Fixing Bugs 🔨
-695e4a1 was sharansarthak, 4 days ago, message: Added a few test cases
-5eb7c49 was zeyadomran, 4 days ago, message: Remove Item Functionality Added! ✅
-108079a was zeyadomran, 4 days ago, message: Added Scan Item Functionality ⚡️
-351dba0 was matthewJarrams, 5 days ago, message: Added comments and tests for attendant looks up product
-334f58b was matthewJarrams, 5 days ago, message: Added Attendant Looks up product use case and tests
-593acbc was kirkelumir, 5 days ago, message: Merge pull request #8 from zeyadomran/branch3
-1d131c0 was kirkelumir, 5 days ago, message: Added use cases 5, 7, and 8
-41bc788 was kirkelumir, 5 days ago, message: Delete SelfCheckoutSoftware.java
-ba604bd was kirkelumir, 5 days ago, message: Rename SelfCheckoutSoftware.java to SelfCheckoutSystem - Software/src/org/lsmr/selfcheckout/SelfCheckoutSoftware.java
-de1c45f was kirkelumir, 5 days ago, message: Added use cases 5, 7, and 8
-68c49bf was matthewJarrams, 5 days ago, message: Added some more tests to use cases I did
-de0c57a was matthewJarrams, 5 days ago, message: Added tests for attendant and updated test suite
-28aabcf was matthewJarrams, 5 days ago, message: Added comments
-10221a0 was DanySaaidBonilla, 6 days ago, message: Added More Tests
-b3ec34f was DanySaaidBonilla, 6 days ago, message: Merge pull request #7 from zeyadomran/Adding-Tests-and-Use-Cases
-eddbedf was DanySaaidBonilla, 6 days ago, message: Fixed a bug
-7786d3d was DanySaaidBonilla, 6 days ago, message: Added some documentation fixes
-f0fc23b was DanySaaidBonilla, 6 days ago, message: Added Tests and Use Case
-d1ba949 was matthewJarrams, 6 days ago, message: added changes to weight discrepancy
-a8bf4fa was DanySaaidBonilla, 6 days ago, message: Merge pull request #5 from zeyadomran/DanySaaidBonilla-ApprovesWeightDiff
-2c3702d was DanySaaidBonilla, 6 days ago, message: Added attendant approves weight discrepancy
-2e55626 was zeyadomran, 6 days ago, message: Added Attendant Panel ✅
-2a83049 was zeyadomran, 7 days ago, message: ..
-b3a067b was zeyadomran, 7 days ago, message: File Management 🗃
-8292d8f was zeyadomran, 7 days ago, message: Updated to Hardware v3.1 ⚡️
-3f9334a was zeyadomran, 7 days ago, message: Updated to Hardware v3.1 ⚡️
-aa34682 was sharansarthak, 7 days ago, message: Added TouchScreenTest.java
-9d24770 was matthewJarrams, 7 days ago, message: All previous tests and the new dispenser stuff passes
-75a3dfe was matthewJarrams, 7 days ago, message: Attendant Logout added
-f379f02 was g-heemeryck, 7 days ago, message: Merge pull request #4 from zeyadomran/storagedispenserbranch
-8e5683a was g-heemeryck, 7 days ago, message: Rename SelfCheckoutSystem - Software - Test/LoadCoinDispensersTest.java to SelfCheckoutSystem - Software - Test/src/org/lsmr/selfcheckout/software/test/LoadCoinDispensersTest.java
-3128877 was g-heemeryck, 7 days ago, message: Rename SelfCheckoutSystem - Software - Test/LoadBanknoteDispensersTest.java to SelfCheckoutSystem - Software - Test/src/org/lsmr/selfcheckout/software/test/LoadBanknoteDispensersTest.java
-0c26857 was g-heemeryck, 7 days ago, message: Rename SelfCheckoutSystem - Software - Test/EmptyStorageTest.java to SelfCheckoutSystem - Software - Test/src/org/lsmr/selfcheckout/software/test/EmptyStorageTest.java
-df3b594 was g-heemeryck, 7 days ago, message: Update CoinDispenserListenerStub.java
-369218d was g-heemeryck, 7 days ago, message: Update CoinStorageUnitListenerStub.java
-421b90a was g-heemeryck, 7 days ago, message: Update SelfCheckoutSoftware.java
-f8e9fc6 was g-heemeryck, 7 days ago, message: Add files via upload
-fea18bc was zeyadomran, 7 days ago, message: Finished Main GUI screen design ✅
-ab09c2b was Kylie Sicat, 7 days ago, message: Updated SelfCheckoutSystem - Software - Structural.drawio
-8d6e008 was zeyadomran, 7 days ago, message: Added First GUI Screen
-1be4e30 was Kylie Sicat, 8 days ago, message: Updated SelfCheckoutSystem - Software - Structural.drawio
-56f0235 was Kylie Sicat, 8 days ago, message: Updated SelfCheckoutSystem - Software - Structural.drawio
-5607042 was sharansarthak, 8 days ago, message: Paper or Ink can only be added to the printer if attendant is logged in
-c5ee8eb was DanySaaidBonilla, 9 days ago, message: Merge pull request #3 from zeyadomran/DanySaaidBonilla-patch-1
-07215df was DanySaaidBonilla, 9 days ago, message: Added some use cases
-38f43dc was matthewJarrams, 9 days ago, message: Added some tests for attendant
-4d15044 was matthewJarrams, 9 days ago, message: Merge pull request #2 from zeyadomran/Attendant
-1b8d856 was Kylie Sicat, 9 days ago, message: added gift card tests &minor change with tapCard()
-d89dd6b was matthewJarrams, 9 days ago, message: Separated Attendant class from Software
-a7ebdcd was matthewJarrams, 9 days ago, message: manual fix of previous commit
-9e656f2 was matthewJarrams, 9 days ago, message: Fixed an issue with the last commit
-c35fbeb was Kylie Sicat, 9 days ago, message: Creating SelfCheckoutSystem - Software - Structural.drawio
-377e25d was Kylie Sicat, 9 days ago, message: Added gift card issuer in database and modified the card methods in main class
-33b22d9 was matthewJarrams, 10 days ago, message: Merge pull request #1 from zeyadomran/ShutDownStation
-603d7ae was matthewJarrams, 10 days ago, message: Some initial shutdown and start up station implementaion
-86c12d2 was matthewJarrams, 10 days ago, message: Manual Merge add of Dany's branch
-9919520 was matthewJarrams, 10 days ago, message: Plu code for Product use case and look up product use case
-6be701e was matthewJarrams, 11 days ago, message: No changes
-0e2f1ca was zeyadomran, 11 days ago, message: Initial Commit 🚀
-62b7faa was zeyadomran, 11 days ago, message: Initial Commit 🚀
+commit a72a6652cb616f6e2e4835c9fc7dad7c5a9ebe8c
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Wed Apr 14 17:17:37 2021 -0600
+
+    Update Combined diagrams.pdf
+
+commit ef42d042c42cbfaa6a6cdb6237f6c6cc992c6c0e
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Wed Apr 14 17:10:18 2021 -0600
+
+    Update Combined diagrams.pdf
+
+commit e3a99663ed849211f2a37aff147eea98a1b12626
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Wed Apr 14 17:04:44 2021 -0600
+
+    Update Combined diagrams.pdf
+
+commit 9aa8b6e1ee15e8361bc5fb129c1d0e229b879c0c
+Author: joseph-yclam <76238646+joseph-yclam@users.noreply.github.com>
+Date:   Wed Apr 14 17:02:32 2021 -0600
+
+    paywithcoin
+
+commit 6f9f1b769abe894cb4062d6bb4733a659f2d0d67
+Author: joseph-yclam <76238646+joseph-yclam@users.noreply.github.com>
+Date:   Wed Apr 14 17:01:56 2021 -0600
+
+    Delete PayWithCoinSequence.pdf
+
+commit 5cb16c2c73ef5957b678f4225f4eea7decb4633e
+Merge: 6a42ab9 a5c6917
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Wed Apr 14 17:01:05 2021 -0600
+
+    Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+
+commit a5c6917cc70470b4640b7c837af715cf7cb7ba36
+Author: kirkelumir <56174765+kirkelumir@users.noreply.github.com>
+Date:   Wed Apr 14 16:58:36 2021 -0600
+
+    Update TestSuiteMain.java
+
+commit 6a42ab985360956e24c38d803e39c41e49c5a1fd
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Wed Apr 14 16:58:13 2021 -0600
+
+    Combined pdf files
+
+commit f49abb6bb5cba6501f3f87f0f38e36d2721dcb18
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Thu Apr 15 02:55:50 2021 +0400
+
+    Coverage Fix 🔨
+
+commit 8c00076ee60e9f3f6f92a3136241d40b53be2547
+Merge: a7bd052 e4cda3c
+Author: kirkelumir <56174765+kirkelumir@users.noreply.github.com>
+Date:   Wed Apr 14 16:54:44 2021 -0600
+
+    Merge pull request #15 from zeyadomran/removepurchaseditemstest
+    
+    Added tests for removePurchasedItems() method.
+
+commit e4cda3cd1343dfcf98a20b12f5fbba3ccd8e0f1f
+Author: kirkelumir <56174765+kirkelumir@users.noreply.github.com>
+Date:   Wed Apr 14 16:54:23 2021 -0600
+
+    Added tests for removePurchasedItems() method.
+
+commit a7bd0523720c19adace82629c98a90123937195e
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Thu Apr 15 02:50:47 2021 +0400
+
+    Added GUI Test 🚀
+
+commit cc0dcdf48d060c175cf70f4fd19339c6ae9ad473
+Merge: ce3f3bd 59b461e
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Wed Apr 14 16:48:27 2021 -0600
+
+    Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+
+commit ce3f3bd333af138d0ac102e9312dde4722873589
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Wed Apr 14 16:47:31 2021 -0600
+
+    Create SENG 300 Iteration 3 Meeting #4.pdf
+
+commit 59b461ee4c44b386b8814f8c29239653ac718506
+Author: DanySaaidBonilla <47337034+DanySaaidBonilla@users.noreply.github.com>
+Date:   Wed Apr 14 16:46:08 2021 -0600
+
+    Added Tests
+
+commit 0a08b5d2ce58cdae4f68ab7e4971f87b5b18cad9
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Thu Apr 15 02:43:08 2021 +0400
+
+    Fixed bug
+
+commit 3df7c8c4a419cc30ba7114d4266b58c853b6962b
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Thu Apr 15 02:38:48 2021 +0400
+
+    Added removePurchasedItems Test
+
+commit 57cb86a824b16e7cdd167bef870d89cefb752e4c
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Thu Apr 15 02:36:45 2021 +0400
+
+    added returnToAddingItems test
+
+commit d592da57ba3127ba3da0d047362b3ef948a9faa6
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Thu Apr 15 02:28:40 2021 +0400
+
+    Added Log File
+
+commit fef5794a5ce35a01b8a6f4eb61cc471d18f4744e
+Merge: 164019b 1a24c46
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Thu Apr 15 02:26:18 2021 +0400
+
+    Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+
+commit 164019b0b12aa74e1f549bb9727e2dc78cdad593
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Thu Apr 15 02:26:16 2021 +0400
+
+    Added ReadMe.txt
+
+commit 1a24c46997a97cdf29520e3bfb86506760439391
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Wed Apr 14 16:23:54 2021 -0600
+
+    Diagram explanation and cover page
+
+commit 599fa24136a7c0b38e9802aa81bbb6012e99d126
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Wed Apr 14 15:50:00 2021 -0600
+
+    Create SENG 300 Iteration 3 Meeting #3.pdf
+
+commit 1a72a0c0c98201bdba4ab0ac18a13c144a7489b3
+Merge: cd541b2 1a05727
+Author: Zeyad Omran <ziomran@gmail.com>
+Date:   Thu Apr 15 01:15:34 2021 +0400
+
+    Merge pull request #14 from zeyadomran/Bug-Fix
+    
+    Bug fix
+
+commit cd541b26afa7c390d09ead35830dd5f2a930c0e9
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Thu Apr 15 01:08:57 2021 +0400
+
+    Fixed GUI Bugs ✅
+
+commit b24b134feeefbef99c718e2b88196d3c9f1da87d
+Author: Kylie Sicat <47333417+kg-sicat@users.noreply.github.com>
+Date:   Wed Apr 14 13:06:51 2021 -0600
+
+    Updated GUI Structural Diagram.jpg
+
+commit 9f08f812eaf709d45a880678b252bd040701efbd
+Author: Kylie Sicat <47333417+kg-sicat@users.noreply.github.com>
+Date:   Wed Apr 14 13:06:06 2021 -0600
+
+    Update GUI Structural Diagram.drawio
+
+commit 1a05727de6bdb339ca5de485a218513ed3ec4b8f
+Author: DanySaaidBonilla <47337034+DanySaaidBonilla@users.noreply.github.com>
+Date:   Wed Apr 14 04:43:46 2021 -0600
+
+    Update SelfCheckoutSoftware.java
+
+commit b40ed5694aaf4549331678768b5e15d48d1c5a0a
+Author: DanySaaidBonilla <47337034+DanySaaidBonilla@users.noreply.github.com>
+Date:   Wed Apr 14 04:37:36 2021 -0600
+
+    Add files via upload
+
+commit 8a49d98b271c1763535f0a89ddac03d3599e78aa
+Author: DanySaaidBonilla <47337034+DanySaaidBonilla@users.noreply.github.com>
+Date:   Wed Apr 14 04:35:59 2021 -0600
+
+    Bug fixs
+
+commit a9594fba381a4768895e75180609653d34b2a9c7
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Tue Apr 13 20:49:38 2021 -0600
+
+    Text fixes
+
+commit 61b32f8dd052cddd103df1756980dc9cb6b2a270
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Tue Apr 13 20:45:31 2021 -0600
+
+    Fixed some errors
+
+commit 44bfc2277b9c3cc6da0411bcc6f156a9155ae50f
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Tue Apr 13 20:37:36 2021 -0600
+
+    Added folders
+
+commit c2febdb09421e3fe4b342f6c74c1b562ed2e1a4d
+Merge: 3e36afa 7c34a94
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Tue Apr 13 20:35:21 2021 -0600
+
+    Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+
+commit 3e36afa02df14e1e6bb56f83dfeff4b83000e3b7
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Tue Apr 13 20:35:11 2021 -0600
+
+    Possible script for presentation  (design)
+
+commit 7c34a941cc0b18b6325109c08585001f82300f5b
+Author: Mackenzie Dalton <44074517+sonofabird@users.noreply.github.com>
+Date:   Tue Apr 13 20:20:43 2021 -0600
+
+    Add files via upload
+    
+    Added test cases for CheckWeight()
+
+commit 549e358ef3256bfe221b0b7b3dea5c412dba2179
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Tue Apr 13 19:11:23 2021 -0600
+
+    Abstracted class diagram
+
+commit 98e69d467d7a140805d6bde795f29be1d24c25d2
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Tue Apr 13 18:23:11 2021 -0600
+
+    Added number of bags in receipt
+
+commit f6e4071974313124686f4f10b7b0b895fad3ed5c
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Wed Apr 14 04:06:53 2021 +0400
+
+    Added Start Screen for GUI ✅
+
+commit fa3ef8bb7fbfc0f34c871200a59914e86ebe0edf
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Wed Apr 14 03:53:16 2021 +0400
+
+    Fixed Bagging Area Bug 🔨
+
+commit 4b39c33459c78a62c8e1d6e60be0cd0538e6ac1a
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Wed Apr 14 03:05:17 2021 +0400
+
+    GUI Completed!!!!!!!!!!!!!! ✅
+
+commit 4beee1017f7dc87320b2a912940949ad4a615929
+Merge: 7e058a4 166b6d9
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Wed Apr 14 02:58:32 2021 +0400
+
+    Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+
+commit 7e058a469f0b24f26468d103c9d3258d2f96ad3c
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Wed Apr 14 02:58:24 2021 +0400
+
+    Organized Main Class 🗃
+
+commit 166b6d9435282b60ac70e2110bc54cf97bb42339
+Author: Mackenzie Dalton <44074517+sonofabird@users.noreply.github.com>
+Date:   Tue Apr 13 16:53:16 2021 -0600
+
+    Add files via upload
+    
+    State diagram for the placing items in bagging area
+
+commit 5b2d547668715c70fad1e63a82018f28fcee1ea5
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Wed Apr 14 02:36:08 2021 +0400
+
+    Added Paying with various cards 💳
+
+commit f862ee88cdc9e9fef85686cc31b0c147add92c64
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Wed Apr 14 01:40:39 2021 +0400
+
+    Added Pay with Coin and Pay with Cash to GUI 💰
+
+commit bda073f7870ed49687e49b91b6c79d602baf2d7a
+Author: Nathan Lum <nathan.lum@ucalgary.ca>
+Date:   Tue Apr 13 14:46:07 2021 -0600
+
+    Added comments
+
+commit 7d1dc645b62cd4ea4ad737350ce9137bced92026
+Author: Nathan Lum <nathan.lum@ucalgary.ca>
+Date:   Tue Apr 13 14:19:39 2021 -0600
+
+    Added comments
+
+commit 95e8889e9ba0562d8305d921991cf7505d7f2c21
+Author: Nathan Lum <nathan.lum@ucalgary.ca>
+Date:   Tue Apr 13 14:05:30 2021 -0600
+
+    Added comments
+
+commit ad748dd03c15bfe4a32e5d47c54451763a7b6937
+Author: Nathan Lum <nathan.lum@ucalgary.ca>
+Date:   Tue Apr 13 13:55:29 2021 -0600
+
+    Added comments, fixed misspelling in file name
+
+commit 45a882fa18867d1e8c88b21b3c3438096849f9e7
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Tue Apr 13 20:32:32 2021 +0400
+
+    Added checking weight before checking out ✅
+
+commit dd0bec18915626383f6aad76922ba18f3feefc4c
+Author: Mackenzie Dalton <44074517+sonofabird@users.noreply.github.com>
+Date:   Tue Apr 13 00:39:58 2021 -0600
+
+    Add files via upload
+    
+    Sequence diagram for placing an item in bagging area (reuploaded since the first version was cropped)
+
+commit b80916b53739f0f916a9ee14b069d48ae4fc0774
+Author: Mackenzie Dalton <44074517+sonofabird@users.noreply.github.com>
+Date:   Tue Apr 13 00:38:36 2021 -0600
+
+    Delete PlaceInBaggingArea-SequenceDiagram.pdf
+
+commit 50b51a676eb9ebb245bcfbecf9f324446bd8b49d
+Author: Mackenzie Dalton <44074517+sonofabird@users.noreply.github.com>
+Date:   Tue Apr 13 00:35:38 2021 -0600
+
+    Add files via upload
+    
+    Added sequence diagram for adding items to bagging area.  (Diagram focuses on barcoded items specifically, but the sequence is almost identical for PLU items)
+
+commit 5b4599538331359f9032e2ca9aa4d0789146839d
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Mon Apr 12 20:58:58 2021 -0600
+
+    Added some Checkout GUI stuff
+    
+    I added some of the coin paying functionality.
+
+commit 520cf533ebc8aa1d4f4f16b20db834c4178e1c53
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Mon Apr 12 19:28:16 2021 -0600
+
+    Fixed bug in GUI/Code
+    
+    Total was not subtracting correctly
+
+commit 31dc561d48a1a9e924ea5374a4c6557d8809c703
+Author: Kylie Sicat <47333417+kg-sicat@users.noreply.github.com>
+Date:   Mon Apr 12 18:21:22 2021 -0600
+
+    Added Structural Diagrams
+    
+    I added as both pdf and jpeg because when I create a pdf it messes it up because its very big. Also wrote up the diagram explanations in the google doc :)
+
+commit 9fc7d33673eb04c62d6fbb3f41180e68e93bacc7
+Author: Kylie Sicat <47333417+kg-sicat@users.noreply.github.com>
+Date:   Mon Apr 12 18:09:05 2021 -0600
+
+    Updated GUI Structural Diagram.drawio
+
+commit 3d518dda909ebd3483f24eae35ae8d291ae78c38
+Author: Kylie Sicat <47333417+kg-sicat@users.noreply.github.com>
+Date:   Mon Apr 12 18:08:47 2021 -0600
+
+    Added GUI Structural Diagram.drawio
+
+commit 3314d10ea84c8b1e40a98e6ff20bda04f67a81ab
+Author: Kylie Sicat <47333417+kg-sicat@users.noreply.github.com>
+Date:   Mon Apr 12 17:58:19 2021 -0600
+
+    Updated SelfCheckoutSystem - Software - Structural.drawio
+
+commit 133c7b464b1c466635311803e53a5d674fc507a6
+Author: joseph-yclam <76238646+joseph-yclam@users.noreply.github.com>
+Date:   Mon Apr 12 14:19:45 2021 -0600
+
+    Upload pay banknote and pay coin sequence diagrams
+
+commit ba447f53e9ab5fa75ef4076f60410c84bd3479a5
+Merge: 79202fd eedb3c5
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Mon Apr 12 14:13:37 2021 -0600
+
+    Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+
+commit 79202fd6653dc80a01b10005641f01a159f54eb9
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Mon Apr 12 14:12:54 2021 -0600
+
+    Added currentMember use case
+
+commit eedb3c5ced63ad2cf9b81b466887d5b3356f49a0
+Author: mathew-luong <47367640+mathew-luong@users.noreply.github.com>
+Date:   Mon Apr 12 14:02:36 2021 -0600
+
+    Upload State and Sequence diagrams
+
+commit abf6c611ea7e034ae4b80e8249876a106763302c
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Mon Apr 12 23:38:00 2021 +0400
+
+    Fixed Bug ⚡️
+
+commit 4da174b673e469257a563235491331467db496d3
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Mon Apr 12 23:15:43 2021 +0400
+
+    Added add ink/paper to printer func to gui ✅
+
+commit 565a9427fe1d6f10b64daa786a0f18417b5790b6
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Mon Apr 12 23:10:13 2021 +0400
+
+    Added remove product from purchases functionality ⚡️
+
+commit c8d99e23e8a8d77241e6e715353897749b607651
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Mon Apr 12 23:03:59 2021 +0400
+
+    Added refill banknote/coin dispenser functionality to GUI ✅
+
+commit 594807b6da2e5c161554147de447d10b58a8b1c0
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Mon Apr 12 22:36:03 2021 +0400
+
+    Added attendant approves weight discrepancy function to GUI ✅
+
+commit f8626745cfa05779eaca4b710fd59352de402a13
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Mon Apr 12 22:14:11 2021 +0400
+
+    Added shutdown/startup/block functionality to GUI 👨🏽‍🔧
+
+commit cf2a67c8f75911c575f4b472ee006e64b5a17e88
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Mon Apr 12 21:55:36 2021 +0400
+
+    Added attendant empties coin storage to GUI ✅
+
+commit 5da85ceab2573c06dd37079e6de6124107c15547
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Mon Apr 12 21:54:36 2021 +0400
+
+    Added attendant empties banknote storage to GUI ✅
+
+commit d2ee4c8d9b1df1b031568451e1a22d31bd9c6f66
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Mon Apr 12 21:49:42 2021 +0400
+
+    Added attendant lookup functionality 🔍
+
+commit ed87141df00dd7700e99a1f6eb6456b53fc16724
+Merge: 02071a3 b89e47e
+Author: kirkelumir <56174765+kirkelumir@users.noreply.github.com>
+Date:   Sun Apr 11 21:58:33 2021 -0600
+
+    Merge pull request #13 from zeyadomran/testcasesbranch
+    
+    Added some tests to MemberTest.java
+
+commit b89e47eab8f5916e9e040ae267eee919fd7e9351
+Author: kirkelumir <56174765+kirkelumir@users.noreply.github.com>
+Date:   Sun Apr 11 21:58:08 2021 -0600
+
+    Added some tests to MemberTest.java
+
+commit 02071a3746dc3837a8774b14a0e8bd746479fae9
+Author: sharansarthak <59523742+sharansarthak@users.noreply.github.com>
+Date:   Sun Apr 11 16:17:45 2021 -0600
+
+    Removed unused variable
+
+commit 3b65a665afbe35b10d1b431083e4419ca3812b0c
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Mon Apr 12 01:37:54 2021 +0400
+
+    Small Fixes 🔨
+
+commit 2b6c553f7930e2de49aa523cee5402181defe337
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Mon Apr 12 00:43:30 2021 +0400
+
+    Added Attendant looks up product function 🔍
+
+commit e978d3558c7a51e0095a7df4cfe71780ed0ac7a9
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Mon Apr 12 00:28:11 2021 +0400
+
+    Added Attendantt Login/Logout 👨🏽‍🔧
+
+commit dd8b6462231a2bcf9974ebf43701414361c3d0b9
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sun Apr 11 21:59:05 2021 +0400
+
+    Added support for attendant panel and checkout panel ⚡️
+
+commit 650c1acaf5d9058bfceebafa3ec71e34e6bf2955
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sun Apr 11 21:38:03 2021 +0400
+
+    Added addOwnBag functionality 🛍
+
+commit 0205a60f82056df8ec583ed6ba657ed81a4efc3a
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sun Apr 11 21:30:56 2021 +0400
+
+    Fixed Compatability between main and GUI branches 🚀
+
+commit 682020c8e07fc9c0ff2203f097f625388e070434
+Merge: 25a091e 12b6168
+Author: Zeyad Omran <ziomran@gmail.com>
+Date:   Sun Apr 11 21:23:15 2021 +0400
+
+    Merge pull request #12 from zeyadomran/GUI
+    
+    GUI
+
+commit 12b6168d064e32c9c1a034f5dc3538e387e21018
+Merge: 39a3df0 25a091e
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sun Apr 11 21:22:59 2021 +0400
+
+    Merge GUI to Main
+
+commit 39a3df04f35042bdd343897e821aaa1360bf6ad5
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sun Apr 11 21:20:23 2021 +0400
+
+    .
+
+commit 7568c88540d67b23cb2665b553e5ab47ebb117d8
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sun Apr 11 21:03:47 2021 +0400
+
+    Added remove from bagging area functionality ✅
+
+commit 1b621f8b4c743cb89a96a8f2c306519ea637a448
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sun Apr 11 20:44:35 2021 +0400
+
+    Added Lookup for BarcodedProducts & PLUCodedProducts 🔍
+
+commit 815bfcb0818dd6c5d9815b9b6915d001435ad0b5
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sun Apr 11 20:06:25 2021 +0400
+
+    Added Swipe Member Card functionality 💳
+
+commit 25a091e86e9e200a0265a99ade195fe4f94a4c52
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Sun Apr 11 03:58:15 2021 -0600
+
+    checkLowPaper Function created
+
+commit 25d92b5179689058f24676d3771d549ad8193157
+Merge: 47a78fe fb58d23
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Sun Apr 11 03:36:26 2021 -0600
+
+    Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+
+commit 47a78fe572abc246dc77d435ba8f10b03d27c5b9
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Sun Apr 11 03:21:10 2021 -0600
+
+    Create SENG 300 Iteration 3 Meeting #2.pdf
+
+commit fb58d2354b31571a30895c8560ed16cf1b02918d
+Merge: 9f35612 fb720cd
+Author: Mackenzie Dalton <44074517+sonofabird@users.noreply.github.com>
+Date:   Sun Apr 11 00:05:15 2021 -0600
+
+    Merge pull request #11 from zeyadomran/ReturnToAddItems
+    
+    Add files via upload
+
+commit fb720cd72c248000bd8639d2b7d78768b6b78095
+Author: Mackenzie Dalton <44074517+sonofabird@users.noreply.github.com>
+Date:   Sun Apr 11 00:04:46 2021 -0600
+
+    Add files via upload
+    
+    Added ReturnToAddingItems use case (case a)- added boolean to local variables to indicate whether customer is currently adding items or not.  Included lines in payWithBanknote, payWithCoin and lookUpProductCode which sets this boolean to false, and returnToAddingItems changes it back to true.
+    
+    (Feel free to change this if needed for the GUI)
+
+commit 9f356123185f952b92f29fdb8cee0e6236649c46
+Merge: 39780a9 9a44a39
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Sat Apr 10 18:37:03 2021 -0600
+
+    Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+
+commit 39780a92e0a7bb23899319e700baed4627f24868
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Sat Apr 10 18:32:55 2021 -0600
+
+    LowPaper use case
+
+commit 9a44a3934dda5f968ede97acaf2bd6e3f5c2aa73
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Sat Apr 10 17:54:05 2021 -0600
+
+    Ensured 100% coverage for plu item tests
+
+commit 0675779426ed57474e7f7ef0d464a31750a955c2
+Merge: 42190d6 e65f7c0
+Author: Mackenzie Dalton <44074517+sonofabird@users.noreply.github.com>
+Date:   Sat Apr 10 16:10:20 2021 -0600
+
+    Merge pull request #10 from zeyadomran/CheckWeight
+    
+    Add files via upload
+
+commit e65f7c0f2af7caaefc39d8c961896cfb2a02a5d1
+Author: Mackenzie Dalton <44074517+sonofabird@users.noreply.github.com>
+Date:   Sat Apr 10 16:08:56 2021 -0600
+
+    Add files via upload
+    
+    Added use case i- checks if the weight in the bagging area complies with expected weight
+
+commit 42190d6fde8964152ecd1069e9d2e24cef911f1c
+Merge: 8914d65 cb97adf
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Sat Apr 10 16:08:16 2021 -0600
+
+    Merge branch 'main' of https://github.com/zeyadomran/Self-Checkout-Station-Simulator into main
+
+commit cb97adfe17bad8a0f5d5d50d28a6d5949df73eed
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Sat Apr 10 16:05:38 2021 -0600
+
+    State diagrams
+
+commit 8914d655d032fd72734c08cbfa4ae80d8df26d5d
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Sat Apr 10 16:04:35 2021 -0600
+
+    Create SENG 300 Iteration 3 Meeting #1.pdf
+
+commit 832d6ec4764513d9e63b665f2eb0aac09544ba64
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sun Apr 11 01:37:31 2021 +0400
+
+    UX Improvement ✍🏽
+
+commit e990941bae6a66114d4f6f27caa21926a9405f71
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sun Apr 11 01:29:56 2021 +0400
+
+    Added Bagging Are Functionality 💰
+
+commit cf25b6482c903d8f6c10f5bc40354747807c45d4
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sun Apr 11 01:16:18 2021 +0400
+
+    Add Manual Member Log In ✍🏽
+
+commit e2042a74c6a0dc539563aa3db02f64775895ce14
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sun Apr 11 01:09:40 2021 +0400
+
+    Added Create Membership Functionality 🚀
+
+commit ea57e55438281d648682fa20765d83559c75a850
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Sat Apr 10 14:58:07 2021 -0600
+
+    Added highLevel State Diagram
+
+commit 48b1853f99447aff44211c2cf2ae7c8ed73b99e9
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sun Apr 11 00:01:38 2021 +0400
+
+    Check Description ⬇️
+    
+    Added scan and remove item functionality.
+    
+    Added PLU item functionality.
+    
+    Loaded Table and TextArea Dynamically.
+
+commit 978e611e841e006a182ed084fd851e22609c61f9
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sat Apr 10 22:59:10 2021 +0400
+
+    Fixing Bugs 🔨
+
+commit 695e4a11a2c3b55d8b7a41a971003bb6ccfcf12e
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Sat Apr 10 12:51:29 2021 -0600
+
+    Added a few test cases
+
+commit 5eb7c49ac587fc347625e4e1169745a44468ee8e
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sat Apr 10 21:30:57 2021 +0400
+
+    Remove Item Functionality Added! ✅
+
+commit 108079a280b33366e4a3dcc09b803ffb104f011b
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sat Apr 10 21:18:23 2021 +0400
+
+    Added Scan Item Functionality ⚡️
+
+commit 351dba0a6f961231bc709f2565caebb017654548
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Fri Apr 9 17:39:28 2021 -0600
+
+    Added comments and tests for attendant looks up product
+
+commit 334f58b45da93d5e06a0e620dbc309d8fa33a98b
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Fri Apr 9 17:09:36 2021 -0600
+
+    Added Attendant Looks up product use case and tests
+
+commit 593acbcf834cce8ab6e7475561b839e3b2fc76f2
+Merge: 68c49bf 1d131c0
+Author: kirkelumir <56174765+kirkelumir@users.noreply.github.com>
+Date:   Fri Apr 9 16:53:18 2021 -0600
+
+    Merge pull request #8 from zeyadomran/branch3
+    
+    Added use cases 5, 7, and 8
+
+commit 1d131c094e30e6003eebabd829f0e838487d15b8
+Author: kirkelumir <56174765+kirkelumir@users.noreply.github.com>
+Date:   Fri Apr 9 16:50:44 2021 -0600
+
+    Added use cases 5, 7, and 8
+
+commit 41bc78853dca4b28181b6d9f983d5db72e185ed8
+Author: kirkelumir <56174765+kirkelumir@users.noreply.github.com>
+Date:   Fri Apr 9 16:50:23 2021 -0600
+
+    Delete SelfCheckoutSoftware.java
+
+commit ba604bd7ef507874b89e20c17bc9abf180488d6e
+Author: kirkelumir <56174765+kirkelumir@users.noreply.github.com>
+Date:   Fri Apr 9 16:49:31 2021 -0600
+
+    Rename SelfCheckoutSoftware.java to SelfCheckoutSystem - Software/src/org/lsmr/selfcheckout/SelfCheckoutSoftware.java
+
+commit de1c45fb49e8f2e3117d33dda7d82a5965716af1
+Author: kirkelumir <56174765+kirkelumir@users.noreply.github.com>
+Date:   Fri Apr 9 16:47:24 2021 -0600
+
+    Added use cases 5, 7, and 8
+
+commit 68c49bfc06afa85ab2dd1479a7bdc532a2a9c402
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Fri Apr 9 15:48:05 2021 -0600
+
+    Added some more tests to use cases I did
+
+commit de0c57adc4288c22434c214e8230dfd13ac56790
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Fri Apr 9 15:29:07 2021 -0600
+
+    Added tests for attendant and updated test suite
+
+commit 28aabcf25e467781dee1cf7c29840591287f338a
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Fri Apr 9 14:25:07 2021 -0600
+
+    Added comments
+
+commit 10221a0e6503a1ab95d80b9a5fa78b14c5f66c7c
+Author: DanySaaidBonilla <47337034+DanySaaidBonilla@users.noreply.github.com>
+Date:   Fri Apr 9 03:31:24 2021 -0600
+
+    Added More Tests
+
+commit b3ec34f353f5d111aaf9547f4fb9ea12580b3938
+Merge: d1ba949 eddbedf
+Author: DanySaaidBonilla <47337034+DanySaaidBonilla@users.noreply.github.com>
+Date:   Fri Apr 9 02:35:36 2021 -0600
+
+    Merge pull request #7 from zeyadomran/Adding-Tests-and-Use-Cases
+    
+    Adding tests and use cases
+
+commit eddbedff5a82f6c03cd22e1cbc76a0b2f09c2946
+Author: DanySaaidBonilla <47337034+DanySaaidBonilla@users.noreply.github.com>
+Date:   Fri Apr 9 02:32:29 2021 -0600
+
+    Fixed a bug
+
+commit 7786d3dd460bf1d4d0cd464b11e142d81b67d437
+Author: DanySaaidBonilla <47337034+DanySaaidBonilla@users.noreply.github.com>
+Date:   Fri Apr 9 02:26:23 2021 -0600
+
+    Added some documentation fixes
+
+commit f0fc23b8dcbe12dcf1897ab521a386fafb5bc2b2
+Author: DanySaaidBonilla <47337034+DanySaaidBonilla@users.noreply.github.com>
+Date:   Thu Apr 8 22:54:55 2021 -0600
+
+    Added Tests and Use Case
+    
+    Added tests and the station can now detect low ink
+
+commit d1ba94966056a35ab996dc5bb004470623bb4731
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Thu Apr 8 17:46:07 2021 -0600
+
+    added changes to weight discrepancy
+    
+    Made it so we have a running discrepancy total. Needs to be updated when the failToPlaceItem simulation exception is thrown
+
+commit a8bf4fa54a67b3fbc8451b3346ae873875ffe1f5
+Merge: 2a83049 2c3702d
+Author: DanySaaidBonilla <47337034+DanySaaidBonilla@users.noreply.github.com>
+Date:   Thu Apr 8 16:28:25 2021 -0600
+
+    Merge pull request #5 from zeyadomran/DanySaaidBonilla-ApprovesWeightDiff
+    
+    Added attendant approves weight discrepancy
+
+commit 2c3702dcebdbf14ae33c774672bdb2b39c6deaee
+Author: DanySaaidBonilla <47337034+DanySaaidBonilla@users.noreply.github.com>
+Date:   Thu Apr 8 16:27:54 2021 -0600
+
+    Added attendant approves weight discrepancy
+
+commit 2e556263a5dc5ddf7ec67234de238004c53e24d7
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Thu Apr 8 22:05:07 2021 +0400
+
+    Added Attendant Panel ✅
+
+commit 2a83049c36ed94c2c28d03964dcaf2bdd4fd19b2
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Thu Apr 8 14:17:12 2021 +0400
+
+    ..
+
+commit b3a067bc711b2857f7d2950b7c5b1b8af41fbc1c
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Thu Apr 8 14:10:08 2021 +0400
+
+    File Management 🗃
+
+commit 8292d8f985e18a5bda45881db7d353f7133cf32c
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Thu Apr 8 14:09:00 2021 +0400
+
+    Updated to Hardware v3.1 ⚡️
+
+commit 3f9334a34a16bba4e52fd0106bb7e5a91ea208b2
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Thu Apr 8 14:04:58 2021 +0400
+
+    Updated to Hardware v3.1 ⚡️
+
+commit aa346829a7159dec53f0e2e62027b11c6dd59b50
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Thu Apr 8 03:09:02 2021 -0600
+
+    Added TouchScreenTest.java
+
+commit 9d24770525fd63a1416af86264d95c5d773534c0
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Wed Apr 7 18:20:03 2021 -0600
+
+    All previous tests and the new dispenser stuff passes
+
+commit 75a3dfe054095ac17b922d9ec604bd595f2a5994
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Wed Apr 7 17:10:18 2021 -0600
+
+    Attendant Logout added
+
+commit f379f02a7a81111f4a363eccd01e28369b6f9e5e
+Merge: ab09c2b 8e5683a
+Author: g-heemeryck <grace.heemeryck1@ucalgary.ca>
+Date:   Wed Apr 7 16:53:39 2021 -0600
+
+    Merge pull request #4 from zeyadomran/storagedispenserbranch
+    
+    Added storage and dispensers use cases
+
+commit 8e5683ab90eadb4ad6cbacca9f6cb223c9d1f9e3
+Author: g-heemeryck <grace.heemeryck1@ucalgary.ca>
+Date:   Wed Apr 7 16:46:44 2021 -0600
+
+    Rename SelfCheckoutSystem - Software - Test/LoadCoinDispensersTest.java to SelfCheckoutSystem - Software - Test/src/org/lsmr/selfcheckout/software/test/LoadCoinDispensersTest.java
+
+commit 3128877ecd7001c96fb9905888e91d064f8ceed8
+Author: g-heemeryck <grace.heemeryck1@ucalgary.ca>
+Date:   Wed Apr 7 16:46:21 2021 -0600
+
+    Rename SelfCheckoutSystem - Software - Test/LoadBanknoteDispensersTest.java to SelfCheckoutSystem - Software - Test/src/org/lsmr/selfcheckout/software/test/LoadBanknoteDispensersTest.java
+
+commit 0c26857383e3f078eafc5d050f851c7297804778
+Author: g-heemeryck <grace.heemeryck1@ucalgary.ca>
+Date:   Wed Apr 7 16:45:47 2021 -0600
+
+    Rename SelfCheckoutSystem - Software - Test/EmptyStorageTest.java to SelfCheckoutSystem - Software - Test/src/org/lsmr/selfcheckout/software/test/EmptyStorageTest.java
+
+commit df3b594d771fefbbe231001daa4ca0e2a012cf3b
+Author: g-heemeryck <grace.heemeryck1@ucalgary.ca>
+Date:   Wed Apr 7 16:43:40 2021 -0600
+
+    Update CoinDispenserListenerStub.java
+    
+    added function to get coinsLoaded variable
+
+commit 369218df5019709f7853de2cfc46a9627b7d6b93
+Author: g-heemeryck <grace.heemeryck1@ucalgary.ca>
+Date:   Wed Apr 7 16:43:00 2021 -0600
+
+    Update CoinStorageUnitListenerStub.java
+    
+    added function to read if it has been loaded
+
+commit 421b90afa6e56e424b444b814e370c8f938ba984
+Author: g-heemeryck <grace.heemeryck1@ucalgary.ca>
+Date:   Wed Apr 7 16:41:19 2021 -0600
+
+    Update SelfCheckoutSoftware.java
+    
+    Added use cases for emptying storage and loading banknote and coin dispensers. Also removed automatic loading of banknote and coin dispensers in constructor, and added listener stubs for coin and banknote storage.
+
+commit f8e9fc69f14a4ddcbd0f90f9c0a854d0d8f30b10
+Author: g-heemeryck <grace.heemeryck1@ucalgary.ca>
+Date:   Wed Apr 7 16:33:26 2021 -0600
+
+    Add files via upload
+    
+    Added tests for emptying storage and loading banknote/coin dispensers
+
+commit fea18bc70164bad12ac0aa4c3dc2a226ae96448b
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Thu Apr 8 01:07:09 2021 +0400
+
+    Finished Main GUI screen design ✅
+
+commit ab09c2b5fe905f094d41eeaed583508b37f03e49
+Author: Kylie Sicat <47333417+kg-sicat@users.noreply.github.com>
+Date:   Wed Apr 7 13:16:39 2021 -0600
+
+    Updated SelfCheckoutSystem - Software - Structural.drawio
+
+commit 8d6e008017ffbe095f8aff10faf5c205c002c8d5
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Wed Apr 7 22:45:22 2021 +0400
+
+    Added First GUI Screen
+
+commit 1be4e30b73d86f24f41d0d65ea880c3beb146805
+Author: Kylie Sicat <47333417+kg-sicat@users.noreply.github.com>
+Date:   Wed Apr 7 00:03:17 2021 -0600
+
+    Updated SelfCheckoutSystem - Software - Structural.drawio
+
+commit 56f0235a89dc09dac9998585d67eb8263d80cf4d
+Author: Kylie Sicat <47333417+kg-sicat@users.noreply.github.com>
+Date:   Tue Apr 6 23:08:14 2021 -0600
+
+    Updated SelfCheckoutSystem - Software - Structural.drawio
+
+commit 5607042572e7fb330a36739756b6e8496420987d
+Author: sharansarthak <sarthaksharan24@gmail.com>
+Date:   Tue Apr 6 15:09:47 2021 -0600
+
+    Paper or Ink can only be added to the printer if attendant is logged in
+
+commit c5ee8eb3ff1d42bec5c48566b66b515f02d57f43
+Merge: 38f43dc 07215df
+Author: DanySaaidBonilla <47337034+DanySaaidBonilla@users.noreply.github.com>
+Date:   Mon Apr 5 18:21:42 2021 -0600
+
+    Merge pull request #3 from zeyadomran/DanySaaidBonilla-patch-1
+    
+    Added some use cases
+
+commit 07215dfc2602f91cd4b7ce9d03e343b33eb07f89
+Author: DanySaaidBonilla <47337034+DanySaaidBonilla@users.noreply.github.com>
+Date:   Mon Apr 5 18:20:59 2021 -0600
+
+    Added some use cases
+    
+    Added removing item from purchases and other attendant use cases
+
+commit 38f43dc1bebd2f6b60cf2e527494c5beb99edb75
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Mon Apr 5 16:08:59 2021 -0600
+
+    Added some tests for attendant
+
+commit 4d15044bb54cd9917734b2f5d089bda099cb8c60
+Merge: 1b8d856 d89dd6b
+Author: matthewJarrams <47400145+matthewJarrams@users.noreply.github.com>
+Date:   Mon Apr 5 16:04:59 2021 -0600
+
+    Merge pull request #2 from zeyadomran/Attendant
+    
+    Separated Attendant class from Software
+
+commit 1b8d85662c56f4952716bfd61d0f06a962bc831c
+Author: Kylie Sicat <sicat.kylie@gmail.com>
+Date:   Mon Apr 5 15:57:20 2021 -0600
+
+    added gift card tests &minor change with tapCard()
+
+commit d89dd6b0e202ddd8af44392af7e06ba1b1ba5b03
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Mon Apr 5 15:51:23 2021 -0600
+
+    Separated Attendant class from Software
+    
+    Added an attendant class that can modify the software system using functions
+
+commit a7ebdcdc5cd5e6cfa8e67f079098e673db50270b
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Mon Apr 5 14:32:19 2021 -0600
+
+    manual fix of previous commit
+
+commit 9e656f2fe9c3c245c7960a1f827ffd84e5923d23
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Mon Apr 5 14:25:27 2021 -0600
+
+    Fixed an issue with the last commit
+    
+    The project folder "software" contained all of the projects
+
+commit c35fbeb2d27113893f07e280074402dda9c91d05
+Author: Kylie Sicat <47333417+kg-sicat@users.noreply.github.com>
+Date:   Mon Apr 5 13:53:33 2021 -0600
+
+    Creating SelfCheckoutSystem - Software - Structural.drawio
+
+commit 377e25db3be9c171c0ff8c2a9feb5778d0ecc351
+Author: Kylie Sicat <sicat.kylie@gmail.com>
+Date:   Mon Apr 5 13:38:36 2021 -0600
+
+    Added gift card issuer in database and modified the card methods in main class
+    
+    Will do tests, just my eclipse is acting weird with versions. Hoping i didn't mess up the main branch
+
+commit 33b22d95630b81188553634cd42d5491e6d79976
+Merge: 86c12d2 603d7ae
+Author: matthewJarrams <47400145+matthewJarrams@users.noreply.github.com>
+Date:   Sun Apr 4 19:26:01 2021 -0600
+
+    Merge pull request #1 from zeyadomran/ShutDownStation
+    
+    Some initial shutdown and start up station implementation
+
+commit 603d7aeb2ba3863ae69d158925c0226e37cc1239
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Sun Apr 4 19:25:30 2021 -0600
+
+    Some initial shutdown and start up station implementaion
+    
+    Will disable all of the external devices the customer can use
+
+commit 86c12d291fb4be886534f61987b5501876dcf52a
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Sun Apr 4 18:59:19 2021 -0600
+
+    Manual Merge add of Dany's branch
+    
+    Added the ability for attendant to add ink and paper to printer.
+
+commit 9919520251690f20d434f5251dd6c0bb5638219d
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Sun Apr 4 18:42:17 2021 -0600
+
+    Plu code for Product use case and look up product use case
+
+commit 6be701e54752f949444fdf6da15ff37e54ee78e2
+Author: matthewJarrams <matthew.jarrams@gmail.com>
+Date:   Sat Apr 3 14:49:30 2021 -0600
+
+    No changes
+
+commit 0e2f1ca2fa7e9a909f5c8f2b3575b5407f807a3a
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sun Apr 4 00:20:36 2021 +0400
+
+    Initial Commit 🚀
+
+commit 62b7faad4ef0c2f8d8911b40ef63de4bf9599fb9
+Author: zeyadomran <ziomran@gmail.com>
+Date:   Sun Apr 4 00:08:22 2021 +0400
+
+    Initial Commit 🚀
