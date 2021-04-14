@@ -143,6 +143,15 @@ public class MainSCSPanel extends JPanel {
  				BarcodedItem item = null;
 				for(BarcodedItem i : control.getScannedItems()) {
 					if(i.getBarcode().equals(barcode)) item = i;
+					for(BarcodedItem j : control.getBaggingArea()) {
+						if(j == item) {
+							JOptionPane.showMessageDialog(new JPanel(),
+								"Please remove the item from the bagging area first!",
+								"Remove Item Failed!",
+								JOptionPane.ERROR_MESSAGE);
+								return;
+						}
+					}
 				}
 				boolean success;
 				if(item != null) {
@@ -225,6 +234,15 @@ public class MainSCSPanel extends JPanel {
  				PLUCodedItem item = null;
 				for(PLUCodedItem i : control.getPluItems()) {
 					if(i.getPLUCode().equals(plu)) item = i;
+					for(PLUCodedItem j : control.getBaggingAreaPlu()) {
+						if(j == item) {
+							JOptionPane.showMessageDialog(new JPanel(),
+								"Please remove the item from the bagging area first!",
+								"Remove PLU Item Failed!",
+								JOptionPane.ERROR_MESSAGE);
+								return;
+						}
+					}
 				}
 				boolean success;
 				if(item != null) {
@@ -351,6 +369,14 @@ public class MainSCSPanel extends JPanel {
 				}
 				Barcode barcode = new Barcode(code);
 				boolean success = control.placeItemInBaggingArea(barcode);
+				if(control.getBaggingAreaWeight() == -1) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Scale Overload, Please remove an item from the bagging area!",
+						"Failed!",
+						JOptionPane.ERROR_MESSAGE);
+						updatePanel(control.buildTextAreaString());
+					return;
+				}
 				if(success) {
 					JOptionPane.showMessageDialog(new JPanel(),
 						"Item: " + barcode + " was added to bagging area!",
@@ -386,6 +412,14 @@ public class MainSCSPanel extends JPanel {
 				}
 				PriceLookupCode plu = new PriceLookupCode(code);
 				boolean success = control.placePluItemInBaggingArea(plu);
+				if(control.getBaggingAreaWeight() == -1) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"Scale Overload, Please remove an item from the bagging area!",
+						"Failed!",
+						JOptionPane.ERROR_MESSAGE);
+						updatePanel(control.buildTextAreaString());
+					return;
+				}
 				if(success) {
 					JOptionPane.showMessageDialog(new JPanel(),
 						"Item: " + plu + " was added to bagging area!",
@@ -648,6 +682,14 @@ public class MainSCSPanel extends JPanel {
 					JOptionPane.showMessageDialog(new JPanel(),
 						"Please add all items to the bagging area, or call an attendant!",
 						"Weight Discrepancy!",
+						JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				if(control.getLowInk() || control.getLowPaper()) {
+					JOptionPane.showMessageDialog(new JPanel(),
+						"The receipt printer has low ink/paper, please call an attendant!",
+						"Printer Low Ink/Paper!",
 						JOptionPane.ERROR_MESSAGE);
 					return;
 				}

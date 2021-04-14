@@ -85,7 +85,7 @@ public class AttendantSCSPanel extends JPanel {
 				boolean success = control.setMaxWeightDiff(weight);
 				if(success) {
 					JOptionPane.showMessageDialog(new JPanel(),
-					"The new approved max weight difference is: " + weight +"!",
+					"The new approved max weight difference is: " + control.getMaxWeightDiff() +"!",
 					"Success!",
 					JOptionPane.PLAIN_MESSAGE);
 				} else {

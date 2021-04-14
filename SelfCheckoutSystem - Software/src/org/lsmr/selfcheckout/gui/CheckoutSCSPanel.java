@@ -445,9 +445,20 @@ public class CheckoutSCSPanel extends JPanel {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				infoText.setText(""+getTextAreaText());
+				boolean done = false;
 				if(entered.compareTo(control.getTotal()) >= 0) {
+					done = true;
+					try {
 					control.generateReceipt();
 					receipt.setText("" + control.getReceipt());
+					} catch (Exception err) {
+						JOptionPane.showMessageDialog(new JPanel(),
+							"Failed to generate receipt!",
+							"Error!",
+							JOptionPane.ERROR_MESSAGE);
+					}
+				}
+				if(done) {
 					returnToAddingItems.setVisible(false);
 					restartGUI.setVisible(true);
 				}
