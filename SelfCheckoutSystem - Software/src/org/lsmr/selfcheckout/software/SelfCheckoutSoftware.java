@@ -37,6 +37,7 @@ import org.lsmr.selfcheckout.external.ProductDatabases;
 import org.lsmr.selfcheckout.gui.AttendantSCSPanel;
 import org.lsmr.selfcheckout.gui.CheckoutSCSPanel;
 import org.lsmr.selfcheckout.gui.MainSCSPanel;
+import org.lsmr.selfcheckout.gui.StartScreenPanel;
 import org.lsmr.selfcheckout.products.BarcodedProduct;
 import org.lsmr.selfcheckout.products.PLUCodedProduct;
 import org.lsmr.selfcheckout.products.Product;
@@ -1563,6 +1564,27 @@ public class SelfCheckoutSoftware {
 		frame.validate();
 		frame.repaint();
 		this.station.screen.setVisible(true); // Displays the JFrame.
+		this.addingItems = false;
+	}
+
+	/**
+	 * Loads up the checkout GUI.
+	 */
+	public void startGUI() {
+		JFrame frame = this.station.screen.getFrame(); // Gets The JFrame used by the touchscreen listener.
+		this.station.screen.setVisible(false);
+		frame.getContentPane().removeAll();
+		frame.setLayout(new BorderLayout());
+		StartScreenPanel checkoutPanel = new StartScreenPanel(this);
+		JPanel fixedPanel = new JPanel(new GridBagLayout());
+		fixedPanel.setPreferredSize(frame.getSize());
+		fixedPanel.setBackground(new Color(9, 11, 16));
+		fixedPanel.add(checkoutPanel);
+		frame.getContentPane().add(fixedPanel);
+		frame.validate();
+		frame.repaint();
+		this.station.screen.setVisible(true); // Displays the JFrame.
+		resetStation();
 		this.addingItems = false;
 	}
 

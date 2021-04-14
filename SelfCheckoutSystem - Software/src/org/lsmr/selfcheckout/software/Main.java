@@ -17,7 +17,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		initializeGUI();
-		control.loadMainGUI();
+		control.startGUI();
 	}
 
 	private static void initializeGUI() {

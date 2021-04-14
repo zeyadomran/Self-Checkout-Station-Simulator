@@ -26,6 +26,8 @@ public class CheckoutSCSPanel extends JPanel {
 	private SelfCheckoutSoftware control;
 	private JTextArea receipt;
 	private JTextArea infoText;
+	private JButton returnToAddingItems;
+	private JButton restartGUI;
 	private BigDecimal entered;
 	private ArrayList<Coin> coins = new ArrayList<Coin>();
 	private ArrayList<Banknote> banknotes = new ArrayList<Banknote>();
@@ -70,7 +72,22 @@ public class CheckoutSCSPanel extends JPanel {
 		
 		updatePanel();
 		
-		JButton returnToAddingItems = new JButton("Return To Adding Items");
+		restartGUI = new JButton("Done");
+		restartGUI.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				control.startGUI();
+			}
+		});
+		restartGUI.setOpaque(true);
+		restartGUI.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		restartGUI.setBorder(new LineBorder(new Color(15, 17, 26), 1, true));
+		restartGUI.setBackground(new Color(40, 167, 69));
+		restartGUI.setBounds(980, 475, 280, 55);
+		restartGUI.setVisible(false);
+		add(restartGUI);
+
+		returnToAddingItems = new JButton("Return To Adding Items");
 		returnToAddingItems.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -431,7 +448,8 @@ public class CheckoutSCSPanel extends JPanel {
 				if(entered.compareTo(control.getTotal()) >= 0) {
 					control.generateReceipt();
 					receipt.setText("" + control.getReceipt());
-					control.resetStation();
+					returnToAddingItems.setVisible(false);
+					restartGUI.setVisible(true);
 				}
 			}
 		});
